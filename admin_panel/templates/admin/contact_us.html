@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Travelin Responsive HTML Admin Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="Travelin">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/home/Magnet logo.png' %}">
+  <title>Vacation Feast</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- End fonts -->
+
+	<!-- core:css -->
+	<link rel="stylesheet" href="{% static 'vendors/core/core.css' %}">
+	<!-- endinject -->
+
+	<!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}">
+	<!-- End plugin css for this page -->
+
+	<!-- inject:css -->
+	<link rel="stylesheet" href="{% static 'fonts/feather-font/css/iconfont.css' %}">
+	<!-- endinject -->
+
+  <!-- Layout styles -->  
+  <link rel="stylesheet" href="{% static 'css/css/style.css' %}">
+  <!-- End layout styles -->
+
+  <link rel="shortcut icon" href="../images/favicon.png" />
+  <style>
+    textarea{
+      resize: none;
+    }
+  </style>
+</head>
+<body>
+	<div class="main-wrapper">
+
+		<!-- sidebar starts -->
+    {% include 'home/aside.html' %}
+    <!-- sidebar Ends -->
+	
+		<div class="page-wrapper">
+					
+			<!-- navbar Starts -->
+			{% include 'home/adminheader.html' %}
+			<!-- navbar Ends -->
+
+      <!-- Page Content Starts -->
+			<div class="page-content">
+
+				<nav class="page-breadcrumb d-flex align-items-center justify-content-between">
+					<ol class="breadcrumb mb-0">
+						<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+					</ol>
+				</nav>
+
+				<div class="row">
+					<div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="dataTableExample" class="table">
+                    <thead>
+                      <tr>
+                        <th>tilte</th>
+                        <th>description</th>
+                        <th>keywords</th>
+                        <th>Created by</th>
+                        <th>updated by</th>
+                        <!-- <th class="text-center">Published</th> -->
+                        <th class="text-center">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <!-- <td class="w-25">
+                          <img src="../images/trending/trending2.jpg" alt="image">
+                        </td> -->
+                        <td>{{ datedata.meta_title}}</td>
+                        <td>{{ datedata.meta_description}}</td>
+                        <td>{{ datedata.meta_keyword}}</td>
+                        <td>{{ created_by }}</td>
+                        <td>{{ updated_by }}</td>
+                        <!-- <td class="text-center">
+                          <span class="form-check form-switch"><input type="checkbox" class="form-check-input" id="formSwitch1"></span>
+                        </td> -->
+                        <td class="text-center">
+                          <ul class="d-flex list-unstyled mb-0 justify-content-center">
+                            <li class="me-2">
+                              <a href="#" data-bs-toggle="modal" data-bs-target="#viewslider"><i class="link-icon" data-feather="eye"></i></a>
+                              <div class="modal fade" id="viewslider" tabindex="-1" aria-labelledby="viewslider" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-body">
+
+                                      <h5 class="mb-1">{{ datedata.meta_title}}</h5>
+                                      <h2 class="mb-1">{{ datedata.meta_keyword}}</h2>
+                                      <p class="mb-0">
+                                        {{ datedata.meta_description}}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              </li>
+                            <li class="me-2"><a href="#" data-bs-toggle="modal" data-bs-target="#addslider"><i class="link-icon"  data-feather="edit"></i></a></li>
+                            <!-- <li><a href="#"><i class="link-icon"  data-feather="delete"></i></a></li> -->
+                          </ul>
+                        </td>
+                      </tr>
+
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+					</div>
+				</div>
+
+
+			</div>
+      <!-- Page Content Ends -->
+
+			<!-- footer Starts -->
+      <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small">
+        <p class="text-muted mb-1 mb-md-0">Copyright © 2022 <a href="../index.html" target="_blank">Vacation Feast</a>.</p>
+        <!-- <p class="text-muted">Powered By <i class="mb-1 text-primary ms-1 icon-sm" data-feather="heart"></i> Bizberg Themes</p> -->
+      </footer>
+      <!-- footer Ends -->
+	
+		</div>
+	</div>
+
+  <div class="modal fade" id="addslider" tabindex="-1" aria-labelledby="addslider" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header text-center d-flex justify-content-between">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Meta tags</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="forms-sample" id="myForm" action="{% url 'submit_form_contact' %}" method="POST">
+             {% csrf_token %}
+            <div class="mb-3">
+              <label for="subtitle" class="form-label">Title</label>
+              <!-- <textarea name="getsome" id="getsome" cols="50" rows="5"> -->
+              <textarea type="text" class="form-control" id="title" name="title" value="" autocomplete="off" placeholder="">{{ datedata.meta_title}}</textarea>
+            </div>
+            <div class="mb-3">
+              <label for="title" class="form-label">Description</label>
+              <textarea type="text" class="form-control" id="description" name="description" value="" placeholder="">{{ datedata.meta_description}}</textarea>
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Keywords</label>
+              <textarea type="text" class="form-control" id="keyword" name="keyword" value="" autocomplete="off" placeholder="">{{ datedata.meta_keyword}}</textarea>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary"><i class="link-icon" data-feather="plus"></i>Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<!-- core:js -->
+  <script src="{% static 'vendors/core/core.js' %}"></script>
+  <!-- endinject -->
+
+  <!-- Plugin js for this page -->
+  <script src="{% static 'vendors/chartjs/Chart.min.js'  %}"></script>
+  <script src="{% static 'vendors/jquery.flot/jquery.flot.js' %}"></script>
+  <script src="{% static 'vendors/jquery.flot/jquery.flot.resize.js' %}"></script>
+  <script src="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static 'vendors/apexcharts/apexcharts.min.js' %}"></script>
+	<!-- End plugin js for this page -->
+
+	<!-- inject:js -->
+	<script src="{% static 'vendors/feather-icons/feather.min.js' %}"></script>
+	<script src="{% static 'js/admin/template.js' %}"></script>
+	<!-- endinject -->
+
+	<!-- Custom js for this page -->
+  <script src="{% static 'js/admin/dashboard-light.js' %}"></script>
+  <script src="{% static 'js/admin/datepicker.js' %}"></script>
+	<!-- End custom js for this page -->
+
+
+</body>
+</html>    

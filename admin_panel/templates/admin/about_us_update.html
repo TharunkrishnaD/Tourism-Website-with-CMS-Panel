@@ -1,0 +1,267 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Travelin Responsive HTML Admin Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="Travelin">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/home/Magnet logo.png' %}">
+  <title>Vacation Feast</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- End fonts -->
+
+	<!-- core:css -->
+	<link rel="stylesheet" href="{% static 'vendors/core/core.css' %}">
+	<!-- endinject -->
+
+	<!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}">
+	<!-- End plugin css for this page -->
+
+	<!-- inject:css -->
+	<link rel="stylesheet" href="{% static 'css/css/iconfont.css' %}">
+	<!-- endinject -->
+
+  <!-- Layout styles -->  
+	<link rel="stylesheet" href="{% static 'css/css/style.css' %}">
+  <!-- End layout styles -->
+
+  <link rel="shortcut icon" href="../images/favicon.png" />
+</head>
+<body>
+	<div class="main-wrapper">
+
+		<!-- sidebar starts -->
+    {% include 'home/aside.html' %}
+    <!-- sidebar Ends -->
+	
+		<div class="page-wrapper">
+					
+			<!-- navbar Starts -->
+      {% include 'home/adminheader.html' %}
+			<!-- navbar Ends -->
+<!-- ---------------------------------------------my work contend---------------------------------- -->
+
+
+
+      <!-- Page Content Starts -->
+			<div class="page-content">
+
+				<nav class="page-breadcrumb d-flex align-items-center justify-content-between">
+					<ol class="breadcrumb mb-0">
+						<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+						<li class="breadcrumb-item active" aria-current="page">About Us Updates</li>
+					</ol>
+          <!-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addslider"><i class="link-icon" data-feather="plus"></i> Add Slider</button> -->
+				</nav>
+
+        <!-- <div class="search-box p-4 bg-white rounded mb-3 box-shadow">
+          <form class="forms-sample">
+            <div class="row align-items-center">
+              <div class="col-lg-3">
+                <h5>Slider Lists</h5>
+              </div>
+              <div class="col-lg-6 col-md-4">
+                <input type="text" placeholder="Search by slider title" class="form-control">
+              </div>
+              <div class="col-lg-3 col-md-4">
+                <select class="form-select form-select-lg">
+                  <option selected>Category</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div> -->
+       
+				<div class="row">
+					<div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="dataTableExample" class="table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Changed date</th>
+                        <th>About us Image</th>
+                        <th>client Review Image</th>
+                        <th>Title</th>
+                        <!-- <th>Subtitle</th> -->
+                        <!-- <th class="text-center">Published</th> -->
+                        <th class="text-center">Action</th>
+                      </tr>About Us Changes
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>{{ aboutus_admin.current_date }}</td>
+                        <td class="w-25">
+                          <img src="{% static aboutus_admin.image_file_url %}" alt="image">
+                        </td>
+                        <td class="w-25">
+                          <img src="{% static aboutus_admin.review_image_url %}" alt="image">
+                        </td>
+                        <td>About Us Page</td>
+                        <!-- <td>Road To Travel</td> -->
+                        <!-- <td class="text-center">
+                          <span class="form-check form-switch"><input type="checkbox" class="form-check-input" id="formSwitch1"></span>
+                        </td> -->
+                        <td class="text-center">
+                          <ul class="d-flex list-unstyled mb-0 justify-content-center">
+                           <li class="me-2"><a href="#" data-bs-toggle="modal" data-bs-target="#addslider"><i class="link-icon"  data-feather="edit"></i></a></li>
+                            
+                          </ul>
+                        </td>
+                      </tr>
+
+      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+					</div>
+				</div>
+        <!-- <div class="row">
+          <div class="dataTables_paginate">
+                <ul class="pagination">
+                  <li class="paginate_button page-item">
+                    <a href="#" class="page-link">Previous</a>
+                  </li>
+                  <li class="paginate_button page-item active"><a href="#" class="page-link">1</a></li>
+                  <li class="paginate_button page-item"><a href="#" class="page-link">2</a></li>
+                  <li class="paginate_button page-item"><a href="#" class="page-link">3</a></li>
+                  <li class="paginate_button page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
+            </div>
+        </div> -->
+
+			</div>
+      <!-- Page Content Ends -->
+
+      
+<!-- -------------------------------------------------------page contend ----------------------------------- -->
+			<!-- footer Starts -->
+      <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small">
+        <p class="text-muted mb-1 mb-md-0">Copyright © 2022 <a href="../index.html" target="_blank">Vacation Feast</a>.</p>
+        <!-- <p class="text-muted">Powered By <i class="mb-1 text-primary ms-1 icon-sm" data-feather="heart"></i> Bizberg Themes</p> -->
+      </footer>
+      <!-- footer Ends -->
+	
+		</div>
+	</div>
+
+  <div class="modal fade" id="addslider" tabindex="-1" aria-labelledby="addslider" aria-hidden="true">
+    <div class="modal-dialog" style="top: 78% !important;max-width: 1200px;">
+      <div class="modal-content">
+        <div class="modal-header text-center d-flex justify-content-between">
+          <h5 class="modal-title" id="exampleModalLabel">About Us</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form class="forms-sample row" action="{% url 'about_us_new' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+              <label for="subtitle" class="form-label">Page Title</label>
+              <input type="text" class="form-control" id="subtitle" required name="Sub_Title" autocomplete="off" value="{{aboutus_admin.subtitle}}">
+            </div>
+            <div class="mb-3">
+              <label for="title" class="form-label">About Us Content 1</label>
+               <textarea class="form-control" style="resize: none;" required id="title" name="content_para-1" autocomplete="off">{{ aboutus_admin.content_para_1 }}</textarea>
+            </div>
+            
+            <div class="mb-3">
+              <label for="description" class="form-label">About Us Content 2</label>
+              <textarea class="form-control" id="title" required style="resize: none;" name="content_para-2" autocomplete="off">{{ aboutus_admin.content_para_2 }}</textarea>
+            </div>
+            <div class="mb-3">
+              <label for="title" class="form-label">Meta Title</label>
+               <textarea class="form-control" style="resize: none;" required id="title" name="meta_title" autocomplete="off">{{ aboutus_admin.meta_title }}</textarea>
+            </div>
+            <div class="mb-3">
+              <label for="title" class="form-label">Meta Description</label>
+               <textarea class="form-control" style="resize: none;" required id="title" name="meta_description" autocomplete="off">{{ aboutus_admin.meta_description }}</textarea>
+            </div>
+            <div class="mb-3">
+              <label for="title" class="form-label">Meta Keyword</label>
+               <textarea class="form-control" style="resize: none;" required id="title" name="meta_keyword" autocomplete="off">{{ aboutus_admin.meta_keyword }}</textarea>
+            </div>
+            <div class="d-flex justify-content-between">
+            <div class="mb-3">
+              <label for="description" class="form-label">Years Experiences</label>
+              <input type="number" class="form-control" required id="password" name="Years_Experiences" autocomplete="off" value="{{aboutus_admin.years_experiences}}">
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Tour Packages</label>
+              <input type="number" class="form-control" required id="password" name="Tour_Packages" autocomplete="off" value="{{aboutus_admin.tour_packages}}">
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Happy Customers</label>
+              <input type="number" class="form-control" required id="password" name="Happy_Customers" autocomplete="off" value="{{aboutus_admin.happy_customers}}">
+            </div>
+            <div class="mb-3">
+              <label for="description" class="form-label">Servicable Countries</label>
+              <input type="number" class="form-control" required id="password" name="Servicable_Countries" autocomplete="off" value="{{aboutus_admin.servicable_countries}}">
+            </div>
+            </div>
+            <div class="mb-3 col-lg-6">
+              <!-- <img src="{{ aboutus_admin.image_file_url }}" alt=""> -->
+              <label for="upload" class="form-label">About Us Images</label>
+              <input class="form-control"  type="file" name="image-file" id="upload" >
+            </div>
+            <div class="mb-3  col-lg-6">
+              <!-- <img src="{{ aboutus_admin.review_image_url }}" alt=""> -->
+              <label for="upload" class="form-label">Review cover Images</label>
+              <input class="form-control"  type="file" name="image-file-2" id="upload" >
+            </div>
+            <!-- <div class="mb-3">
+              <label for="title" class="form-label">Slider Button</label>
+              <input type="text" class="form-control" id="title" placeholder="">
+            </div> -->
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary"><i class="link-icon" data-feather="plus"></i>Change About Us</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+ 
+
+	<!-- core:js -->
+  <script src="{% static 'vendors/core/core.js' %}"></script>
+  <!-- endinject -->
+
+  <!-- Plugin js for this page -->
+  <script src="{% static 'vendors/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+  <!-- End plugin js for this page -->
+
+  <!-- inject:js -->
+  <script src="{% static 'vendors/feather-icons/feather.min.js' %}"></script>
+  <script src="{% static 'js/admin/template.js' %}"></script>
+  <!-- endinject -->
+
+  <!-- Custom js for this page -->
+  <script src="{% static 'js/admin/tinymce.js' %}"></script>
+  <script src="{% static 'js/admin/datepicker.js' %}"></script>
+  <!-- End custom js for this page -->
+
+  <style>
+  
+    </style>
+
+</body>
+</html>    

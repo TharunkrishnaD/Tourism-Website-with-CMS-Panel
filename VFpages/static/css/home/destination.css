@@ -1,0 +1,171 @@
+/* .service-nav {
+    background:  #029e9d;
+    border: 2px solid #fff;
+    border-radius: 25px !important;
+    padding: 5px !important;
+    width: 100%;
+} */
+
+.service-nav .nav-link {
+    padding: 10px 15px !important;
+    border-radius: 10px !important;
+    border: 1px solid #c3c0c0;
+    margin: 0px 8px;
+}
+
+.des_btn {
+    /* box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important; */
+    border-radius: 0px !important;
+    width: 100%;
+    color: white;
+}
+
+.rad_btn {
+    border-radius: 0px 0px 15px 0px !important;
+}
+
+.des_nav {
+    background: #777;
+    border: 2px solid #f1f1f1;
+    border-radius: 0px 15px 15px 0px;
+    padding: 0px 0px;
+    border-left: 7px solid #029e9d;
+    /* background-color: white; */
+}
+
+.des_head {
+    background-color: white;
+    padding: 10px 12px;
+    border-radius: 0px 13px 0px 0px;
+    text-align: center;
+}
+
+
+.des_div {
+    margin-top: 10px;
+}
+
+
+.des_nav_div {
+    position: sticky;
+    top: 40px;
+}
+
+.des_titles {
+    color: #029e9d;
+}
+
+.des_div .des_text  {
+    list-style-type: disclosure-closed ;
+}
+
+.des_image {
+   width: 100%;
+    height: 300px;
+    border-radius: 20px;
+}
+
+.des_text {
+    text-align: justify;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.des-pic-hide {
+    display: none;
+}
+
+.des_p {
+    list-style-type: none !important;
+}
+
+.rounded {
+    border-radius: 10px !important;
+}
+
+.bg-theme {
+    background: #029e9d !important;
+}
+
+.deslist_image {
+    border-radius: 10px !important;
+}
+
+.color-overlay {
+    border-radius: 10px !important;
+}
+
+.trend-item1,.trend-content {
+    /* cursor: pointer; */
+    z-index: 1;
+}
+
+.deslist_image_div {
+    overflow: hidden;
+}
+
+.deslist_image {
+    transition: all ease-in-out 0.3s;
+    width: 100%;
+}
+
+.deslist_image:hover {
+    transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
+.pills-div {
+    display: flex;
+    flex-direction: row;
+}
+
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background: #029e9d !important;
+}
+
+@media (max-width: 991px) {
+    .package-list-div {
+        flex-direction: column;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .des_div {
+        flex-direction: column;
+    }
+
+    .des_nav_div div {
+       flex-direction: row;
+    }
+
+    .package-list-div {
+        flex-direction: column;
+    }
+
+    .des-pic-hide {
+        display: block !important;
+    }
+
+    .des-pic-show {
+        display: none !important;
+    }
+
+    .des_nav {
+        display: flex !important;
+        flex-direction: row !important;
+    }
+
+   
+}
+
+@media (max-width: 639px) {
+    .color-overlay {
+        height: 50% !important;
+        opacity: 0.4;
+        background: #000000;
+        background: linear-gradient(to bottom, transparent, #000000) !important; 
+    }
+}

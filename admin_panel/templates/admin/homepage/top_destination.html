@@ -1,0 +1,589 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Travelin Responsive HTML Admin Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="Travelin">
+
+	<title>Travelin - Travel Tour Booking HTML Templates</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- End fonts -->
+
+	<!-- core:css -->
+	<link rel="stylesheet" href="{% static 'vendors/core/core.css' %}">
+	<!-- endinject -->
+
+	<!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}">
+	<!-- End plugin css for this page -->
+
+	<!-- inject:css -->
+	<link rel="stylesheet" href="{% static 'css/css/iconfont.css' %}">
+	<!-- endinject -->
+
+  <!-- Layout styles -->  
+	<link rel="stylesheet" href="{% static 'css/css/style.css' %}">
+  <!-- End layout styles -->
+
+  <link rel="shortcut icon" href="../images/favicon.png" />
+</head>
+<body>
+	<div class="main-wrapper">
+
+		<!-- sidebar starts -->
+        {% include 'home/aside.html' %}
+    <!-- sidebar Ends -->
+	
+		<div class="page-wrapper">
+					
+			<!-- navbar Starts -->
+            {% include 'home/adminheader.html' %}
+			<!-- navbar Ends -->
+<!-- ---------------------------------------------my work contend---------------------------------- -->
+
+
+
+      <!-- Page Content Starts -->
+			<div class="page-content">
+
+				<nav class="page-breadcrumb d-flex align-items-center justify-content-between">
+					<ol class="breadcrumb mb-0">
+						<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+						<li class="breadcrumb-item active" aria-current="page">International Destination</li>
+					</ol>
+          <!-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addslider"><i class="link-icon" data-feather="plus"></i> Add Slider</button> -->
+				</nav>
+
+        <!-- <div class="search-box p-4 bg-white rounded mb-3 box-shadow">
+          <form class="forms-sample">
+            <div class="row align-items-center">
+              <div class="col-lg-3">
+                <h5>Slider Lists</h5>
+              </div>
+              <div class="col-lg-6 col-md-4">
+                <input type="text" placeholder="Search by slider title" class="form-control">
+              </div>
+              <div class="col-lg-3 col-md-4">
+                <select class="form-select form-select-lg">
+                  <option selected>Category</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div> -->
+        <div class="row">
+          <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table id="dataTableExample" class="table">
+                        <thead class="text-center">
+                          <tr >
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Destination Name</th>
+                            <!-- <th>Image</th> -->
+                            <th>Action</th>
+                            
+                          </tr>
+                          <div class="justify-content-between d-flex"><p class="mb-0 mt-3">Home Page International Top Destination</p>
+                            <!-- <button class="btn btn-primary px-4 py-2" data-bs-toggle="modal" data-bs-target="#addslider-addteam"><i class="link-icon" data-feather="plus"></i> Add Slider</button> -->
+                          </div>
+            
+                        </thead>
+                       
+                        <tbody class="text-center">
+
+                          <tr class="text-center">
+                            <td>1</td>
+                           
+                            <td>{{ topdestination.update_date }}</td>
+                            <td> International Top destinations</td>
+                           
+                            <!-- <td><img src="{% static 'image/homepageslider_image/' %}{{ topdestination.description.SliderImage }}"></td> -->
+                            <td class="text-center">
+                                <ul class="list-unstyled mb-0">
+                                    <li>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#addslider">
+                                            <i class="link-icon" data-feather="edit"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                              </td>
+                          
+                          </tr>
+                        
+                        </tbody>
+                      
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+       
+			
+        
+        <!-- <div class="row">
+          <div class="dataTables_paginate">
+                <ul class="pagination">
+                  <li class="paginate_button page-item">
+                    <a href="#" class="page-link">Previous</a>
+                  </li>
+                  <li class="paginate_button page-item active"><a href="#" class="page-link">1</a></li>
+                  <li class="paginate_button page-item"><a href="#" class="page-link">2</a></li>
+                  <li class="paginate_button page-item"><a href="#" class="page-link">3</a></li>
+                  <li class="paginate_button page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
+            </div>
+        </div> -->
+
+			</div>
+      <!-- Page Content Ends -->
+
+      
+<!-- -------------------------------------------------------page contend ----------------------------------- -->
+			<!-- footer Starts -->
+      <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small">
+        <p class="text-muted mb-1 mb-md-0">Copyright © 2022 <a href="../index.html" target="_blank">Vacation Feast</a>.</p>
+        <!-- <p class="text-muted">Powered By <i class="mb-1 text-primary ms-1 icon-sm" data-feather="heart"></i> Bizberg Themes</p> -->
+      </footer>
+      <!-- footer Ends -->
+	
+		</div>
+	</div>
+
+ 
+  <!-- Add Team Modal -->
+
+
+<!-- Edit Team Modal -->
+<div class="modal fade" id="addslider" tabindex="-1" aria-labelledby="addslider" aria-hidden="true">
+    <div class="modal-dialog" style="top: 78% !important;max-width: 1200px;">
+      <div class="modal-content">
+        <div class="modal-header d-flex justify-content-between">
+          <h5 class="modal-title" id="exampleModalLabel">International Top Destination</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-4">
+          <form class="forms-sample" action="{% url 'Homepage_topdestination_Edit' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p style="font-weight: 600;font-size: 18px;" class="mb-3">Destination 1</p>
+          <div>
+            <div class="row">
+              <div class="mb-3 col-lg-6">
+                <input type="hidden" class="select-city1" id="new-{{topdestination.destination_1Continent}}" value="{{topdestination.destination_1Continent}}">
+                <label for="title" class="form-label">Select destination</label>
+                <select class="form-select Show-city1"  name="destination_1Continent" >
+                      <option value="">delect destination</option>
+                      <optgroup label="International">
+                        {% for internation in Internation %}
+                          <option value="{{internation.destination_slug}}">{{internation.destination_name}}</option>
+                        {% endfor %}
+                      </optgroup>
+                      
+                      <optgroup label="Domestic">
+                        {% for domestic in Domestic %}
+                          <option value="{{domestic.destination_slug}}">{{domestic.destination_name}}</option>
+                        {% endfor %}
+                      </optgroup>
+                  </select>
+                </div>
+              <div class="mb-3 col-lg-6">
+                <label for="title" class="form-label">Select destination Cities</label>
+                <input type="hidden" class="select-1" id="new-{{topdestination.destination_1Cities}}" value="{{topdestination.destination_1Cities}}">
+                <select class="form-select Show-1"  name="destination_1Cities">
+                  <option value="">select city</option>
+                  {% for city in City_list %}
+                  <option value="{{city.international_city_name}}">{{city.international_city_name}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+          </div>
+          <div class="row">
+            <div class="mb-3 col-lg-6">
+              <label for="title" class="form-label">Price</label>
+              <input type="text" class="form-control"  id="password" name="destination_1Price" autocomplete="off" value="{{topdestination.destination_1Price}}">
+            </div>
+            <div class="mb-3 col-lg-6">
+              <!-- <img src="{{ topdestination.image_file_url }}" alt=""> -->
+              <label for="upload" class="form-label">Destination Images (size:1200x541)</label>
+              <input class="form-control"  type="file" name="destination_1image" id="upload" >
+            </div>
+        </div>
+        </div>
+        <p style="font-weight: 600;font-size: 18px;" class="mb-3">Destination 2</p>
+        <div>
+          <div class="row">
+            <div class="mb-3 col-lg-6">
+              <input type="hidden" class="select-city2" id="new2-{{topdestination.destination_2Continent}}" value="{{topdestination.destination_2Continent}}">
+              <label for="title" class="form-label">Select destination</label>
+              <select class="form-select Show-city2"  name="destination_2Continent">
+                    <option value=""></option>
+                    <optgroup label="International">
+                      {% for internation in Internation %}
+                        <option value="{{internation.destination_slug}}">{{internation.destination_name}}</option>
+                      {% endfor %}
+                    </optgroup>
+                    
+                    <optgroup label="Domestic">
+                      {% for domestic in Domestic %}
+                        <option value="{{domestic.destination_slug}}">{{domestic.destination_name}}</option>
+                      {% endfor %}
+                    </optgroup>
+                </select>
+              </div>
+            <div class="mb-3 col-lg-6">
+              <label for="title" class="form-label">Select destination Cities</label>
+              <input type="hidden" class="select-2" id="new2-{{topdestination.destination_2Cities}}" value="{{topdestination.destination_2Cities}}">
+              <select class="form-select Show-2"  name="destination_2Cities">
+                <option value=""></option>
+                {% for city in City_list %}
+                <option value="{{city.international_city_name}}">{{city.international_city_name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+        </div>
+     
+        <div class="row">
+          <div class="mb-3 col-lg-6">
+            <label for="title" class="form-label">Price</label>
+            <input type="text" class="form-control"  id="password" name="destination_2price" autocomplete="off" value="{{topdestination.destination_2price}}">
+          </div>
+          <div class="mb-3 col-lg-6">
+            <!-- <img src="{{ topdestination.image_file_url }}" alt=""> -->
+            <label for="upload" class="form-label">Destination Images(size:700x650)</label>
+            <input class="form-control"  type="file" name="destination_2image" id="upload" >
+          </div>
+      </div>
+      </div>
+      <p style="font-weight: 600;font-size: 18px;" class="mb-3">Destination 3</p>
+      <div>
+        <div class="row">
+          <div class="mb-3 col-lg-6">
+            <input type="hidden" class="select-city3" id="new-{{topdestination.destination_3Continent}}" value="{{topdestination.destination_3Continent}}">
+            <label for="title" class="form-label">Select destination</label>
+            <select class="form-select Show-city3"  name="destination_3Continent">
+                  <option value=""></option>
+                  <optgroup label="International">
+                    {% for internation in Internation %}
+                      <option value="{{internation.destination_slug}}">{{internation.destination_name}}</option>
+                    {% endfor %}
+                  </optgroup>
+                  
+                  <optgroup label="Domestic">
+                    {% for domestic in Domestic %}
+                      <option value="{{domestic.destination_slug}}">{{domestic.destination_name}}</option>
+                    {% endfor %}
+                  </optgroup>
+              </select>
+            </div>
+          <div class="mb-3 col-lg-6">
+            <label for="title" class="form-label">Select destination Cities</label>
+            <input type="hidden" class="select-3" id="new-{{topdestination.destination_3Cities}}" value="{{topdestination.destination_3Cities}}">
+            <select class="form-select Show-3"  name="destination_3Cities">
+              <option value=""></option>
+              {% for city in City_list %}
+              <option value="{{city.international_city_name}}">{{city.international_city_name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col-lg-6">
+          <label for="title" class="form-label">Price</label>
+          <input type="text" class="form-control"  id="password" name="destination_3price" autocomplete="off" value="{{topdestination.destination_3price}}">
+        </div>
+        <div class="mb-3 col-lg-6">
+          <!-- <img src="{{ topdestination.image_file_url }}" alt=""> -->
+          <label for="upload" class="form-label">Destination Images (size:700x650)</label>
+          <input class="form-control"  type="file" name="destination_3image" id="upload" >
+        </div>
+    </div>
+    </div>
+    <p style="font-weight: 600;font-size: 18px;" class="mb-3">Destination 4</p>
+      <div>
+        <div class="row">
+          <div class="mb-3 col-lg-6">
+            <input type="hidden" class="select-city4" id="new-{{topdestination.destination_4Continent}}" value="{{topdestination.destination_4Continent}}">
+            <label for="title" class="form-label">Select destination</label>
+            <select class="form-select Show-city4"  name="destination_4Continent">
+                  <option value=""></option>
+                  <optgroup label="International">
+                    {% for internation in Internation %}
+                      <option value="{{internation.destination_slug}}">{{internation.destination_name}}</option>
+                    {% endfor %}
+                  </optgroup>
+                  
+                  <optgroup label="Domestic">
+                    {% for domestic in Domestic %}
+                      <option value="{{domestic.destination_slug}}">{{domestic.destination_name}}</option>
+                    {% endfor %}
+                  </optgroup>
+              </select>
+            </div>
+          <div class="mb-3 col-lg-6">
+            <label for="title" class="form-label">Select destination Cities</label>
+            <input type="hidden" class="select-4" id="new-{{topdestination.destination_4Cities}}" value="{{topdestination.destination_4Cities}}">
+            <select class="form-select Show-4"  name="destination_4Cities">
+              <option value=""></option>
+              {% for city in City_list %}
+              <option value="{{city.international_city_name}}">{{city.international_city_name}}</option>
+              {% endfor %}
+            </select>
+          </div>
+      </div>
+      <div class="row">
+        <div class="mb-3 col-lg-6">
+          <label for="title" class="form-label">Price</label>
+          <input type="text" class="form-control"  id="password" name="destination_4price" autocomplete="off" value="{{topdestination.destination_4price}}">
+        </div>
+        <div class="mb-3 col-lg-6">
+          <!-- <img src="{{ topdestination.image_file_url }}" alt=""> -->
+          <label for="upload" class="form-label">Destination Images (size:700x925)</label>
+          <input class="form-control"  type="file" name="destination_4image" id="upload" >
+        </div>
+    </div>
+    </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary"><i class="link-icon" data-feather="plus"></i>Change Top destination</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var selectTourValues = document.querySelectorAll(".select-city1");
+        var showTourValues = document.querySelectorAll(".Show-city1");
+  
+        selectTourValues.forEach(function(select, index) {
+            var selectTourValue = select.value;
+            var showTourValue = showTourValues[index];
+  
+            // Loop through the options to find the one that matches the input value
+            for (var k = 0; k < showTourValue.options.length; k++) {
+                if (showTourValue.options[k].value === selectTourValue) {
+                  showTourValue.options[k].selected = true;
+                    break;
+                }
+            }
+  
+            // Add event listener for change event on the select element
+            showTourValue.addEventListener("change", function() {
+                // Update the value of the hidden input to match the selected option
+                select.value = this.value;
+            });
+        });
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var selectTourValues = document.querySelectorAll(".select-city2");
+        var showTourValues = document.querySelectorAll(".Show-city2");
+  
+        selectTourValues.forEach(function(select, index) {
+            var selectTourValue = select.value;
+            var showTourValue = showTourValues[index];
+  
+            // Loop through the options to find the one that matches the input value
+            for (var k = 0; k < showTourValue.options.length; k++) {
+                if (showTourValue.options[k].value === selectTourValue) {
+                  showTourValue.options[k].selected = true;
+                    break;
+                }
+            }
+  
+            // Add event listener for change event on the select element
+            showTourValue.addEventListener("change", function() {
+                // Update the value of the hidden input to match the selected option
+                select.value = this.value;
+            });
+        });
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var selectTourValues = document.querySelectorAll(".select-city3");
+        var showTourValues = document.querySelectorAll(".Show-city3");
+  
+        selectTourValues.forEach(function(select, index) {
+            var selectTourValue = select.value;
+            var showTourValue = showTourValues[index];
+  
+            // Loop through the options to find the one that matches the input value
+            for (var k = 0; k < showTourValue.options.length; k++) {
+                if (showTourValue.options[k].value === selectTourValue) {
+                  showTourValue.options[k].selected = true;
+                    break;
+                }
+            }
+  
+            // Add event listener for change event on the select element
+            showTourValue.addEventListener("change", function() {
+                // Update the value of the hidden input to match the selected option
+                select.value = this.value;
+            });
+        });
+    });
+  </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          var selectTourValues = document.querySelectorAll(".select-city4");
+          var showTourValues = document.querySelectorAll(".Show-city4");
+    
+          selectTourValues.forEach(function(select, index) {
+              var selectTourValue = select.value;
+              var showTourValue = showTourValues[index];
+    
+              // Loop through the options to find the one that matches the input value
+              for (var k = 0; k < showTourValue.options.length; k++) {
+                  if (showTourValue.options[k].value === selectTourValue) {
+                    showTourValue.options[k].selected = true;
+                      break;
+                  }
+              }
+    
+              // Add event listener for change event on the select element
+              showTourValue.addEventListener("change", function() {
+                  // Update the value of the hidden input to match the selected option
+                  select.value = this.value;
+              });
+          });
+      });
+    </script>
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var selectTourValues = document.querySelectorAll(".select-1");
+        var showTourValues = document.querySelectorAll(".Show-1");
+  
+        selectTourValues.forEach(function(select, index) {
+            var selectTourValue = select.value;
+            var showTourValue = showTourValues[index];
+  
+            // Loop through the options to find the one that matches the input value
+            for (var k = 0; k < showTourValue.options.length; k++) {
+                if (showTourValue.options[k].value === selectTourValue) {
+                  showTourValue.options[k].selected = true;
+                    break;
+                }
+            }
+  
+            // Add event listener for change event on the select element
+            showTourValue.addEventListener("change", function() {
+                // Update the value of the hidden input to match the selected option
+                select.value = this.value;
+            });
+        });
+    });
+  </script>
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var selectTourValues = document.querySelectorAll(".select-2");
+        var showTourValues = document.querySelectorAll(".Show-2");
+  
+        selectTourValues.forEach(function(select, index) {
+            var selectTourValue = select.value;
+            var showTourValue = showTourValues[index];
+  
+            // Loop through the options to find the one that matches the input value
+            for (var k = 0; k < showTourValue.options.length; k++) {
+                if (showTourValue.options[k].value === selectTourValue) {
+                  showTourValue.options[k].selected = true;
+                    break;
+                }
+            }
+  
+            // Add event listener for change event on the select element
+            showTourValue.addEventListener("change", function() {
+                // Update the value of the hidden input to match the selected option
+                select.value = this.value;
+            });
+        });
+    });
+  </script>
+   <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var selectTourValues = document.querySelectorAll(".select-3");
+        var showTourValues = document.querySelectorAll(".Show-3");
+  
+        selectTourValues.forEach(function(select, index) {
+            var selectTourValue = select.value;
+            var showTourValue = showTourValues[index];
+  
+            // Loop through the options to find the one that matches the input value
+            for (var k = 0; k < showTourValue.options.length; k++) {
+                if (showTourValue.options[k].value === selectTourValue) {
+                  showTourValue.options[k].selected = true;
+                    break;
+                }
+            }
+  
+            // Add event listener for change event on the select element
+            showTourValue.addEventListener("change", function() {
+                // Update the value of the hidden input to match the selected option
+                select.value = this.value;
+            });
+        });
+    });
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var selectTourValues = document.querySelectorAll(".select-4");
+        var showTourValues = document.querySelectorAll(".Show-4");
+  
+        selectTourValues.forEach(function(select, index) {
+            var selectTourValue = select.value;
+            var showTourValue = showTourValues[index];
+  
+            // Loop through the options to find the one that matches the input value
+            for (var k = 0; k < showTourValue.options.length; k++) {
+                if (showTourValue.options[k].value === selectTourValue) {
+                  showTourValue.options[k].selected = true;
+                    break;
+                }
+            }
+  
+            // Add event listener for change event on the select element
+            showTourValue.addEventListener("change", function() {
+                // Update the value of the hidden input to match the selected option
+                select.value = this.value;
+            });
+        });
+    });
+  </script>
+
+	<!-- core:js -->
+  <script src="{% static 'vendors/core/core.js' %}"></script>
+  <!-- endinject -->
+
+  <!-- Plugin js for this page -->
+  <script src="{% static 'vendors/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+  <!-- End plugin js for this page -->
+
+  <!-- inject:js -->
+  <script src="{% static 'vendors/feather-icons/feather.min.js' %}"></script>
+  <script src="{% static 'js/admin/template.js' %}"></script>
+  <!-- endinject -->
+
+  <!-- Custom js for this page -->
+  <script src="{% static 'js/admin/tinymce.js' %}"></script>
+  <script src="{% static 'js/admin/datepicker.js' %}"></script>
+  <!-- End custom js for this page -->
+
+</body>
+</html> 

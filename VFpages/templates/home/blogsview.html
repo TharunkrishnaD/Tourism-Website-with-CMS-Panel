@@ -1,0 +1,353 @@
+{% load static %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zxx">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>{{ blog_entry.description.meta_title }}</title>
+
+    <meta name="og:title" content="{{ blog_entry.description.meta_title }}">
+    
+    <meta name="description" content="{{ blog_entry.description.meta_description }}" />
+    
+    <meta name="og:description" content="{{ blog_entry.description.meta_description }}">
+    <meta name="keywords" content="{{ blog_entry.description.meta_keywords }}" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/home/Magnet logo.png' %}">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/home/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <!--Custom CSS-->
+    <link href="{% static 'css/home/style.css' %}" rel="stylesheet" type="text/css">
+    <!--Plugin CSS-->
+    <link href="{% static 'css/home/plugin.css' %}" rel="stylesheet" type="text/css">
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/home/fonts/line-icons.css' %}" type="text/css">
+    <style>
+        .number {
+            font-family: "Font Awesome 5 Brands;"
+        }
+     </style>
+</head>
+
+<body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status"></div>
+    </div>
+    <!-- Preloader Ends -->
+
+    <!-- header starts -->
+    {% include 'home/header.html' %}
+    
+    <!-- header ends -->
+    <style>
+        .section-shape {
+            background-image: url("{% static 'image/home/shape8.png' %}") !important;
+        }
+        #bc_image {
+            background-image: url("{% static blog_entry.description.banner_image_url %}") !important;
+            height: 500px; 
+        }
+    </style>
+
+    <!-- BreadCrumb Starts -->  
+    <section class="breadcrumb-main pb-20 pt-14" id="bc_image">
+        <div class="section-shape section-shape1 top-inherit bottom-0"></div>
+        <div class="breadcrumb-outer">
+            <div class="container">
+                <!--<div class="breadcrumb-content text-center">-->
+                <!--    <h1 class="mb-3">"{{ blog_entry.description.hint }}"</h1>-->
+                <!--    <nav aria-label="breadcrumb" class="d-block">-->
+                <!--        <ul class="breadcrumb">-->
+                <!--            <li class="breadcrumb-item"><a href="{% url 'home_page'%}">Home</a></li>-->
+                <!--            <li class="breadcrumb-item active" aria-current="page">{{ blog_entry.description.category }}</li>-->
+                <!--        </ul>-->
+                <!--    </nav>-->
+                <!--</div>-->
+            </div>
+        </div>
+        <div class="dot-overlay"></div>
+    </section>
+    <!-- BreadCrumb Ends --> 
+
+    <!-- blog starts -->
+    <section class="blog">
+        <div class="container">
+            <div class="row ">
+                <div class="col-lg-9 mb-4">
+                    <div class="blog-single">
+
+                        <div class="blog-wrapper">
+                            <h2 class="lh-sm" id="title-link{{blog_entry.id}}">{{ blog_entry.description.title}}</h2>
+                            <script>
+                                            // Get the title element
+                                            var titleElement = document.getElementById('title-link{{blog_entry.id}}');
+                                            var titleText = titleElement.textContent;
+                                        
+                                            // Replace numbers with spans having a specific class
+                                            var replacedText = titleText.replace(/[\d&]+/g, function(match) {
+                                                return "<span class='number'>" + match + "</span>";
+                                            });
+                                        
+                                            // Set the modified HTML back to the element
+                                            titleElement.innerHTML = replacedText;
+                            </script>
+                            <div class="blog-content first-child-cap">
+                                <p class="mb-3">{{ blog_entry.description.description}}<br><br>
+                                <img src="{% static blog_entry.description.cover_image_url %}" alt="image" style="height: 300px;width: 100%; class="mb-3 rounded">
+                                {{ blog_entry.description.content}}</p>
+                            </div>
+
+                            <!-- blog blockquote -->
+                            <div class="blog_content mt-2 mb-5">
+                                {{ blog_entry.description.jump_link_titles | safe}}
+                                <!-- <p class="white">“To take a trivial example, which ever undertakes laborious physical work exercise, except obtain some advantage blinded” </p>
+                                <span class="white">By Michael Delwell</span>
+                                <i class="fas fa-quote-left"></i> -->
+                            </div>
+                            <div id="richTextAreaContent">
+                                {{ blog_entry.description.richtextarea | safe }}
+                            </div>
+                            <style>
+                                .blog_content {
+                                    color: #029e9d !important;
+                                    font-size: 20px !important;
+                                    text-align: start !important;
+                                    padding: 20px !important;
+                                    border-left: 8px solid #029e9d;
+                                }
+                            </style>
+                            </div>
+                            </div>
+                </div>
+                <div class="col-lg-3 mb-4" style="position: sticky;top: 20px;height: 600px;">
+                    <div class="popular-post sidebar-item mb-4">
+                        <div class="sidebar-tabs">
+                            <div class="post-tabs">
+                                <!-- tab navs -->
+                                <ul class="nav nav-tabs nav-pills nav-fill" id="postsTab1" role="tablist">
+                                    <li class="nav-item d-inline-block" role="presentation">
+                                        <button aria-selected="false" class="nav-link active" data-bs-target="#popular" data-bs-toggle="tab" id="popular-tab" role="tab" type="button">Popular</button>
+                                    </li>
+                                    <li class="nav-item d-inline-block" role="presentation">
+                                        <button aria-selected="true" class="nav-link" data-bs-target="#recent" data-bs-toggle="tab" id="recent-tab" role="tab" type="button">Recent</button>
+                                    </li>
+                                </ul>
+                                <!-- tab contents -->
+                                <div class="tab-content" id="postsTabContent1">
+                                    <!-- popular posts -->
+                                    <div aria-labelledby="popular-tab" class="tab-pane fade active show" id="popular" role="tabpanel">
+                                        {% for popular in popular_entries %}
+                                                <article class="post mb-2 border-b pb-2">
+                                                    <div class="s-content d-flex align-items-center justify-space-between">
+                                                        <div class="sidebar-image w-25 me-3 rounded">
+                                                            <a href="/blogs/{{ popular.description.url }}"><img src="{% static popular.description.grid_image_url %}" alt="" style="height: 80px;"></a>
+                                                        </div>
+                                                        <div class="content-list w-75">
+                                                            <h5 class="mb-1"><a href="/blogs/{{ popular.description.url }}" class="update-link" id="popular{{popular.id}}" data-blog-id="{{ popular.id }}" data-blog-url="{{ popular.description.url }}">{{ popular.description.title }}</a></h5>
+                                                            <script>
+                                                                // Get the title element
+                                                                var titleElement = document.getElementById('popular{{popular.id}}');
+                                                                var titleText = titleElement.textContent;
+                                                            
+                                                                // Replace numbers with spans having a specific class
+                                                                var replacedText = titleText.replace(/[\d&]+/g, function(match) {
+                                                                    return "<span class='number'>" + match + "</span>";
+                                                                });
+                                                            
+                                                                // Set the modified HTML back to the element
+                                                                titleElement.innerHTML = replacedText;
+                                                            </script>
+                                                            <div class="date">{{ popular.description.created_on }}</div>
+                                                        </div>    
+                                                    </div> 
+                                                </article>
+                                                {% endfor %}
+                                </div>
+                                    <!-- Recent posts -->
+                                    <div aria-labelledby="recent-tab" class="tab-pane fade" id="recent" role="tabpanel">
+                                        {% for last_entry in last_seven_entries %}
+                                                <article class="post mb-2 border-b pb-2">
+                                                    <div class="s-content d-flex align-items-center justify-space-between">
+                                                        <div class="sidebar-image w-25 me-3 rounded">
+                                                            <a href="/blogs/{{ last_entry.description.url }}"><img src="{% static last_entry.description.grid_image_url %}" alt="" style="height: 80px;"></a>
+                                                        </div>
+                                                        <div class="content-list w-75">
+                                                            <h5 class="mb-1"><a href="/blogs/{{ last_entry.description.url }}" id="recent{{last_entry.id}}" class="update-link" data-blog-id="{{ last_entry.id }}" data-blog-url="{{ last_entry.description.url }}">{{ last_entry.description.title }}</a></h5>
+                                                            <script>
+                                                                // Get the title element
+                                                                var titleElement = document.getElementById('recent{{last_entry.id}}');
+                                                                var titleText = titleElement.textContent;
+                                                            
+                                                                // Replace numbers with spans having a specific class
+                                                                var replacedText = titleText.replace(/[\d&]+/g, function(match) {
+                                                                    return "<span class='number'>" + match + "</span>";
+                                                                });
+                                                            
+                                                                // Set the modified HTML back to the element
+                                                                titleElement.innerHTML = replacedText;
+                                                            </script>
+                                                            <div class="date">{{ last_entry.description.created_on }}</div>
+                                                        </div>    
+                                                    </div> 
+                                                </article>
+                                                {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </section>
+    <!-- partner ends -->
+
+    <!-- footer starts -->
+    {% include 'home/footer.html' %}
+    <!-- footer ends -->
+    
+    <!-- Back to top start -->
+    <div id="back-to-top">
+        <a href="#"></a>
+    </div>
+    <!-- Back to top ends -->
+
+    <!-- search popup -->
+    <div id="search1">
+        <button type="button" class="close">×</button>
+        <form>
+            <input type="search" value="" placeholder="type keyword(s) here" />
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
+    <!-- login registration modal -->
+    <div class="modal fade log-reg" id="exampleModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="post-tabs">
+                <!-- tab navs -->
+                <ul class="nav nav-tabs nav-pills nav-fill" id="postsTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button aria-controls="login" aria-selected="false" class="nav-link active" data-bs-target="#login" data-bs-toggle="tab" id="login-tab" role="tab" type="button">Login</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button aria-controls="register" aria-selected="true" class="nav-link" data-bs-target="#register" data-bs-toggle="tab" id="register-tab" role="tab" type="button">Register</button>
+                    </li>
+                </ul>
+                <!-- tab contents -->
+                <div class="tab-content blog-full" id="postsTabContent">
+                    <!-- popular posts -->
+                    <div aria-labelledby="login-tab" class="tab-pane fade active show" id="login" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-6">
+                               <div class="blog-image rounded">
+                                    <a href="#" style="background-image: url(images/trending/trending5.jpg);"></a>
+                                </div> 
+                            </div>
+                            <div class="col-lg-6">
+                                <h4 class="text-center border-b pb-2">Login</h4>
+                                <div class="log-reg-button d-flex align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-fb">
+                                        <i class="fab fa-facebook"></i> Login with Facebook
+                                    </button>
+                                    <button type="submit" class="btn btn-google">
+                                        <i class="fab fa-google"></i> Login with Google
+                                    </button>
+                                </div>
+                                <hr class="log-reg-hr position-relative my-4 overflow-visible">
+                                <form method="post" action="#" name="contactform" id="contactform">
+                                    <div class="form-group mb-2">
+                                        <input type="text" name="user_name" class="form-control" id="fname" placeholder="User Name or Email Address">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <input type="password" name="password_name" class="form-control" id="lpass" placeholder="Password">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="exampleCheck">
+                                        <label class="custom-control-label mb-0" for="exampleCheck1">Remember me</label>
+                                        <a class="float-end" href="#">Lost your password?</a>
+                                    </div>
+                                    <div class="comment-btn mb-2 pb-2 text-center border-b">
+                                        <input type="submit" class="nir-btn w-100" id="submit" value="Login">
+                                    </div>
+                                    <p class="text-center">Don't have an account? <a href="#" class="theme">Register</a></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Recent posts -->
+                    <div aria-labelledby="register-tab" class="tab-pane fade" id="register" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-6">
+                               <div class="blog-image rounded">
+                                    <a href="#" style="background-image: url(images/trending/trending5.jpg);"></a>
+                                </div> 
+                            </div>
+                            <div class="col-lg-6">
+                                <h4 class="text-center border-b pb-2">Register</h4>
+                                <div class="log-reg-button d-flex align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-fb">
+                                        <i class="fab fa-facebook"></i> Login with Facebook
+                                    </button>
+                                    <button type="submit" class="btn btn-google">
+                                        <i class="fab fa-google"></i> Login with Google
+                                    </button>
+                                </div>
+                                <hr class="log-reg-hr position-relative my-4 overflow-visible">
+                                <form method="post" action="#" name="contactform1" id="contactform1">
+                                    <div class="form-group mb-2">
+                                        <input type="text" name="user_name" class="form-control" id="fname1" placeholder="User Name">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <input type="text" name="user_name" class="form-control" id="femail" placeholder="Email Address">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <input type="password" name="password_name" class="form-control" id="lpass1" placeholder="Password">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <input type="password" name="password_name" class="form-control" id="lrepass" placeholder="Re-enter Password">
+                                    </div>
+                                    <div class="form-group mb-2 d-flex">
+                                        <input type="checkbox" class="custom-control-input" id="exampleCheck1">
+                                        <label class="custom-control-label mb-0 ms-1 lh-1" for="exampleCheck1">I have read and accept the Terms and Privacy Policy?</label>
+                                    </div>
+                                    <div class="comment-btn mb-2 pb-2 text-center border-b">
+                                        <input type="submit" class="nir-btn w-100" id="submit1" value="Register">
+                                    </div>
+                                    <p class="text-center">Already have an account? <a href="#" class="theme">Login</a></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- *Scripts* -->
+    <script src="{% static 'js/home/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'js/home/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/home/particles.js' %}"></script>
+    <script src="{% static 'js/home/particlerun.js' %}"></script>
+    <script src="{% static 'js/home/plugin.js' %}"></script>
+    <script src="{% static 'js/home/main.js' %}"></script>
+    <script src="{% static 'js/home/custom-nav.js' %}"></script>
+
+</body>
+</html>

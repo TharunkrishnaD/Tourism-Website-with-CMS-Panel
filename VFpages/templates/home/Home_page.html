@@ -1,0 +1,1000 @@
+{% load static %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zxx">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>{{homepage_meta.meta_title }}</title>
+
+    <meta name="og:title" content="{{homepage_meta.meta_title }}">
+    
+    <meta name="description" content="{{homepage_meta.meta_description }}" />
+    
+    <meta name="og:description" content="{{homepage_meta.meta_description }}">
+    <meta name="keywords" content="{{homepage_meta.meta_keyword }}" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/home/Magnet logo.png' %}">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/home/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <!--Custom CSS-->
+    <link href="{% static 'css/home/style.css' %}" rel="stylesheet" type="text/css">
+    <!--Plugin CSS-->
+    <link href="{% static 'css/home/plugin.css' %}" rel="stylesheet" type="text/css">
+
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+    <link rel="stylesheet" href="{% static 'css/home/fonts/line-icons.css' %}" type="text/css">
+    <style>
+        .number {
+            font-family: "Font Awesome 5 Brands;"
+        }
+        
+        /*.package_slider .slick-initialized .slick-slide {*/
+        /*    display: block;*/
+        /*    width: 340px !important;*/
+        /*}*/
+        
+        /*.articles_slider .slick-initialized .slick-slide {*/
+        /*    display: block;*/
+        /*    width: 340px !important;*/
+        /*}*/
+    </style>
+</head>
+<body>
+    <style>
+  
+    .section-shape1{
+        background-image: url(/static/image/images/shape8.png);
+    }
+
+    .swiper-container {
+        cursor:pointer  !important;
+    }
+
+    .nav-fill .nav-item, .nav-fill>.nav-link {
+    /* flex: 1 1 auto; */
+    text-align: center;
+    }
+    
+    .buclist_price {
+            color: #fff !important;
+            background: #029e9d;
+            padding: 3px 4px;
+            border-radius: 6px;font-size:18px;
+    }
+    
+     #myBtn {
+        color: #029e9d;
+        background: none;
+    }
+    
+     .para-about {
+        text-align: justify;
+    }
+    
+    .box-shadow {
+        box-shadow: 0 0 15px #00000037;
+    }
+    
+    .item-slider .slick-prev, .item-slider .slick-next {
+        top: -94px;
+    }
+    
+    .trending .trend-item .trend-meta, .trending .trend-item1 .trend-meta, .trending .trend-item2 .trend-meta {
+        position: absolute;
+        top: -22px;
+        right: 20px;
+    }
+    
+    .nav-tabs > li.nav-item button {
+        /*background-color:#f1f1f1;*/
+        border: 1px solid #029e9d;
+        font-size:15px;
+    }
+    
+    @media (max-width: 768px) {
+        .trend-full  {
+            height:auto !important;
+        }
+        
+        .bucket_image {
+            height:160px !important;
+        }
+        
+        .bucket_details {
+            padding-top:4px !important;
+        }
+        
+        .bucket_div{ 
+            height:auto !important;
+            
+        }
+        
+        .bucon_div {
+            padding:0px !important;
+        }
+        
+    }
+    
+    @media screen and (min-width: 1200px) and (max-width: 1399px) { 
+        .why-us-tab {
+            height:500px;
+        }
+        
+        .stay_price {
+            font-size:17px !important;
+        }
+        
+        .start_from {
+            font-size:14px !important;
+        }
+        
+          .buc_text_div {
+            height:145px !important;
+        }
+    }
+     @media screen and (min-width: 992px) and (max-width: 1199px) { 
+        .why-us-tab {
+            height:600px;
+        }
+        
+         .buc_text_div {
+            height:165px !important;
+        }
+    }
+    
+     @media screen and (min-width: 768px) and (max-width: 991px) { 
+        .why-us-tab {
+            height:400px;
+        }
+    }
+    
+     @media screen and (min-width:576px ) and (max-width: 768px) { 
+        .why-us-tab {
+            height:500px;
+        }
+    }
+</style>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status"></div>
+    </div>
+    <!-- Preloader Ends -->
+    
+
+    <!-- header starts -->
+    {% include 'home/header.html' %}
+    <!-- header ends -->
+        <h1 style="display:none">Leading travel agency in Chennai</h1>
+
+    <!-- banner starts -->
+    <section class="banner overflow-hidden">
+        <div class="slider top50">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    {% for slider in destinationSlider %}
+                    <div class="swiper-slide">
+                        <div class="slide-inner">
+                            <a href="{% url 'international-tour-packages' slider.description.SliderTitle %}">
+                            <div class="slide-image slide-image{{slider.id}}" ></div>
+                            <div class="swiper-content">
+                                <div class="entry-meta mb-2">
+                                    <h5 class="entry-category mb-0 white"></h5>
+                                </div>
+                              
+                                <p class="white mb-4"></p>
+                                <!-- <a href="{% url 'international-tour-packages' slider.description.SliderTitle %}" class="nir-btn">Know More</a> -->
+                            </div>
+                            <!-- <div class="dot-overlay"></div> -->
+                        </a>
+                        </div> 
+                    </div>
+                    <style>
+                     .slide-image{{slider.id}} {
+                            background-image: url("{% static 'image/homepageslider_image/' %}{{ slider.description.SliderImage }}");
+                    }
+                    </style>
+                    {% endfor %}
+                    
+                </div>
+            </div>
+        </div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </section>
+    <!-- banner ends -->
+    
+
+     <!-- about-us starts -->
+     <section class="about-us pb-0">
+        <div class="section-shape section-shape1"></div>
+    </section>
+    <!-- about-us ends -->
+
+
+    <!-- top Destination starts -->
+    <section class="trending pb-3 pt-3">
+        <div class="container">
+            <div class="section-title mb-6  mx-auto text-center">
+                <!-- <h4 class="mb-1 theme1">Top Destinations</h4> -->
+                <h2 class="mb-1">Top<span class="theme ps-2">International  Destinations</span></h2>
+                <p>Explore stunning destinations, experience unique cultures & make lasting experiences on your adventure</p>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-7">
+                    <div class="row">
+                        <div class="col-lg-12 mb-4">
+                            <div class="trend-item1">
+                                <a href="{% url 'international-tour-packages' international_page_top.description.destination_1Continent %}" >
+                                <div class="trend-image position-relative rounded">
+                                    
+                                    <img src="{% static 'image/Top_destination/' %}{{ international_page_top.description.destination_1image }}" alt="image">
+                                    <div class="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
+                                        <div class="trend-content-title">
+                                            <h5 class="mb-0 theme1">{{international_page_top.description.destination_1Continent}}</h5>
+                                            <h3 class="mb-0 white">{{international_page_top.description.destination_1Cities}}</h3>
+                                        </div>
+                                        <span class="white bg-theme fw-bold p-1 px-2 rounded"> {{international_page_top.description.destination_1Price}}</span>
+                                    </div>
+                                    <!--<div class="color-overlay"></div>-->
+                                    
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
+                            <div class="trend-item1">
+                                <a href="{% url 'international-tour-packages' international_page_top.description.destination_2Continent %}" class="theme1">
+                                <div class="trend-image position-relative rounded">
+                                    <img src="{% static 'image/Top_destination/' %}{{ international_page_top.description.destination_2image }}" alt="image">
+                                    <div class="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100">
+                                        <div class="trend-content-title">
+                                            <h5 class="mb-0 theme1">{{international_page_top.description.destination_2Continent}}</h5>
+                                            <h3 class="mb-0 white">{{international_page_top.description.destination_2Cities}}</h3>
+                                        </div>
+                                        <span class="white bg-theme fw-bold p-1 px-2 rounded"> {{international_page_top.description.destination_2price}}</span>
+                                    </div>
+                                    <!--<div class="color-overlay"></div>-->
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
+                            <div class="trend-item1">
+                                <a href="{% url 'international-tour-packages' international_page_top.description.destination_3Continent %}" class="theme1">
+                                <div class="trend-image position-relative rounded">
+                                    <img src="{% static 'image/Top_destination/' %}{{ international_page_top.description.destination_3image }}" alt="image">
+                                    <div class="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
+                                        <div class="trend-content-title">
+                                            <h5 class="mb-0 theme1">{{international_page_top.description.destination_3Continent}}</h5>
+                                            <h3 class="mb-0 white">{{international_page_top.description.destination_3Cities}}</h3>
+                                        </div>
+                                        <span class="white bg-theme fw-bold p-1 px-2 rounded"> {{international_page_top.description.destination_3price}}</span>
+                                    </div>
+                                    <!--<div class="color-overlay"></div>-->
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 mb-4">
+                    <div class="trend-item1">
+                        <a href="{% url 'international-tour-packages' international_page_top.description.destination_4Continent %}" class="theme1">
+                        <div class="trend-image position-relative rounded">
+                            <img src="{% static 'image/Top_destination/' %}{{ international_page_top.description.destination_4image }}" alt="image">
+                            <div class="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
+                                <div class="trend-content-title">
+                                    <h5 class="mb-0 theme1">{{international_page_top.description.destination_4Continent}}</h5>
+                                    <h3 class="mb-0 white">{{international_page_top.description.destination_4Cities}}</h3>
+                                </div>
+                                <span class="white bg-theme fw-bold p-1 px-2 rounded"> {{international_page_top.description.destination_4price}}</span>
+                            </div>
+                            <!--<div class="color-overlay"></div>-->
+                        </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- top Destination ends -->
+
+
+       <!-- top Destination starts -->
+     <section class="trending bg-grey pb-3 pt-3">
+        <div class="container">
+            <div class="section-title mb-6 mx-auto text-center">
+                <!-- <h4 class="mb-1 theme1">Top Destinations</h4> -->
+                <h2 class="mb-1 ">Top<span class="theme ps-2">Domestic Destinations</span></h2>
+                <p>Explore the wonders of India with our curated top domestic travel packages!</p>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-lg-5 mb-4">
+                    <div class="trend-item1">
+                        <a href="{% url 'main_DestinationAttraction' domestict_page_top.description.destination_1Continent %}" class="theme1">
+                        <div class="trend-image position-relative rounded">
+                            <img src="{% static 'image/Top_destination/' %}{{ domestict_page_top.description.destination_1image }}" alt="image">
+                            <div class="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
+                                <div class="trend-content-title">
+                                    <h5 class="mb-0 theme1">{{domestict_page_top.description.destination_1Continent}}</h5>
+                                    <h3 class="mb-0 white">{{domestict_page_top.description.destination_1Cities}}</h3>
+                                </div>
+                                <span class="white bg-theme fw-bold p-1 px-2 rounded"> {{domestict_page_top.description.destination_1Price}}</span>
+                            </div>
+                            <!--<div class="color-overlay"></div>-->
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="row">
+                        <div class="col-lg-12 mb-4">
+                            <div class="trend-item1">
+                                <a href="{% url 'main_DestinationAttraction' domestict_page_top.description.destination_2Continent %}" class="theme1">
+                                <div class="trend-image position-relative rounded">
+                                    <img src="{% static 'image/Top_destination/' %}{{ domestict_page_top.description.destination_2image }}" alt="image">
+                                    <div class="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
+                                        <div class="trend-content-title">
+                                            <h5 class="mb-0 theme1">{{domestict_page_top.description.destination_2Continent}}</h5>
+                                            <h3 class="mb-0 white">{{domestict_page_top.description.destination_2Cities}}</h3>
+                                        </div>
+                                        <span class="white bg-theme fw-bold p-1 px-2 rounded"> {{domestict_page_top.description.destination_2price}}</span>
+                                    </div>
+                                    <!--<div class="color-overlay"></div>-->
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
+                            <div class="trend-item1">
+                                <a href="{% url 'main_DestinationAttraction' domestict_page_top.description.destination_3Continent %}" class="theme1">
+                                <div class="trend-image position-relative rounded">
+                                    <img src="{% static 'image/Top_destination/' %}{{ domestict_page_top.description.destination_3image }}" alt="image">
+                                    <div class="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100">
+                                        <div class="trend-content-title">
+                                            <h5 class="mb-0 theme1">{{domestict_page_top.description.destination_3Continent}}</h5>
+                                            <h3 class="mb-0 white">{{domestict_page_top.description.destination_3Cities}}</h3>
+                                        </div>
+                                        <span class="white bg-theme fw-bold p-1 px-2 rounded"> {{domestict_page_top.description.destination_3price}}</span>
+                                    </div>
+                                    <!--<div class="color-overlay"></div>-->
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 mb-4">
+                            <div class="trend-item1">
+                                <a href="{% url 'main_DestinationAttraction' domestict_page_top.description.destination_4Continent %}" class="theme1">
+                                <div class="trend-image position-relative rounded">
+                                    <img src="{% static 'image/Top_destination/' %}{{ domestict_page_top.description.destination_4image }}" alt="image">
+                                    <div class="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100 z-index">
+                                        <div class="trend-content-title">
+                                            <h5 class="mb-0 theme1">{{domestict_page_top.description.destination_4Continent}}</h5>
+                                            <h3 class="mb-0 white">{{domestict_page_top.description.destination_4Cities}}</h3>
+                                        </div>
+                                        <span class="white bg-theme fw-bold p-1 px-2 rounded"> {{domestict_page_top.description.destination_4price}}</span>
+                                    </div>
+                                    <!--<div class="color-overlay"></div>-->
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+    <!-- top Destination ends -->
+
+    
+    <!-- best tour Starts -->
+    <section class="trending pb-3 pt-3">
+        <!--<div class="section-shape top-0" style="background-image: url(images/shape8.png);"></div>-->
+        <div class="container">
+            <div class="row align-items-center justify-content-between mb-1">
+                <div class="col-lg-7">
+                    <div class="section-title text-lg-start">
+                        <!--<h4 class="mb-1 text-start theme1">Top Pick</h4>-->
+                        <h2 class="mb-1">Best <span class="theme">Tour Packages</span></h2>
+                        <p>Breathtaking Destinations to Personalized Experiences, Discover Hassle-free Travel Solutions Tailored just for you.</p>
+                    </div>
+                </div>
+                <div class="col-lg-5">  
+                </div>
+            </div>
+            <div class="trend-box package_slider">
+                <div class="row item-slider">
+                    {% for packages in packages_top %}
+                    <div class="col-lg-4 col-md-6 col-sm-6 mb-3">
+                        <div class="trend-item rounded box-shadow bg-white">
+                            <a href="{% url 'lead_itinerary' packages.description.Url_in_lead %}" >
+                            <div class="trend-image position-relative">
+                                <img src="{% static packages.description.grid_image_url %}" alt="image" class="">
+                                <!--<div class="color-overlay"></div>-->
+                            </div>
+                            </a>
+                            <div class="trend-content px-3 py-2 position-relative" style="height:225px">
+                                <div class="trend-meta bg-theme white px-2 py-1 rounded">
+                                    <div class="entry-author">
+                                        <i class="icon-calendar"  style="font-size:14px;"></i>
+                                        <span class="fw-bold  ps-1" style="font-size:14px !important;">{{ packages.description.Noofdays }}</span>
+                                    </div>
+                                </div>
+                                <div style="height:135px">
+                                    <h5 class="theme mb-0" style="font-size:16px;"><i class="flaticon-location-pin"></i>  {{ packages.description.place1 }}</h5>
+                                     <h3 class="mb-1" style="font-size:22px"><a href="{% url 'lead_itinerary' packages.description.Url_in_lead %}" id="tag-link{{ packages.id }}">{{ packages.description.place2 }}</a></h3>
+                                     <script>
+                                        // Get the place2 element
+                                        var placeElement = document.getElementById('tag-link{{ packages.id }}');
+                                        var placeText = placeElement.textContent;
+                                    
+                                        // Replace '&' with a span having a specific class
+                                        var replacedText = placeText.replace(/&/g, function(match) {
+                                            return "<span class='number'>" + match + "</span>";
+                                        });
+                                    
+                                        // Set the modified HTML back to the element
+                                        placeElement.innerHTML = replacedText;
+                                    </script>
+                                    <!--<div class="rating-main d-flex align-items-center pb-2">-->
+                                    <!--    <div class="rating">-->
+                                    <!--        <span class="fa fa-star checked"></span>-->
+                                    <!--        <span class="fa fa-star checked"></span>-->
+                                    <!--        <span class="fa fa-star checked"></span>-->
+                                    <!--        <span class="fa fa-star checked"></span>-->
+                                    <!--        <span class="fa fa-star checked"></span>-->
+                                    <!--    </div>-->
+                                    <!--    <span class="ms-2">(12)</span>-->
+                                    <!--</div>-->
+                                    <p class="pb-1 mb-0" style="font-size:14px;">{{ packages.description.descriptions }}</p>
+                                </div>
+                                <div class="entry-meta">
+                                        <div class="entry-author align-items-center pt-1 border-t justify-content-end text-end">
+                                            <span class="theme1 mb-0 mt-0 me-2 start_from" style="border-bottom: 3px solid #029e9d !important;">Starts from</span>
+                                          <span class="theme fw-bold fs-5 p-1 px-2 stay_price" style="background:#f1f1f1;font-size:22px;border-radius:6px"> {{ packages.description.price }}</span><br>
+                                          <span class="mb-1 mt-1" style="font-size:14px;">{{ packages.description.person }}</span>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>  
+               <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const starInputs = document.querySelectorAll('.star-value');
+            starInputs.forEach(input => {
+                const value = parseInt(input.value);
+                const parentDiv = input.closest('.item');
+                const stars = parentDiv.querySelectorAll('.fa-star');
+                stars.forEach((star, index) => {
+                    if (index < value) {
+                        star.classList.add('checked');
+                    } else {
+                        star.classList.remove('checked');
+                    }
+                });
+            });
+        });
+    </script>
+            <style>
+                .checked {
+                    color:orange;
+                }
+            </style>
+            
+        </div>
+    </section>
+    <!-- best tour Ends -->
+    
+    
+    <!--Why us starts-->
+    <section class="trending bg-grey pb-3 pt-3">
+        <div class="container">
+            
+            <div class="section-title mb-6 w-50 mx-auto text-center">
+                <h4 class="mb-1 theme1"></h4>
+                <h2 class="mb-1">Why <span class="theme">Vacation Feast ?</span></h2>
+                <p>A seamless travel experience tailored just for you With our expertise, personalized service, and dedication to excellence, we turn wanderlust dreams into unforgettable experiences.</p>
+            </div>
+            
+            <div class="why-us">
+                <div class="why-us-box">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+                            <div class="why-us-item p-5 pt-6 pb-6 border rounded bg-white  why-us-tab">
+                                <div class="why-us-content">
+                                    <div class="why-us-icon mb-1 text-center">
+                                        <i class="icon-flag theme"></i>
+                                    </div>
+                                    <h4 ><a href="#" style="color: #029e9d;" class="text-center">Hassle-free booking</a></h4>
+                                    <p class="mb-2 para-about text-center">Experience hassle-free booking with our user-friendly platform and dedicated support team, ensuring a smooth journey from start to finish.</p>
+                                    <p class="mb-0 theme"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+                            <div class="why-us-item p-5 pt-6 pb-6 border rounded bg-white  why-us-tab">
+                                <div class="why-us-content">
+                                    <div class="why-us-icon mb-1 text-center">
+                                        <i class="icon-location-pin theme"></i>
+                                    </div>
+                                    <h4><a href="#" style="color:#029e9d;" class="text-center"><span class="number">24/7</span> on Tour Assistance</a></h4>
+                                    <p class="mb-2 para-about text-center">Experience worry-free travel with our 24/7 on-tour assistance, providing support and guidance whenever you need it, wherever you are in the world. </p>
+                                    <p class="mb-0 theme"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+                            <div class="why-us-item p-5 pt-6 pb-6 border rounded bg-white  why-us-tab">
+                                <div class="why-us-content">
+                                    <div class="why-us-icon mb-1 text-center">
+                                        <i class="icon-directions theme"></i>
+                                    </div>
+                                    <h4><a href="#" style="color:#029e9d;" class="text-center">Exceptional Customer Support</a></h4>
+                                    <p class="mb-2 para-about text-center">Our team of dedicated customer support specialists is committed to providing exceptional service, ensuring your every need is met with efficiency and care.</p>
+                                    <p class="mb-0 theme"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
+                            <div class="why-us-item p-5 pt-6 pb-6 border rounded bg-white why-us-tab">
+                                <div class="why-us-content">
+                                    <div class="why-us-icon mb-1 text-center">
+                                        <i class="icon-compass theme"></i>
+                                    </div>
+                                    <h4><a href="#" style="color:#029e9d;" class="text-center">Unforgettable Experiences</a></h4>
+                                    <p class="mb-2 para-about text-center">Trust in our promise of unforgettable experiences, crafted with meticulous attention to detail and a passion for creating lasting memories.</p>
+                                    <p class="mb-0 theme"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <style>
+                h4 {
+                    text-align: center;
+                    align-items: center;
+                    justify-content: center;
+                }
+            </style>
+        </div>
+    </section>
+    <!-- why us ends -->
+    
+    
+    <!-- Bucket-list starts -->
+    <section class="trending pb-3 pt-3">
+        <div class="container">
+            <div class="section-title text-center w-75 mx-auto mb-2">
+                <!--<h4 class="mb-1 theme1">Bucket List</h4>-->
+                <h2 class="mb-1">Top Up Your <span class="theme">Bucket Lists</span></h2>
+                <p>Explore must-see destinations and dream-worthy adventures, curated to fulfill your travel dreams.</p>
+            </div>
+            <div class="trending-topic-main">
+                <!-- tab navs -->
+               
+                <ul class="nav nav-tabs nav-pills nav-fill mx-auto" id="postsTab1" role="tablist">
+                    {% for category, packages in categories.items %}
+                        {% if category != "Not-selected" %}
+                            <li class="nav-item" role="presentation">
+                                <button  aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" class="nav-link {% if forloop.first %}active{% endif %} px-2 py-1" data-bs-target="#{{ category }}" data-bs-toggle="tab" id="{{ category }}-tab" role="tab" type="button">{{ category }}</button>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                </ul>
+                
+                <!-- tab contents -->
+                <div class="tab-content pt-1" id="postsTabContent1">
+                    <!-- cycling posts -->
+                    {% for category, packages in categories.items %}
+                    {% if category != "Not-selected" %}
+                    
+                    <div aria-labelledby="{{ category }}-tab" class="tab-pane fade {% if forloop.first %}active show{% endif %}" id="{{ category }}" role="tabpanel">
+                        <div class="row">
+                            {% for package in packages %}
+
+                            <div class="col-lg-4 mb-4">
+                                <div class="trend-full bg-white rounded box-shadow overflow-hidden">
+                                    <div class="row m-0">
+                                        <div class="col-lg-6 col-md-6 ps-0 bucon_div">
+                                           <div class="trend-item2 bucket_div">
+                                            <a class="bucket_image" href="{% url 'lead_itinerary' package.description.Url_in_lead %}" style="background-image: url('{% static package.description.grid_image_url %}');"></a>
+
+
+                                                 <!--<div class="color-overlay"></div>-->
+                                            </div> 
+                                        </div>
+                                        <div class="col-lg-6 col-md-6">
+                                            <div class="trend-content bucket_details py-1 position-relative">
+                                                <div style="height: 115px;" class="buc_text_div" >
+                                                    <h5 class="theme mb-0" style="font-size: 16px;"><i class="flaticon-location-pin"></i>{{ package.description.place1 }}</h5>
+                                                    <h3 class="mb-1" style="font-size: 18px;"><a href="{% url 'lead_itinerary' package.description.Url_in_lead %}" id="New-link{{ package.id }}">{{ package.description.place2 }}</a></h3>
+                                                    <script>
+                                                        // Get the place2 element
+                                                        var placeElement = document.getElementById('New-link{{ package.id }}');
+                                                        var placeText = placeElement.textContent;
+                                                    
+                                                        // Replace '&' with a span having a specific class
+                                                        var replacedText = placeText.replace(/&/g, function(match) {
+                                                            return "<span class='number'>" + match + "</span>";
+                                                        });
+                                                    
+                                                        // Set the modified HTML back to the element
+                                                        placeElement.innerHTML = replacedText;
+                                                    </script>
+                                                    <div class="trend-meta mb-1">
+                                                        <div class="entry-author">
+                                                            <i class="icon-calendar" style="font-size: 13px;"></i>
+                                                            <span style="font-size: 13px;">{{ package.description.Noofdays }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="entry-meta border-t mb-0">
+                                                    <div class="entry-author align-items-center">
+                                                        <span class="theme1 fw-bold mb-0" style="font-size: 14px;">Starts from</span>
+                                                        <p class="theme fw-bold mb-0 bg-theme buclist_price text-center" style="font-size:18px">{{ package.description.price }}</p>
+                                                        <p class="mt-0 mb-0" style="font-size:13px">{{ package.description.person }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                           
+                        </div>
+                        <div class="text-end"><a href="{% url 'catagories_city'  category  %}"><button class="py-1 px-4 pmore-btn">More Packages</button></a></div>
+                        <style>
+                            .pmore-btn {
+                                background:#029e9d;
+                                color: #fff;
+                                border-radius: 8px;
+                            }
+                        </style>
+                        
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- Bucket-list ends -->
+    
+
+<section class="trending pb-3 pt-3 bg-grey ">
+        <div class="section-shape top-0" style="background-image: url(images/shape8.png);"></div>
+        <div class="container">
+            <div class="row align-items-center justify-content-between mb-6 ">
+                <div class="col-lg-7">
+                    <div class="section-title text-lg-start">
+                        <!--<h4 class="mb-1 text-start theme1">Top Pick</h4>-->
+                        <h2 class="mb-1">Recent <span class="theme">Articles <span class="number">&</span> Posts</span></h2>
+                        <p>Discover insightful travel tips, detailed destination guides, and captivating stories designed to enhance your travel experience.</p>
+                    </div>
+                </div>
+                <div class="col-lg-5">  
+                </div>
+            </div>
+            <div class="trend-box articles_slider">
+                <div class="row item-slider">
+                    {% for last_entry in last_seven_entries %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="trend-item box-shadow bg-white mb-4 rounded">
+                            <a href="/blogs/{{ last_entry.description.url }}">
+                            <div class="trend-image">
+                                <img src="{% static last_entry.description.grid_image_url %}" alt="image">
+                            </div>
+                            </a>
+                            <div class="trend-content-main p-4" style="height:155px;">
+                                <div class="trend-content">
+                                    <h5 class="theme mb-1">{{ last_entry.description.category }}</h5>
+                                    <h4 class="mb-0 text-start" style="font-size:20px;"><a href="/blogs/{{ last_entry.description.url }}" id="popular{{last_entry.id}}">{{ last_entry.description.title }}</a></h4>
+                                    <script>
+                                        // Get the title element
+                                        var titleElement = document.getElementById('popular{{last_entry.id}}');
+                                        var titleText = titleElement.textContent;
+                                    
+                                        // Replace numbers with spans having a specific class
+                                        var replacedText = titleText.replace(/[\d&]+/g, function(match) {
+                                            return "<span class='number'>" + match + "</span>";
+                                        });
+                                    
+                                        // Set the modified HTML back to the element
+                                        titleElement.innerHTML = replacedText;
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>  
+              
+            
+        </div>
+    </section>
+    
+    
+    <!-- recent-articles ends -->
+    
+    
+     <!-- testimonial starts -->
+    <section class="testimonial pb-3 pt-3" id="testimonial-img" >
+        <div class="container"> 
+            <div class="section-title mb-2 text-center w-75 mx-auto">
+                    <h4 class="mb-1 theme1"></h4>
+                    <h2 class="mb-1">Hear from Our <span class="theme">Happy Travelers</span></h2>
+                    <p>Our Happy customers share their first-hand experiences, inspiring testimonials, and exciting adventures.</p>
+                </div>
+            <div class="row align-items-center">
+                <div class="col-lg-5 ">
+                    <div class="testimonial-image">
+                        <img src="{% static description.review_image_url %}" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-7 ">
+                    <div class="row review-slider">
+                        {% for review in user_reviews %}
+                            <div class="col-sm-4 item">
+                                <input type="hidden" class="star-value" id="star-value-{{ review.id }}" value="{{review.Clientrating}}">
+                                <div class="testimonial-item1 rounded">
+                                    <div class="author-info mt-2 d-flex align-items-center mb-4">
+                                         <img src="{% static 'image/client_image/' %}{{ review.image_path }}" alt="" class="author-image"> 
+                                        <div class="author-title ps-2">
+                                            <h5 class="m-0 theme" style="font-size:22px">{{ review.ClientName }}</h5>
+                                            <p class="mb-0 rating white"></p>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star checked"></span>
+                                            <span class="fa fa-star"></span>
+                                            <span class="fa fa-star"></span>
+                                        </div>
+                                    </div>
+                                    <div class="details">
+                                        <!-- <p class="m-0"><i class="fa fa-quote-left me-2 fs-1"></i>{{ review.Client_content }}</p> -->
+                                        <p class="m-0"><i class="fa fa-quote-left me-2 fs-1"></i>{{ review.Client_content }}</p>
+                                        <a href="{{review.reviewlink}}" onclick="toggleReadMore(this)" id="myBtn">Read more...</a>
+                                    </div>
+                                    <!--<div class="rev_images mt-3 pe-4 d-flex">-->
+                                    <!--   <img src="{% static 'image/Continents/International_Australia.jpg' %}" alt="">-->
+                                    <!--   <img src="{% static 'image/Continents/International_Australia.jpg' %}" alt="">-->
+                                    <!--   <img src="{% static 'image/Continents/International_Australia.jpg' %}" alt="">-->
+                                    <!--   <img src="{% static 'image/Continents/International_Australia.jpg' %}" alt="">-->
+                                    <!--   <img src="{% static 'image/Continents/International_Australia.jpg' %}" alt="">-->
+                                    <!--</div>-->
+                                </div>
+                            </div>
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- testimonial ends -->
+     
+     
+    <!-- partner starts -->
+    <section class="our-partner pb-3 pt-3">
+        <div class="container">
+            <div class="section-title mb-6 w-75 mx-auto text-center">
+                <!--<h4 class="mb-1 theme1">Our Partners</h4>-->
+                <h2 class="mb-1">Our Awesome <span class="theme">partners</span></h2>
+                <p>From renowned hotels to trusted airlines, discover the collaborations that ensure seamless and unforgettable experiences.</p>
+            </div>
+            <div class="row align-items-center partner-in partner-slider">
+                <div class="col-md-3 col-sm-6">
+                    <div class="partner-item p-4 py-2 rounded bg-lgrey">
+                        <img src="{% static 'image/partners/03.png'%}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="partner-item p-4 py-2 rounded bg-lgrey">
+                        <img src="{% static 'image/partners/07.png'%}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="partner-item p-4 py-2 rounded bg-lgrey">
+                        <img src="{% static 'image/partners/10.png'%}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="partner-item p-4 py-2 rounded bg-lgrey">
+                        <img src="{% static 'image/partners/VF-02.png'%}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="partner-item p-4 py-2 rounded bg-lgrey">
+                        <img src="{% static 'image/partners/VF-05.png'%}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="partner-item p-4 py-2 rounded bg-lgrey">
+                        <img src="{% static 'image/partners/VF-07.png'%}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="partner-item p-4 py-2 rounded bg-lgrey">
+                        <img src="{% static 'image/partners/VF-08.png'%}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="partner-item p-4 py-2 rounded bg-lgrey">
+                        <img src="{% static 'image/partners/VF-10.png'%}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="partner-item p-4 py-2 rounded bg-lgrey">
+                        <img src="{% static 'image/partners/VF-12.png'%}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="partner-item p-4 py-2 rounded bg-lgrey">
+                        <img src="{% static 'image/partners/VF-14.png'%}" alt="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                    <div class="partner-item p-4 py-2 rounded bg-lgrey">
+                        <img src="{% static 'image/partners/VF-15.png'%}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- partner ends--->
+
+
+    <!-- footer starts -->
+    {% include 'home/footer.html' %}
+    <!-- footer ends -->
+    
+    <!-- Back to top start -->
+    <div id="back-to-top">
+        <a href="#"></a>
+    </div>
+    <!-- Back to top ends -->
+
+    <!-- search popup -->
+    <div id="search1">
+        <button type="button" class="close">×</button>
+        <form>
+            <input type="search" value="" placeholder="type keyword(s) here" />
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
+    <!-- login registration modal -->
+    <div class="modal fade log-reg" id="exampleModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="post-tabs">
+                <!-- tab navs -->
+                <ul class="nav nav-tabs nav-pills nav-fill" id="postsTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button aria-controls="login" aria-selected="false" class="nav-link active" data-bs-target="#login" data-bs-toggle="tab" id="login-tab" role="tab" type="button">Login</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button aria-controls="register" aria-selected="true" class="nav-link" data-bs-target="#register" data-bs-toggle="tab" id="register-tab" role="tab" type="button">Register</button>
+                    </li>
+                </ul>
+                <!-- tab contents -->
+                <div class="tab-content blog-full" id="postsTabContent">
+                    <!-- popular posts -->
+                    <div aria-labelledby="login-tab" class="tab-pane fade active show" id="login" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-6">
+                               <div class="blog-image rounded">
+                                    <a href="#" style="background-image: url(images/trending/trending5.jpg);"></a>
+                                </div> 
+                            </div>
+                            <div class="col-lg-6">
+                                <h4 class="text-center border-b pb-2">Login</h4>
+                                <div class="log-reg-button d-flex align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-fb">
+                                        <i class="fab fa-facebook"></i> Login with Facebook
+                                    </button>
+                                    <button type="submit" class="btn btn-google">
+                                        <i class="fab fa-google"></i> Login with Google
+                                    </button>
+                                </div>
+                                <hr class="log-reg-hr position-relative my-4 overflow-visible">
+                                <form method="post" action="#" name="contactform" id="contactform">
+                                    <div class="form-group mb-2">
+                                        <input type="text" name="user_name" class="form-control" id="fname" placeholder="User Name or Email Address">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <input type="password" name="password_name" class="form-control" id="lpass" placeholder="Password">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="exampleCheck">
+                                        <label class="custom-control-label mb-0" for="exampleCheck1">Remember me</label>
+                                        <a class="float-end" href="#">Lost your password?</a>
+                                    </div>
+                                    <div class="comment-btn mb-2 pb-2 text-center border-b">
+                                        <input type="submit" class="nir-btn w-100" id="submit" value="Login">
+                                    </div>
+                                    <p class="text-center">Don't have an account? <a href="#" class="theme">Register</a></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Recent posts -->
+                    <div aria-labelledby="register-tab" class="tab-pane fade" id="register" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-6">
+                               <div class="blog-image rounded">
+                                    <a href="#" style="background-image: url(images/trending/trending5.jpg);"></a>
+                                </div> 
+                            </div>
+                            <div class="col-lg-6">
+                                <h4 class="text-center border-b pb-2">Register</h4>
+                                <div class="log-reg-button d-flex align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-fb">
+                                        <i class="fab fa-facebook"></i> Login with Facebook
+                                    </button>
+                                    <button type="submit" class="btn btn-google">
+                                        <i class="fab fa-google"></i> Login with Google
+                                    </button>
+                                </div>
+                                <hr class="log-reg-hr position-relative my-4 overflow-visible">
+                                <form method="post" action="#" name="contactform1" id="contactform1">
+                                    <div class="form-group mb-2">
+                                        <input type="text" name="user_name" class="form-control" id="fname1" placeholder="User Name">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <input type="text" name="user_name" class="form-control" id="femail" placeholder="Email Address">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <input type="password" name="password_name" class="form-control" id="lpass1" placeholder="Password">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <input type="password" name="password_name" class="form-control" id="lrepass" placeholder="Re-enter Password">
+                                    </div>
+                                    <div class="form-group mb-2 d-flex">
+                                        <input type="checkbox" class="custom-control-input" id="exampleCheck1">
+                                        <label class="custom-control-label mb-0 ms-1 lh-1" for="exampleCheck1">I have read and accept the Terms and Privacy Policy?</label>
+                                    </div>
+                                    <div class="comment-btn mb-2 pb-2 text-center border-b">
+                                        <input type="submit" class="nir-btn w-100" id="submit1" value="Register">
+                                    </div>
+                                    <p class="text-center">Already have an account? <a href="#" class="theme">Login</a></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- *Scripts* -->
+    <script src="{% static 'js/home/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'js/home/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/home/particles.js' %}"></script>
+    <script src="{% static 'js/home/particlerun.js' %}"></script>
+    <script src="{% static 'js/home/plugin.js' %}"></script>
+    <script src="{% static 'js/home/main.js' %}"></script>
+    <script src="{% static 'js/home/custom-swiper.js' %}"></script>
+    <script src="{% static 'js/home/custom-nav.js' %}"></script>
+</body>
+</html>

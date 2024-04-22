@@ -1,0 +1,13 @@
+.deslist_int_image {
+    height: 300px;
+    border-radius: 6px !important;
+}
+
+.trend-item1,.trend-content {
+    /* cursor: pointer; */
+    z-index: 1;
+}
+
+.color-overlay {
+    border-radius: 6px;
+}

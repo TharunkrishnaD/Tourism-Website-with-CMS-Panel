@@ -1,0 +1,340 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zxx">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{{ meata_image.MetaTitle }}</title>
+
+    <meta name="og:title" content="{{ meata_image.MetaTitle }}">
+    
+    <meta name="description" content="{{ meata_image.Metadescription }}" />
+    
+    <meta name="og:description" content="{{ meata_image.Metadescription }}">
+    <meta name="keywords" content="{{ meata_image.Metakeyword }}" />
+    <!-- Favicon -->
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/home/Magnet logo.png' %}">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/home/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'css/home/destinationhome.css' %}" rel="stylesheet" type="text/css">
+    <!--Custom CSS-->
+    <link href="{% static 'css/home/style.css' %}" rel="stylesheet" type="text/css">
+    <!--Plugin CSS-->
+    <link href="{% static 'css/home/plugin.css' %}" rel="stylesheet" type="text/css">
+
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/home/fonts/line-icons.css' %}" type="text/css">
+</head>
+<body>
+
+    <style>
+        .banner{
+            background-image: url("{% static 'image/CategoriesImages/' %}{{ meata_image.img_path }}");
+            height: 500px;
+        }
+        #section-shape-img  {
+           background-image: url("{% static 'image/images/shape8.png' %}");
+       }
+       #backpattren2{
+       background-image:url("{% static 'image/images/shape8.png' %}");
+     }
+     #backpattren {
+       background-image:url("{% static 'image/images/background_pattern.png' %}");
+
+     }
+   </style>
+    <!-- Preloader -->
+    <!-- <div id="preloader">
+        <div id="status"></div>
+    </div> -->
+    <!-- Preloader Ends -->
+
+    <!-- header starts -->
+    {% include 'home/header.html' %}
+    <!-- header ends -->
+
+    <!-- BreadCrumb Starts -->  
+    <section class="breadcrumb-main pb-20 pt-14 background-image banner" >
+        <div class="section-shape section-shape1 top-inherit bottom-0" id="section-shape-img"></div>
+        <div class="breadcrumb-outer">
+            <div class="container">
+                <!--<div class="breadcrumb-content text-center">-->
+                <!--    <h1 class="mb-3 name"></h1>-->
+                <!--    <nav aria-label="breadcrumb" class="d-block">-->
+                <!--        <ul class="breadcrumb">-->
+                <!--            <li class="breadcrumb-item"><a class="tripType" href="{% url 'main_Destination' %}"></a></li>-->
+                <!--            <li class="breadcrumb-item active name" aria-current="page"></li>-->
+                <!--        </ul>-->
+                <!--    </nav>-->
+                <!--</div>-->
+            </div>
+        </div>
+        <div class="dot-overlay"></div>
+    </section>
+    <!-- BreadCrumb Ends --> 
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    var name_int = document.getElementById("name_int").value;
+    var domesticDestinations = ["South", "North", "West", "East"];
+    var formattedText = name_int.replace(/_/g, ' ');
+
+    var pTags = document.getElementsByClassName('name');
+
+    for (var i = 0; i < pTags.length; i++) {
+        var destinationCategory = pTags[i].textContent; // Assuming destinationCategory is derived from the text content of pTags
+        if (domesticDestinations.includes(name_int)) {
+            pTags[i].textContent = formattedText + " India";
+        } else {
+            pTags[i].textContent = formattedText;
+        }
+    }
+});
+
+    </script> -->
+    
+    <!-- <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var destinationCategory = document.getElementById("name_int").value;
+            var domesticDestinations = ["South", "North", "West", "East"];
+            
+            // Check if the destination category is in the list of domestic destinations
+            var isDomestic = domesticDestinations.includes(destinationCategory);
+            
+            // Find the anchor tag
+            var anchorTag = document.querySelector('.tripType');
+           
+    
+            // Set the inner text based on whether it's domestic or international
+            if (isDomestic) {
+                anchorTag.textContent = 'Domestic';
+                
+            
+            } else {
+                anchorTag.textContent = 'International';
+                
+                // If it's an international destination, add "India" to the text
+               
+            }
+        });
+    </script>
+    
+    -->
+
+    <!-- Pakkages List starts -->
+    <section class="package-list">
+        <div class="section-title mb-6 w-50 mx-auto text-center">
+            <input type="hidden" id="name_int" value="{{Cities_list.0.destination_category}}">
+            <h2 class="mb-1">Explore <span class="theme name">{{city_name}}</span></h2>
+        </div>
+        <div class="container package-list-div mx-auto justify-content-center align-items-center row">
+            {% for City_list in categories_City %}
+            <div class="col-lg-4 px-2 col-md-6 col-sm-6 mb-4">
+                <div class="trend-item1">
+                    <div class="trend-image deslist_int_image_div position-relative rounded">
+                        <!-- ?continent={{ City_list.id }}&city={{ City_list.destination_name }}&name={{ City_list.destination_category }}&img={{ City_list.destination_image }} -->
+                        <a href="{% url 'main_DestinationAttraction' City_list.destination_slug %}">
+                            <img src="{% static 'destination/desti_image/' %}{{ City_list.image }}" class="deslist_int_image" alt="image">
+                            <div class="trend-content d-flex align-items-center justify-content-between position-absolute bottom-0 p-4 w-100">
+                                <div class="trend-content-title">
+                                    
+                                    <h5 class="mb-0"><a href="{% url 'main_DestinationAttraction' City_list.destination_slug %}" class="theme1">{{City_list.destination_name}}</a></h5>
+                                    <!-- <h3 class="mb-0 white">{{City_list.destination_name}}</h3> -->
+                                </div>
+                                <!-- <span class="white bg-theme p-1 px-2 rounded">15 Tours</span> -->
+                            </div>
+                            <div class="color-overlay"></div>
+                        </a>
+                    </div>
+                </div>
+                <!-- Add more elements if needed -->
+            </div>
+            {% endfor %}
+          
+        </div>
+       
+       
+    </section>
+    <!-- Pakkages List ends -->
+
+
+    <!-- footer starts -->
+    {% include 'home/footer.html' %}
+    <!-- footer ends -->
+    
+    <!-- Back to top start -->
+    <div id="back-to-top">
+        <a href="#"></a>
+    </div>
+    <!-- Back to top ends -->
+
+    <!-- search popup -->
+    <div id="search1">
+        <button type="button" class="close">×</button>
+        <form>
+            <input type="search" value="" placeholder="type keyword(s) here" />
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
+    <!-- login registration modal -->
+    <div class="modal fade log-reg" id="exampleModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="post-tabs">
+                <!-- tab navs -->
+                <ul class="nav nav-tabs nav-pills nav-fill" id="postsTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button aria-controls="login" aria-selected="false" class="nav-link active" data-bs-target="#login" data-bs-toggle="tab" id="login-tab" role="tab" type="button">Login</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button aria-controls="register" aria-selected="true" class="nav-link" data-bs-target="#register" data-bs-toggle="tab" id="register-tab" role="tab" type="button">Register</button>
+                    </li>
+                </ul>
+                <!-- tab contents -->
+                <div class="tab-content blog-full" id="postsTabContent">
+                    <!-- popular posts -->
+                    <div aria-labelledby="login-tab" class="tab-pane fade active show" id="login" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-6">
+                               <div class="blog-image rounded">
+                                    <a href="#" style="background-image: url(images/trending/trending5.jpg);"></a>
+                                </div> 
+                            </div>
+                            <div class="col-lg-6">
+                                <h4 class="text-center border-b pb-2">Login</h4>
+                                <div class="log-reg-button d-flex align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-fb">
+                                        <i class="fab fa-facebook"></i> Login with Facebook
+                                    </button>
+                                    <button type="submit" class="btn btn-google">
+                                        <i class="fab fa-google"></i> Login with Google
+                                    </button>
+                                </div>
+                                <hr class="log-reg-hr position-relative my-4 overflow-visible">
+                                <form method="post" action="#" name="contactform" id="contactform">
+                                    <div class="form-group mb-2">
+                                        <input type="text" name="user_name" class="form-control" id="fname" placeholder="User Name or Email Address">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <input type="password" name="password_name" class="form-control" id="lpass" placeholder="Password">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <input type="checkbox" class="custom-control-input" id="exampleCheck">
+                                        <label class="custom-control-label mb-0" for="exampleCheck1">Remember me</label>
+                                        <a class="float-end" href="#">Lost your password?</a>
+                                    </div>
+                                    <div class="comment-btn mb-2 pb-2 text-center border-b">
+                                        <input type="submit" class="nir-btn w-100" id="submit" value="Login">
+                                    </div>
+                                    <p class="text-center">Don't have an account? <a href="#" class="theme">Register</a></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Recent posts -->
+                    <div aria-labelledby="register-tab" class="tab-pane fade" id="register" role="tabpanel">
+                        <div class="row">
+                            <div class="col-lg-6">
+                               <div class="blog-image rounded">
+                                    <a href="#" style="background-image: url(images/trending/trending5.jpg);"></a>
+                                </div> 
+                            </div>
+                            <div class="col-lg-6">
+                                <h4 class="text-center border-b pb-2">Register</h4>
+                                <div class="log-reg-button d-flex align-items-center justify-content-between">
+                                    <button type="submit" class="btn btn-fb">
+                                        <i class="fab fa-facebook"></i> Login with Facebook
+                                    </button>
+                                    <button type="submit" class="btn btn-google">
+                                        <i class="fab fa-google"></i> Login with Google
+                                    </button>
+                                </div>
+                                <hr class="log-reg-hr position-relative my-4 overflow-visible">
+                                <form method="post" action="#" name="contactform1" id="contactform1">
+                                    <div class="form-group mb-2">
+                                        <input type="text" name="user_name" class="form-control" id="fname1" placeholder="User Name">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <input type="text" name="user_name" class="form-control" id="femail" placeholder="Email Address">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <input type="password" name="password_name" class="form-control" id="lpass1" placeholder="Password">
+                                    </div>
+                                    <div class="form-group mb-2">
+                                        <input type="password" name="password_name" class="form-control" id="lrepass" placeholder="Re-enter Password">
+                                    </div>
+                                    <div class="form-group mb-2 d-flex">
+                                        <input type="checkbox" class="custom-control-input" id="exampleCheck1">
+                                        <label class="custom-control-label mb-0 ms-1 lh-1" for="exampleCheck1">I have read and accept the Terms and Privacy Policy?</label>
+                                    </div>
+                                    <div class="comment-btn mb-2 pb-2 text-center border-b">
+                                        <input type="submit" class="nir-btn w-100" id="submit1" value="Register">
+                                    </div>
+                                    <p class="text-center">Already have an account? <a href="#" class="theme">Login</a></p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- 
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+    <select id="select-box">
+        <option value="1">Show Div 1</option>
+        <option value="2">Show Div 2</option>
+        <option value="3">Show Div 3</option>
+    </select>
+    <div id="div1" class="hidden">
+        <h2>Div 1 Content</h2>
+       Content for Div 1 -->
+    <!-- </div>
+    <div id="div2" class="hidden">
+        <h2>Div 2 Content</h2> -->
+        <!-- Content for Div 2 -->
+    <!-- </div>
+    <div id="div3" class="hidden">
+        <h2>Div 3 Content</h2> -->
+        <!-- Content for Div 3 -->
+    </div>
+
+    <!-- <script>
+        document.getElementById('select-box').addEventListener('change', function() {
+            var selectedValue = this.value;
+            // Hide all divs
+            document.getElementById('div1').classList.add('hidden');
+            document.getElementById('div2').classList.add('hidden');
+            document.getElementById('div3').classList.add('hidden');
+            // Show the selected div
+            document.getElementById('div' + selectedValue).classList.remove('hidden');
+        });
+    </script>
+     --> 
+
+    <!-- *Scripts* -->
+    <script src="{% static 'js/home/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'js/home/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/home/particles.js' %}"></script>
+    <script src="{% static 'js/home/particlerun.js' %}"></script>
+    <script src="{% static 'js/home/plugin.js' %}"></script>
+    <script src="{% static 'js/home/main.js' %}"></script>
+    <script src="{% static 'js/home/custom-nav.js' %}"></script>
+    <script src="{% static 'js/home/custom-swiper.js' %}"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

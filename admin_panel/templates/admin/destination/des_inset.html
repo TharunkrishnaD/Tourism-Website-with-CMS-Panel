@@ -1,0 +1,191 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Travelin Responsive HTML Admin Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="Travelin">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/home/Magnet%20logo.png' %}">
+    <title>Vacation Feast</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- End fonts -->
+
+	<!-- core:css -->
+	<link rel="stylesheet" href="{% static 'vendors/core/core.css' %}">
+	<!-- endinject -->
+
+	<!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}">
+	<!-- End plugin css for this page -->
+
+	<!-- inject:css -->
+	<link rel="stylesheet" href="{% static 'css/css/iconfont.css' %}">
+	<!-- endinject -->
+
+  <!-- Layout styles -->  
+	<link rel="stylesheet" href="{% static 'css/css/style.css' %}">
+  <!-- End layout styles -->
+
+  <link rel="shortcut icon" href="../images/favicon.png" />
+</head>
+<body>
+	<div class="container">
+        <div class="mt-2 mx-auto justify-content-center" > 
+            <div class="text-center mt-3 mb-3">
+                <h2>DESTINATIONS DETAILS</h2>
+            </div>
+
+<!-- ---------------------------------------------my work contend---------------------------------- -->
+            <form class="forms-sample col-lg-10 mx-auto justify-content-center" action="{% url 'des_insertfn' %}" method="POST" enctype="multipart/form-data" style="border: solid black; padding: 10px 10px;">
+                {% csrf_token %}
+                <div class="mb-3  justify-content-between d-flex" >
+                    
+                    <div class="mb-3 input-div" >
+                        <label for="description" class="form-label">International/Domestic?</label>
+                        <select class="form-select form-width" name="int-domes" id="">
+                            <option value="">Select any one</option>
+                            <option value="1">Domestic</option>
+                            <option value="0">International</option>
+                            </select>
+                    </div>
+                <div class="mb-3 input-div" >
+                    <label for="description" class="form-label">Category</label>
+                    <select class="form-select form-width" name="Category" id="">
+                        <option value="">Select any one</option>
+                        <optgroup label="Domestic">
+                            <option value="North">North India</option>
+                            <option value="South">South India</option>
+                            <option value="West">West India</option>
+                            <option value="East">East India</option>
+                        </optgroup>
+                        <optgroup label="International">
+                            <option value="Europe">Europe</option>
+                            <option value="Africa">Africa</option>
+                            <option value="North_America">North America</option>
+                            <option value="South_America">South America</option>
+                            <option value="Asia">Asia</option>
+                            <option value="Australia_and_New_Zealand">Australia and New Zealand</option>
+                        </optgroup>
+                        
+                    </select>
+                </div>
+                <div class="mb-3 input-div">
+                    <label for="subtitle" class="form-label">Name</label>
+                    <input type="text" class="form-control form-width" required id="subtitle" name="Name" autocomplete="off">
+                </div>
+                  <div class="mb-3 input-div" >
+            <label for="description" class="form-label">Name Slug</label>
+            <input type="text" class="form-control form-width" required  id="password" name="NameSlug" autocomplete="off" >
+        </div>
+                    </div>
+                <div class="mb-3  justify-content-between d-flex" >
+                    <div class="mb-3  input-div">
+                        <label for="upload" class="form-label">Banner Images</label>
+                        <input class="form-control  form-width" required type="file" name="Baner_Images" id="upload" >
+                    </div>
+                    <div class="mb-3 input-div" >
+                        <label for="description" class="form-label">Title</label>
+                        <input type="text" class="form-control form-width" required id="password" name="Title" autocomplete="off" >
+                    </div>
+                    <div class="mb-3 input-div">
+                        <label for="subtitle" class="form-label">Title Slug</label>
+                        <input type="text" class="form-control form-width" id="subtitle" name="TitleSlug" autocomplete="off">
+                    </div>
+                    
+                    
+                    </div>
+                    <div class="mb-3 input-div">
+                        <label for="subtitle" class="form-label">Meta Title</label>
+                        <input type="text" class="form-control form-width" id="MetaTitle" name="MetaTitle" autocomplete="off">
+                    </div>
+                    <div class="mb-3 input-div">
+                        <label for="subtitle" class="form-label">Meta Description</label>
+                        <input type="text" class="form-control form-width" id="Metadescription" name="Metadescription" autocomplete="off">
+                    </div>
+                    <div class="mb-3 input-div">
+                        <label for="subtitle" class="form-label">Meta keyword</label>
+                        <input type="text" class="form-control form-width" id="Metakeyword" name="Metakeyword" autocomplete="off">
+                    </div>
+                <!-- <div class="mb-3  justify-content-between d-flex" >
+                    <div class="mb-3 input-div">
+                        <label for="subtitle" class="form-label">Cost</label>
+                        <input type="number" class="form-control form-width" required id="subtitle" name="Cost" autocomplete="off">
+                    </div>
+                    <div class="mb-3 input-div" >
+                        <label for="description" class="form-label">Duraion</label>
+                        <input type="text" class="form-control form-width" required id="password" name="Duraion" autocomplete="off" >
+                    </div>
+                    <div class="mb-3 input-div" >
+                        <label for="description" class="form-label">Season</label>
+                        <input type="text" class="form-control form-width" required id="password" name="Season" autocomplete="off" >
+                    </div>
+                </div>
+                
+                <div class="mb-3 justify-content-between d-flex">
+                    <div class="mb-3 input-div">
+                        <label for="subtitle" class="form-label">Live Guide</label>
+                        <input type="text" class="form-control form-width" id="subtitle" name="LiveGuide" autocomplete="off">
+                    </div>
+                    <div class="mb-3 input-div" >
+                        <label for="description" class="form-label">Max Group</label>
+                        <input type="text" class="form-control form-width" required id="password" name="MaxGroup" autocomplete="off" >
+                    </div>
+                    <div class="mb-3 input-div" >
+                        <label for="description" class="form-label">ON/OFF Text on website</label>
+                        <select class="form-select form-width" name="Textonwebsite">
+                            <option value="1">ON</option>
+                            <option value="0">OFF</option>
+                         </select>
+                    </div>
+                </div> -->
+               <div class="text-center">
+                    <button type="submit" class="btn btn-primary"><i class="link-icon" data-feather="plus"></i> Add Destination</button>
+                </div>
+            </form>
+		</div>
+	</div>
+
+    <style>
+	.form-width{
+        width: 98%;
+      }
+      .input-div{
+        width: 100%;
+      }
+      .form-control2{
+        width: 95%;
+      }
+      .form-label{
+        font-size: medium;
+        font-weight: 600;
+      }
+
+    </style>
+	<!-- core:js -->
+  <script src="{% static 'vendors/core/core.js' %}"></script>
+  <!-- endinject -->
+
+  <!-- Plugin js for this page -->
+  <script src="{% static 'vendors/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+  <!-- End plugin js for this page -->
+
+  <!-- inject:js -->
+  <script src="{% static 'vendors/feather-icons/feather.min.js' %}"></script>
+  <script src="{% static 'js/admin/template.js' %}"></script>
+  <!-- endinject -->
+
+  <!-- Custom js for this page -->
+  <script src="{% static 'js/admin/tinymce.js' %}"></script>
+  <script src="{% static 'js/admin/datepicker.js' %}"></script>
+  <!-- End custom js for this page -->
+
+</body>
+</html>    

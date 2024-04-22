@@ -1,0 +1,502 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Travelin Responsive HTML Admin Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="Travelin">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/home/Magnet logo.png' %}">
+  <title>Vacation Feast</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- End fonts -->
+
+	<!-- core:css -->
+	<link rel="stylesheet" href="{% static 'vendors/core/core.css' %}">
+	<!-- endinject -->
+
+	<!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}">
+	<!-- End plugin css for this page -->
+
+	<!-- inject:css -->
+	<link rel="stylesheet" href="{% static 'fonts/feather-font/css/iconfont.css' %}">
+	<!-- endinject -->
+
+  <!-- Layout styles -->  
+  <link rel="stylesheet" href="{% static 'css/css/style.css' %}">
+  <!-- End layout styles -->
+
+  <link rel="shortcut icon" href="../images/favicon.png" />
+  <style>
+    textarea{
+      resize: none;
+    }
+  </style>
+</head>
+<body>
+	<div class="main-wrapper">
+
+		<!-- sidebar starts -->
+    {% include 'home/aside.html' %}
+    <!-- sidebar Ends -->
+	
+		<div class="page-wrapper">
+					
+			<!-- navbar Starts -->
+			{% include 'home/adminheader.html' %}
+			<!-- navbar Ends -->
+
+      <!-- Page Content Starts -->
+			<div class="page-content">
+
+                <!-- Add headers -->
+                <nav class="page-breadcrumb d-flex align-items-center justify-content-between">
+					<ol class="breadcrumb mb-0">
+						<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Footer Header</li>
+					</ol>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addheader"><i class="link-icon" data-feather="plus"></i> Add Header</button>
+				</nav>
+                <div class="row">
+					<div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="dataTableExample" class="table">
+                    <thead>
+                      <tr>
+                        <th>Header</th>
+                        <th>Created by</th>
+                        <th>updated by</th>
+                        <!-- <th class="text-center">Published</th> -->
+                        <th class="text-center">Action</th>
+                      </tr>
+                    </thead>
+                    {% for footer in footer_headers %}
+                    <tbody>
+                      <tr>
+                        <td>{{ footer.header.Header}}</td>
+                        <td>{{ footer.created_by }}</td>
+                        <!-- <td class="w-25">
+                          <img src="../images/trending/trending2.jpg" alt="image">
+                        </td> -->
+                        <td>{{ footer.updated_by }}</td>
+                        <!-- <td class="text-center">
+                          <span class="form-check form-switch"><input type="checkbox" class="form-check-input" id="formSwitch1"></span>
+                        </td> -->
+                        <td class="text-center">
+                          <ul class="d-flex list-unstyled mb-0 justify-content-center">
+                            <!-- <li class="me-2">
+                              <a href="#" data-bs-toggle="modal" data-bs-target="#viewslider"><i class="link-icon" data-feather="eye"></i></a>
+                              <div class="modal fade" id="viewslider" tabindex="-1" aria-labelledby="viewslider" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-body">
+                                      <p class="mb-0">
+                                        {{ datedata.meta_description}}
+                                      </p>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              </li> -->
+                            <li class="me-2"><a href="#" data-bs-toggle="modal" data-bs-target="#editor{{ footer.id}}"><i class="link-icon"  data-feather="edit"></i></a></li>
+                            <div class="modal fade" id="editor{{ footer.id}}" tabindex="-1" aria-labelledby="editor" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header text-center d-flex justify-content-between">
+                                      <h5 class="modal-title" id="exampleModalLabel">Edit Header</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="forms-sample" id="myForm" action="{% url 'updateheader' %}" method="POST">
+                                         {% csrf_token %}
+                                         <input type="hidden" class="form-control" id="id" name="id" value="{{ footer.id }}" autocomplete="off" placeholder=""></input>
+                                         <div class="mb-3 text-start">
+                                            <label for="Header" class="form-label">Header</label>
+                                            <!-- <textarea name="getsome" id="getsome" cols="50" rows="5"> -->
+                                            <input type="text" class="form-control" id="Header" name="Header" value="{{ footer.header.Header}}" autocomplete="off" placeholder=""></input>
+                                          </div>
+                                          <div class="mb-3 text-start">
+                                            <label for="URL" class="form-label">URL</label>
+                                            <!-- <textarea name="getsome" id="getsome" cols="50" rows="5"> -->
+                                            <input type="text" class="form-control" id="URL" name="URL" autocomplete="off" placeholder="" value="{{ footer.header.URL }}"></input>
+                                          </div>
+                                        <div class="text-center">
+                                          <button type="submit" class="btn btn-primary"><i class="link-icon" data-feather="plus"></i>Submit</button>
+                                        </div>
+                                      </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            <li>
+                              <a href="#" onclick="confirmDelete('{{ footer.id }}')">
+                                  <i class="link-icon" data-feather="delete"></i>
+                              </a>
+                            </li>
+                          
+                          <script>
+                              function confirmDelete(blogId) {
+                                  if (confirm("Are you sure you want to delete this Footer Header?")) {
+                                      window.location.href = "{% url 'deletefooterheader' %}?id=" + blogId;
+                                  } else {
+                                      // Do nothing or handle cancellation
+                                  }
+                              }
+                          </script>
+                          </ul>
+                        </td>
+                      </tr>
+
+                      
+                    </tbody>
+                    {% endfor %}
+                  </table>
+                </div>
+              </div>
+            </div>
+					</div>
+				</div>
+
+                <!-- Add titles -->
+
+				<nav class="page-breadcrumb d-flex align-items-center justify-content-between">
+					<ol class="breadcrumb mb-0">
+						<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Footer Title</li>
+					</ol>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addslider"><i class="link-icon" data-feather="plus"></i> Add titles</button>
+				</nav>
+                <div class="search-box p-4 bg-white rounded mb-3 box-shadow">
+                    <form class="forms-sample">
+                      <div class="row align-items-center">
+                        <div class="col-lg-3">
+                          <h5>Header Lists</h5>
+                        </div>
+                        <div class="col-lg-12 col-md-4">
+                          <form method="GET" action="{% url 'addtitlefooter' %}">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="search_query" placeholder="Search by footer header" value="{{ search_query }}">
+                                <div class="input-group-append ms-5">
+                                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                                </div>
+                            </div>
+                        </form>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+
+				<div class="row">
+					<div class="col-md-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="dataTableExample" class="table">
+                    <thead>
+                      <tr>
+                        <th>Tilte</th>
+                        <th>Header</th>
+                        <th>URL</th>
+                        <th>Created by</th>
+                        <th>updated by</th>
+                        <!-- <th class="text-center">Published</th> -->
+                        <th class="text-center">Action</th>
+                      </tr>
+                    </thead>
+                    {% for footer in footer_title %}
+                    <tbody>
+                      <tr>
+                        <td>{{ footer.description.title}}</td>
+                        <td>{{ footer.description.Header}}</td>
+                            <td>{{ footer.description.URL}}</td>
+                        <!-- <td class="w-25">
+                          <img src="../images/trending/trending2.jpg" alt="image">
+                        </td> -->
+                        <td>{{ footer.created_by}}</td>
+                        <td>{{ footer.updated_by}}</td>
+                        <!-- <td class="text-center">
+                          <span class="form-check form-switch"><input type="checkbox" class="form-check-input" id="formSwitch1"></span>
+                        </td> -->
+                        <td class="text-center">
+                          <ul class="d-flex list-unstyled mb-0 justify-content-center">
+                            <li class="me-2"><a href="#" data-bs-toggle="modal" data-bs-target="#header{{ footer.id }}"><i class="link-icon"  data-feather="edit"></i></a></li>
+                            <div class="modal fade" id="header{{ footer.id }}" tabindex="-1" aria-labelledby="editor" aria-hidden="true">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                    <div class="modal-header text-center d-flex justify-content-between">
+                                      <h5 class="modal-title" id="exampleModalLabel">Edit Title</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="forms-sample" id="myForm" action="{% url 'updatetitlefooter' %}" method="POST">
+                                            {% csrf_token %}
+                                           <div class="mb-3 text-start">
+                                             <label for="title" class="form-label">Title</label>
+                                             <input type="hidden" name="id" id="id" value="{{ footer.id }}">
+                                             <!-- <textarea name="getsome" id="getsome" cols="50" rows="5"> -->
+                                               <input type="text" class="form-control" id="title" name="title" value="{{ footer.description.title}}" autocomplete="off" placeholder="" required></input>
+                                           </div>
+                                           <div class="mb-3 text-start">
+                                             <label for="URL" class="form-label">URL</label>
+                                             <input type="text" class="form-control" id="URL" name="URL" value="{{ footer.description.URL}}" autocomplete="off" placeholder="" required></input>
+                                           </div>
+                                           <div class="mb-3 text-start">
+                                               <label for="exampleFormControlSelect1" class="form-label">Header Type</label>
+                                               <select class="form-select" id="exampleFormControlSelect1" required>
+                                                   <option selected disabled>{{ footer.description.Header}}</option>
+                                                   {% for footer_header in footer_headers %}
+                                                   <option value="{{ footer_header.id }}">{{ footer_header.header.Header }}</option>
+                                                   {% endfor %}
+                                               </select>
+                                               <input type="hidden" id="selectedHeader" name="selectedHeader" value="{{ footer.description.Header}}">
+                                               <input type="hidden" id="selectedHeaderId" name="selectedHeaderId" value="{{ footer.header_id }}">
+                                           </div>
+                                           
+                                           <script>
+                                               // Event listener to update hidden inputs on option change
+                                               document.getElementById("exampleFormControlSelect1").addEventListener("change", function() {
+                                                   var selectedOption = this.options[this.selectedIndex];
+                                                   document.getElementById("selectedHeader").value = selectedOption.text;
+                                                   document.getElementById("selectedHeaderId").value = selectedOption.value;
+                                               });
+                                           </script>
+                                           
+                                           
+                                           <div class="text-center">
+                                             <button type="submit" class="btn btn-primary"><i class="link-icon" data-feather="plus"></i>Submit</button>
+                                           </div>
+                                        </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            <li>
+                              <a href="#" onclick="confirmDelete1('{{ footer.id }}')">
+                                  <i class="link-icon" data-feather="delete"></i>
+                              </a>
+                            </li>
+                          
+                          <script>
+                              function confirmDelete1(blogId) {
+                                  if (confirm("Are you sure you want to delete this Footer Title?")) {
+                                      window.location.href = "{% url 'deletefootertitle' %}?id=" + blogId;
+                                  } else {
+                                      // Do nothing or handle cancellation
+                                  }
+                              }
+                          </script>
+                          </ul>
+                        </td>
+                      </tr>
+
+                      
+                    </tbody>
+                    {% empty %}
+                            <td>No title entries found.</td>
+                    {% endfor %}
+                  </table>
+                </div>
+              </div>
+            </div>
+					</div>
+				</div>
+                <div class="row">
+                    <div class="dataTables_paginate">
+                        <ul class="pagination">
+                          {% if footer_title.has_previous %}
+              <li class="paginate_button page-item">
+                  <a href="?page=1" class="page-link">&laquo; First</a>
+              </li>
+              <li class="paginate_button page-item">
+                  <a href="?page={{ footer_title.previous_page_number }}" class="page-link">Previous</a>
+              </li>
+          {% endif %}
+          
+          {% if footer_title.paginator.num_pages > 0 %}
+              {% if footer_title.number > 2 %}
+                  {% for page_num in footer_title.paginator.page_range %}
+                      {% if page_num >= footer_title.number|add:"-1" and page_num <= footer_title.number|add:"1" %}
+                          <li class="paginate_button page-item{% if page_num == footer_title.number %} active{% endif %}">
+                              <a href="?page={{ page_num }}" class="page-link">{{ page_num }}</a>
+                          </li>
+                      {% endif %}
+                  {% endfor %}
+              {% else %}
+                  {% for page_num in footer_title.paginator.page_range|slice:":3" %}
+                      <li class="paginate_button page-item{% if page_num == footer_title.number %} active{% endif %}">
+                          <a href="?page={{ page_num }}" class="page-link">{{ page_num }}</a>
+                      </li>
+                  {% endfor %}
+              {% endif %}
+          {% endif %}
+          
+          {% if footer_title.has_next %}
+              <li class="paginate_button page-item">
+                  <a href="?page={{ footer_title.next_page_number }}" class="page-link">Next</a>
+              </li>
+              <li class="paginate_button page-item">
+                  <a href="?page={{ footer_title.paginator.num_pages }}" class="page-link">Last &raquo;</a>
+              </li>
+          {% endif %}
+
+
+			</div>
+      <!-- Page Content Ends -->
+<!-- footer Starts -->
+<footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small">
+  <p class="text-muted mb-1 mb-md-0">Copyright © 2022 <a href="../index.html" target="_blank">Vacation Feast</a>.</p>
+  <!-- <p class="text-muted">Powered By <i class="mb-1 text-primary ms-1 icon-sm" data-feather="heart"></i> Bizberg Themes</p> -->
+</footer>
+<!-- footer Ends -->
+	
+		</div>
+	</div>
+
+    <!-- header -->
+    <div class="modal fade" id="addheader" tabindex="-1" aria-labelledby="addslider" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header text-center d-flex justify-content-between">
+              <h5 class="modal-title" id="exampleModalLabel">Add Header</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="forms-sample" id="myForm" action="{% url 'addheader' %}" method="POST">
+                 {% csrf_token %}
+                <div class="mb-3">
+                  <label for="Header" class="form-label">Header</label>
+                  <!-- <textarea name="getsome" id="getsome" cols="50" rows="5"> -->
+                  <input type="text" class="form-control" id="Header" name="Header" value="" autocomplete="off" placeholder=""></input>
+                </div>
+                <div class="mb-3">
+                  <label for="URL" class="form-label">URL</label>
+                  <!-- <textarea name="getsome" id="getsome" cols="50" rows="5"> -->
+                  <input type="text" class="form-control" id="URL" name="URL" value="" autocomplete="off" placeholder=""></input>
+                </div>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary"><i class="link-icon" data-feather="plus"></i>Submit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- endheader -->
+    <!-- add title -->
+
+  <div class="modal fade" id="addslider" tabindex="-1" aria-labelledby="addslider" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header text-center d-flex justify-content-between">
+          <h5 class="modal-title" id="exampleModalLabel">Add title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="forms-sample" id="myForm" action="{% url 'addtitlefooter' %}" method="POST">
+             {% csrf_token %}
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <!-- <textarea name="getsome" id="getsome" cols="50" rows="5"> -->
+                <input type="text" class="form-control" id="title" name="title" value="" autocomplete="off" placeholder="" required></input>
+            </div>
+            <div class="mb-3">
+              <label for="URL" class="form-label">URL</label>
+              <input type="text" class="form-control" id="URL" name="URL" value="" autocomplete="off" placeholder="" required></input>
+            </div>
+            <div class="mb-3">
+                <label for="exampleFormControlSelect2" class="form-label">Header Type</label>
+                <select class="form-select" id="exampleFormControlSelect2" required>
+                    <option selected disabled>Select the header</option>
+                    {% for footer_header in footer_headers %}
+                    <option value="{{ footer_header.id }}">{{ footer_header.header.Header }}</option>
+                    {% endfor %}
+                </select>
+                <input type="hidden" id="selectedHeadermain" name="selectedHeader">
+                <input type="hidden" id="selectedHeaderIdmain" name="selectedHeaderId">
+            </div>
+            
+            <script>
+                // Event listener to update hidden inputs on option change
+                document.getElementById("exampleFormControlSelect2").addEventListener("change", function() {
+                    var selectedOption = this.options[this.selectedIndex];
+                    document.getElementById("selectedHeadermain").value = selectedOption.text;
+                    document.getElementById("selectedHeaderIdmain").value = selectedOption.value;
+                });
+            </script>
+            
+            
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary"><i class="link-icon" data-feather="plus"></i>Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="editor" tabindex="-1" aria-labelledby="editor" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header text-center d-flex justify-content-between">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Header</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form class="forms-sample" id="myForm" action="{% url 'submit_form_contact' %}" method="POST">
+             {% csrf_token %}
+            <div class="mb-3 text-start">
+              <label for="subtitle" class="form-label">Title</label>
+              <!-- <textarea name="getsome" id="getsome" cols="50" rows="5"> -->
+              <textarea type="text" class="form-control" id="title" name="title" value="" autocomplete="off" placeholder="">{{ datedata.meta_title}}</textarea>
+            </div>
+            <div class="mb-3 text-start">
+              <label for="title" class="form-label">Description</label>
+              <textarea type="text" class="form-control" id="description" name="description" value="" placeholder="">{{ datedata.meta_description}}</textarea>
+            </div>
+            <div class="mb-3 text-start">
+              <label for="description" class="form-label">Keywords</label>
+              <textarea type="text" class="form-control" id="keyword" name="keyword" value="" autocomplete="off" placeholder="">{{ datedata.meta_keyword}}</textarea>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary"><i class="link-icon" data-feather="plus"></i>Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+	<!-- core:js -->
+  <script src="{% static 'vendors/core/core.js' %}"></script>
+  <!-- endinject -->
+
+  <!-- Plugin js for this page -->
+  <script src="{% static 'vendors/chartjs/Chart.min.js'  %}"></script>
+  <script src="{% static 'vendors/jquery.flot/jquery.flot.js' %}"></script>
+  <script src="{% static 'vendors/jquery.flot/jquery.flot.resize.js' %}"></script>
+  <script src="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static 'vendors/apexcharts/apexcharts.min.js' %}"></script>
+	<!-- End plugin js for this page -->
+
+	<!-- inject:js -->
+	<script src="{% static 'vendors/feather-icons/feather.min.js' %}"></script>
+	<script src="{% static 'js/admin/template.js' %}"></script>
+	<!-- endinject -->
+
+	<!-- Custom js for this page -->
+  <script src="{% static 'js/admin/dashboard-light.js' %}"></script>
+  <script src="{% static 'js/admin/datepicker.js' %}"></script>
+	<!-- End custom js for this page -->
+
+
+</body>
+</html>    

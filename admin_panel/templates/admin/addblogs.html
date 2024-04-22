@@ -1,0 +1,513 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Travelin Responsive HTML Admin Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="Travelin">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/home/Magnet logo.png' %}">
+  <title>Vacation Feast</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- End fonts -->
+
+	<!-- core:css -->
+	<link rel="stylesheet" href="{% static 'vendors/core/core.css' %}">
+	<!-- endinject -->
+
+	<!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}">
+	<!-- End plugin css for this page -->
+
+	<!-- inject:css -->
+	<link rel="stylesheet" href="{% static 'fonts/feather-font/css/iconfont.css' %}">
+	<!-- endinject -->
+
+  <!-- Layout styles -->  
+  <link rel="stylesheet" href="{% static 'css/css/style.css' %}">
+  <!-- End layout styles -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <link rel="shortcut icon" href="../images/favicon.png" />
+  <style>
+    textarea{
+      resize: none;
+    }
+  </style>
+</head>
+<body>
+	<div class="main-wrapper">
+
+		<!-- sidebar starts -->
+    {% include 'home/aside.html' %}
+    <!-- sidebar Ends -->
+	
+		<div class="page-wrapper">
+					
+			<!-- navbar Starts -->
+			{% include 'home/adminheader.html' %}
+			<!-- navbar Ends -->
+
+      <!-- Page Content Starts -->
+
+			<div class="page-content">
+
+				<nav class="page-breadcrumb d-flex align-items-center justify-content-between">
+					<ol class="breadcrumb mb-0">
+						<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Package</li>
+					</ol>
+          <a href="{% url 'blog_us_admin' %}" class="btn btn-primary"><i class="link-icon" data-feather="arrow-left"></i> Back To List</a>
+				</nav>
+
+				<div class="row">
+					<div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                  <div class="card-body">
+                    <form id="myForm" class="row forms-sample">
+                          <div class="col-lg-4 mb-3">
+                              <label for="Banner_Image" class="form-label">Banner Image(1800x1200)</label>
+                              <input class="form-control" required type="file" id="Banner_Image">
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <label for="Cover_Image" class="form-label">Cover Image(1800x300)</label>
+                                <input class="form-control"  required type="file" id="Cover_Image">
+                              </div>
+                            <div class="col-lg-4 mb-3">
+                              <label for="Grid_Image" class="form-label">Grid Image(750x500)</label>
+                              <input class="form-control"  required type="file" id="Grid_Image">
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <label for="hint" class="form-label">Hint</label>
+                                <input type="text" class="form-control" id="hint" autocomplete="off" placeholder="">
+                            </div>
+                          <div class="col-lg-4 mb-3">
+                            <label for="categorys" class="form-label">Category</label>
+                            <input type="text" class="form-control" id="categorys" autocomplete="off" placeholder="">
+                          </div>
+                          <div class="col-lg-4 mb-3">
+                            <label for="url" class="form-label">Url</label>
+                            <input class="form-control" name="tinymce" id="url" rows="10"></input>
+                          </div>
+                          <div class="col-lg-3 mb-3">
+                            <label for="author" class="form-label">Author Name</label>
+                            <input type="text" class="form-control" id="author" placeholder="">
+                          </div>
+                          <div class="col-lg-9 mb-3 d-flex justify-content-between">
+                            <div style="width: 70%;">
+                            <label for="tags" class="form-label">Tags</label>
+                            <input type="text" id="selectedTags" class="form-control mt-2" style="background-color: white;" readonly>
+                            <input type="hidden" id="selectedTagIds" name="selectedTagIds">
+                            </div>
+                            <div class="dropdown mt-4 ms-3">
+                                <button class="btn btn-secondary dropdown-toggle mt-3" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Select Tags
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="tagsDropdown">
+                                    <!-- <li><input type="checkbox" id="category1" value="category1"> <label for="category1">Category 1</label></li>
+                                    <li><input type="checkbox" id="category2" value="category2"> <label for="category2">Category 2</label></li> -->
+                                    <!-- Add more options as needed -->
+                                </ul>
+                                
+                            </div>
+                            <div class="mt-4 ms-3">
+                            <button id="sendTagsButton" class="btn btn-primary mt-3 ms-2">Send Tags</button> <!-- Add this button -->
+                            </div>
+                            <script>
+                              // Function to check the value of the hidden input and hide the element if the value is correct
+                              function checkHiddenValue() {
+                                  var hiddenValue = document.getElementById("UserRole").value;
+                                  if (hiddenValue !== "admin" && hiddenValue !== "superadmin") {
+                                      document.getElementById("sendTagsButton").style.display = "none";
+                                  }
+                              }
+
+                              document.addEventListener("DOMContentLoaded", function() {
+                                  checkHiddenValue();
+                              });
+                          </script>
+                            <div id="accessDeniedMessage" style="display: none;">
+                              <p>You do not have access to this page.</p>
+                            </div>
+                            
+                        </div>
+                        <script>
+                          document.addEventListener('DOMContentLoaded', function() {
+                              const dropdownMenu = document.getElementById('tagsDropdown');
+                      
+                              // Fetch available tags from backend (Django model)
+                              fetch('/tags_list/') // Replace '/api/tags/' with your Django backend URL to fetch tags
+                              .then(response => response.json())
+                              .then(data => {
+                                  // Clear existing dropdown menu items
+                                  dropdownMenu.innerHTML = '';
+                      
+                                  // Populate dropdown menu with fetched tags
+                                  data.forEach(tag => {
+                                      const listItem = document.createElement('li');
+                                      listItem.innerHTML = `
+                                          <input type="checkbox" id="${tag.id}" value="${tag.tag_name}">
+                                          <label for="${tag.id}">${tag.tag_name}</label>
+                                      `;
+                                      dropdownMenu.appendChild(listItem);
+                                  });
+                              })
+                              .catch(error => console.error('Error fetching tags:', error));
+                      
+                              // Rest of your JavaScript code
+                          });
+                      </script>                                         
+                        <script>
+                          $(document).ready(function() {
+                          // Store selected tags
+                          const selectedTags = new Set();
+
+                          // Function to update the input field with selected tags
+                          function updateSelectedTagsInput() {
+                              $('#selectedTags').val([...selectedTags].join(', '));
+                          }
+
+                          // Event listener for checkbox change
+                          $('#tagsDropdown').on('change', 'input[type="checkbox"]', function() {
+                              const value = $(this).val();
+                              if (this.checked) {
+                                  selectedTags.add(value);
+                              } else {
+                                  selectedTags.delete(value);
+                              }
+                              updateSelectedTagsInput();
+                          });
+
+                          // Function to handle sending tags to backend
+                          $('#sendTagsButton').click(function() {
+                              const word = prompt("Please enter a word:");
+                              if (word && word.trim() !== "") {
+                                  // Send selected tags and word to the backend using AJAX
+                                  const csrftoken = getCookie('csrftoken');
+                                  $.ajax({
+                                      url: "/blogtag/", // Specify your Django backend URL here
+                                      type: "POST",
+                                      data: {
+                                          word: word,
+                                          tags: [...selectedTags]
+                                      },
+                                      beforeSend: function(xhr, settings) {
+                                          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                                      },
+                                      success: function(response) {
+                                          console.log(response);
+                                          location.reload();
+                                      },
+                                      error: function(xhr, errmsg, err) {
+                                          console.log(xhr.status + ": " + xhr.responseText);
+                                      }
+                                  });
+                              }
+                          });
+                      
+                              // Function to get CSRF token from cookies
+                              function getCookie(name) {
+                                  var cookieValue = null;
+                                  if (document.cookie && document.cookie !== '') {
+                                      var cookies = document.cookie.split(';');
+                                      for (var i = 0; i < cookies.length; i++) {
+                                          var cookie = cookies[i].trim();
+                                          // Does this cookie string begin with the name we want?
+                                          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                              break;
+                                          }
+                                      }
+                                  }
+                                  return cookieValue;
+                              }
+                      
+                              // Check if access is denied and show the access denied message
+                              var role = "{{ request.session.role }}";
+                              if (role !== "admin" && hiddenValue !== "superadmin") {
+                                  $("#accessDeniedMessage").show();
+                              }
+                          });
+                      </script>                      
+                        <script>
+                          document.addEventListener('DOMContentLoaded', function() {
+                              const dropdown = document.querySelector('.dropdown');
+                              const checkboxes = document.querySelectorAll('#tagsDropdown input[type="checkbox"]');
+                              const selectedTagsInput = document.getElementById('selectedTags');
+                              const selectedValues = [];
+                      
+                              dropdown.addEventListener('click', function(event) {
+                                  event.stopPropagation();
+                              });
+                      
+                              checkboxes.forEach(function(checkbox) {
+                                  checkbox.addEventListener('change', function() {
+                                      const value = this.value;
+                                      if (this.checked) {
+                                          selectedValues.push(value);
+                                      } else {
+                                          const index = selectedValues.indexOf(value);
+                                          if (index !== -1) {
+                                              selectedValues.splice(index, 1);
+                                          }
+                                      }
+                                      selectedTagsInput.value = selectedValues.join(', '); // Update the input box value
+                                      // Call your function to handle the selected values in JavaScript here
+                                      handleSelectedValues(selectedValues);
+                                  });
+                              });
+                      
+                              function handleSelectedValues(values) {
+                                  // You can access the selected values here and perform further actions
+                                  selectedTagsInput.value = values.join(', ');
+                              }
+                          });
+                      </script>
+                      <script>
+                        // Store selected tag IDs
+                        const selectedTagIds = new Set();
+
+                        // Function to update the input fields with selected tags and their IDs
+                        function updateSelectedTagsInputs() {
+                            // $('#selectedTags').val([...selectedTags].join(', '));
+                            $('#selectedTagIds').val([...selectedTagIds].join(','));
+                        }
+
+                        // Event listener for checkbox change
+                        $('#tagsDropdown').on('change', 'input[type="checkbox"]', function() {
+                            const value = $(this).val();
+                            const id = $(this).attr('id'); // Get the ID of the tag
+                            if (this.checked) {
+                                // selectedTags.add(value);
+                                selectedTagIds.add(id); // Store the ID
+                            } else {
+                                // selectedTags.delete(value);
+                                selectedTagIds.delete(id); // Remove the ID
+                            }
+                            updateSelectedTagsInputs();
+                        });
+                      </script>
+                      
+                            <div class="col-lg-12 mb-3">
+                              <label for="title" class="form-label">Title</label>
+                              <textarea class="form-control" name="tinymce" id="title" rows="1"></textarea>
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                              <label for="description" class="form-label">Description</label>
+                              <textarea class="form-control" name="tinymce" id="description" rows="3"></textarea>
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                                <label for="content" class="form-label">Content</label>
+                                <textarea class="form-control" name="tinymce" id="content" rows="5"></textarea>
+                              </div>
+                            <div class="col-lg-12 mb-3">
+                              <label for="jumpLinkTitles" class="form-label">Jump Link Titles</label>
+                              <!-- <textarea class="form-control" name="tinymce" id="jumpLinkTitles" rows="10"></textarea> -->
+                              <textarea id="jumpLinkTitles" class="tinymce-editor">
+                              </textarea>
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                                <label for="metaTitle" class="form-label">Meta title</label>
+                                <textarea class="form-control" name="tinymce" id="metaTitle" rows="1"></textarea>
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                                <label for="metaDescription" class="form-label">Meta Description</label>
+                                <textarea class="form-control" name="tinymce" id="metaDescription" rows="2"></textarea>
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                                <label for="metaKeywords" class="form-label">Meta Keywords</label>
+                                <textarea class="form-control" name="tinymce" id="metaKeywords" rows="2"></textarea>
+                            </div>      
+                            <label for="metaKeywords" class="form-label">Blog details Image(1800x300)</label>
+                            <textarea id="myTextarea" class="tinymce-editor">
+                            </textarea><!-- End TinyMCE Editor -->  
+                          <div class="text-center">
+                            <button type="submit" id="submitButton" class="btn btn-primary mt-2"><i class="link-icon" data-feather="plus"></i> Create Blog</button>
+                            <button class="btn btn-primary mt-2"  style="display: none;" id="loadingbutton" type="button" disabled>
+                              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                              Loading...
+                            </button>
+                            <div class="success-msg" id="successmsg"  style="display: none;">
+                              <i class="fa fa-check"></i>
+                              Blog is uploaded.
+                            </div>
+                          </div>
+                          <script>
+                            tinymce.init({
+                                selector: 'textarea#tinymceExample',
+                                plugins: 'advlist autolink lists link image charmap print preview anchor',
+                                toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
+                            });
+                         </script>
+                        </form>
+                  </div>
+                  <script>
+                    $(document).ready(function() {
+                        $('#submitButton').click(function(event) {
+                            event.preventDefault();
+
+                            // // Validate inputs
+                            // var isValid = true;
+
+                            // // Example of required field validation
+                            // $('input[type="text"], input[type="file"], textarea').each(function() {
+                            //     if ($(this).val() === '') {
+                            //         $(this).addClass('is-invalid');
+                            //         isValid = false;
+                            //     } else {
+                            //         $(this).removeClass('is-invalid');
+                            //     }
+                            // });
+
+                            // // If any field is empty, stop submission
+                            // if (!isValid) {
+                            //     return false;
+                            // }
+                
+                            // Get file objects
+                            var bannerImageFile = document.getElementById('Banner_Image').files[0];
+                            var coverImageFile = document.getElementById('Cover_Image').files[0];
+                            var gridImageFile = document.getElementById('Grid_Image').files[0];
+                            var richtextarea = tinymce.get("myTextarea").getContent();
+                            var jumpLinkTitles = tinymce.get("jumpLinkTitles").getContent();
+                            // Get other input values
+                            var hint = $('#hint').val();
+                            var category = $('#categorys').val();
+                            var tags = document.getElementById('selectedTags').value;
+                            var tagsid =  document.getElementById('selectedTagIds').value
+                            var author = $('#author').val();
+                            var url = $('#url').val();
+                            var title = $('#title').val();
+                            var description = $('#description').val();
+                            var content = $('#content').val();
+                            
+                            var metaTitle = $('#metaTitle').val();
+                            var metaDescription = $('#metaDescription').val();
+                            var metaKeywords = $('#metaKeywords').val();
+                
+                            // Create FormData object to send to backend
+                            var formData = new FormData();
+                            formData.append('Banner_Image', bannerImageFile);
+                            formData.append('Cover_Image', coverImageFile);
+                            formData.append('Grid_Image', gridImageFile);
+                            formData.append('hint', hint);
+                            formData.append('category', category);
+                            formData.append('tags', tags);
+                            formData.append('author', author);
+                            formData.append('url', url);
+                            formData.append('title', title);
+                            formData.append('description', description);
+                            formData.append('content', content);
+                            formData.append('jumpLinkTitles', jumpLinkTitles);
+                            formData.append('metaTitle', metaTitle);
+                            formData.append('metaDescription', metaDescription);
+                            formData.append('metaKeywords', metaKeywords);
+                            formData.append('richtextarea', richtextarea);
+                            formData.append('tagsid', tagsid);
+                            
+
+                            var csrftoken = document.cookie.match(/csrftoken=([\w-]+)/)[1];
+                            
+                            document.getElementById("submitButton").style.display = "none";
+                            document.getElementById("loadingbutton").style.display = "block"; // or "block" based on your styling needs
+                
+                
+                            // Make AJAX request
+                            $.ajax({
+                                type: 'POST',
+                                headers: {
+                                    'X-CSRFToken': csrftoken // Include CSRF token in headers
+                                },
+                                url: '/createblogs/', // Replace with your backend URL
+                                data: formData,
+                                processData: false,
+                                contentType: false,
+                                success: function(response) {
+                                    // Handle success response
+                                    document.getElementById("loadingbutton").style.display = "none";
+                                    document.getElementById("successmsg").style.display = "block";
+                                    window.location.href = '/blog_us_admin/';
+                                    
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error
+                                    console.error(xhr.responseText);
+                                }
+                            });
+                            // function getCSRFToken() {
+                            //     return $('input[name="csrfmiddlewaretoken"]').val();
+                            // }
+                        });
+                    });
+                </script>
+              </div>
+					</div>
+				</div>
+
+        <!-- <div class="row">
+          <div class="dataTables_paginate">
+                <ul class="pagination">
+                  <li class="paginate_button page-item">
+                    <a href="#" class="page-link">Previous</a>
+                  </li>
+                  <li class="paginate_button page-item active"><a href="#" class="page-link">1</a></li>
+                  <li class="paginate_button page-item"><a href="#" class="page-link">2</a></li>
+                  <li class="paginate_button page-item"><a href="#" class="page-link">3</a></li>
+                  <li class="paginate_button page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
+            </div>
+        </div> -->
+
+			</div>
+			<!-- Page Content Ends -->
+
+	<!-- footer Starts -->
+  <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small">
+    <p class="text-muted mb-1 mb-md-0">Copyright © 2022 <a href="../index.html" target="_blank">Vacation Feast</a>.</p>
+    <!-- <p class="text-muted">Powered By <i class="mb-1 text-primary ms-1 icon-sm" data-feather="heart"></i> Bizberg Themes</p> -->
+  </footer>
+  <!-- footer Ends -->
+	
+		</div>
+	</div>
+
+	<!-- core:js -->
+    <script src="{% static 'vendors/core/core.js' %}"></script>
+    <!-- endinject -->
+  
+    <!-- Plugin js for this page -->
+    <script src="{% static 'vendors/chartjs/Chart.min.js'  %}"></script>
+    <script src="{% static 'vendors/jquery.flot/jquery.flot.js' %}"></script>
+    <script src="{% static 'vendors/jquery.flot/jquery.flot.resize.js' %}"></script>
+    <script src="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'vendors/apexcharts/apexcharts.min.js' %}"></script>
+      <!-- End plugin js for this page -->
+  
+      <!-- inject:js -->
+      <script src="{% static 'vendors/feather-icons/feather.min.js' %}"></script>
+      <script src="{% static 'js/admin/template.js' %}"></script>
+      <!-- endinject -->
+  
+      <!-- Custom js for this page -->
+    <script src="{% static 'js/admin/dashboard-light.js' %}"></script>
+    <script src="{% static 'js/admin/datepicker.js' %}""></script>
+      <!-- End custom js for this page -->
+      <!-- <script src="{% static 'assets/vendors/tinymce/tinymce.min.js' %}"></script>
+
+      <script src="{% static 'assets/js/tinymce.js' %}"></script> -->
+
+    <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+  <!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
+
+  <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+</html>    

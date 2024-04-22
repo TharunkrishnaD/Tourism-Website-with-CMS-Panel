@@ -1,0 +1,381 @@
+
+
+{% load static %}
+<header class="main_header_area">
+    <div class="header-content py-1 bg-theme">
+        <div class="container d-flex align-items-center justify-content-between">
+            <div class="links">
+                <ul>
+                    <li><a href="#" class="white"><i class="icon-calendar white pe-2"></i> <span id="banner_date">Thursday, Mar 26, 2021</span></a></li>
+                    <li><a href="https://www.google.com/maps/place/Vacation+Feast/@12.9660656,80.2455096,17z/data=!3m1!4b1!4m6!3m5!1s0x3a525d1c438b7ce1:0x4bc368ec6ddcf35b!8m2!3d12.9660604!4d80.2480845!16s%2Fg%2F11c5spb76k?entry=tts" class="white"><i class="icon-location-pin white pe-2"></i>  Chennai, India</a></li>
+                    <li><a href="tel:9941036383" class="white"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width: 22px;" class="pe-2"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg>+91 99410 36383</a></li>
+                </ul>
+            </div>
+            <div class="links float-right">
+                <ul>  
+                    <li><a href="https://www.facebook.com/vacationfeast" class="white"><i class="fab fa-facebook fab-icon" aria-hidden="true"></i></a></li>
+                    <li><a href="https://www.twitter.com/vacationfeast" class="white"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="18" fill="currentColor" class="bi bi-twitter-x" viewBox="0 0 16 16">
+                        <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/>
+                      </svg></a></li>
+                    <li><a href="https://www.instagram.com/thevacationfeast" class="white"><i class="fab fa-instagram fab-icon" aria-hidden="true"></i></a></li>
+                    <li><a href="https://www.linkedin.com/company/vacationfeast" class="white"><i class="fab fa-linkedin fab-icon" aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+      <script>
+                // Get the current date
+                var currentDate = new Date();
+                
+                // Define the months array for getting the abbreviated month name
+                var months = [
+                  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+                ];
+                
+                // Define the days array for getting the day name
+                var days = [
+                  "Sunday", "Monday", "Tuesday", "Wednesday",
+                  "Thursday", "Friday", "Saturday"
+                ];
+                
+                // Format the date as required
+                var formattedDate = days[currentDate.getDay()] + ", " +
+                                    months[currentDate.getMonth()] + " " +
+                                    currentDate.getDate() + ", " +
+                                    currentDate.getFullYear();
+                document.getElementById("banner_date").innerText = formattedDate;
+                console.log(formattedDate);
+            </script>
+    <!-- Navigation Bar -->
+    <div class="header_menu" id="header_menu">
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-flex d-flex align-items-center justify-content-between w-100 pt-2 pb-2">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{% url 'home_page' %}">
+                            <img src="{% static 'image/home/VF magnet logo.png' %}" alt="image" style="width: 260px;height:auto;">
+                        </a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="navbar-collapse1 d-flex align-items-center" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav nav-head" id="responsive-menu">
+        
+                            <li class="focus-nav px-2 ">
+                                <a class="nav-top" href="{% url 'home_page' %}">Home</a>
+                            </li>
+
+                            <li class="submenu dropdown focus-nav px-2">
+                                <a class="nav-top" href="{% url 'about-us' %}">About Us</a>
+                            </li>
+                            
+                            
+                            <li class="submenu dropdown focus-nav px-2">
+                                <a href="#" class="dropdown-toggle nav-top" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Destinations <i class="icon-arrow-down" aria-hidden="true"></i></a>
+                                <ul class="dropdown-menu">
+                                    <li class="submenu dropdown focus-nav ">
+                                        <a href="{% url 'international-tour' %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">International <i class="fa fa-angle-right" aria-hidden="true"></i></a> 
+                                        <ul class="dropdown-menu">
+                                             <li class="submenu dropdown">
+                                                <a href="{% url 'international-tour-package' 'Asia'%}" id="des2" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Asia<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+
+                                                <ul class="dropdown-menu" id="deslist2">
+                                                    {% for destination in destinations.Asia %}
+                                                    <li><a href="{% url 'international-tour-packages' destination.destination_slug %}">{{destination.destination_name}}</a></li>
+                                                   {% endfor %}
+                                                    
+                                                </ul>
+                                            </li>
+                                            <li class="submenu dropdown">
+                                                <a href="{% url 'international-tour-package' 'Europe'%}" id="des4" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Europe<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                                <ul class="dropdown-menu"  id="deslist4">
+                                                    {% for destination in destinations.Europe %}
+                                                    <li><a href="{% url 'international-tour-packages' destination.destination_slug %}">{{destination.destination_name}}</a></li>
+                                                   {% endfor %}
+                                                  
+                                                </ul>
+                                            </li>
+                                            <li class="submenu dropdown">
+                                                <a href="{% url 'international-tour-package' 'Africa' %}" id="des1" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Africa<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                                <ul class="dropdown-menu" id="deslist1">
+                                                    {% for destination in destinations.Africa %}
+                                                    <li><a href="{% url 'international-tour-packages' destination.destination_slug %}">{{destination.destination_name}}</a></li>
+                                                   {% endfor %}
+                                                </ul>
+                                            </li>
+                                           
+                                            <li class="submenu dropdown">
+                                                <a href="{% url 'international-tour-package' 'Australia_and_New_Zealand'%}" id="des3" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Australia and New Zealand<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                                <ul class="dropdown-menu"  id="deslist3" >
+                                                    {% for destination in destinations.Australia_and_New_Zealand %}
+                                                    <li><a href="{% url 'international-tour-packages' destination.destination_slug %}">{{destination.destination_name}}</a></li>
+                                                   {% endfor %}
+                                                </ul>
+                                            </li>
+                                            
+                                            <li class="submenu dropdown">
+                                                <a href="{% url 'international-tour-package' 'North_America'%}" id="des5" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">North America<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                                <ul class="dropdown-menu" id="deslist5">
+                                                    {% for destination in destinations.North_America %}
+                                                    <li><a href="{% url 'international-tour-packages' destination.destination_slug %}">{{destination.destination_name}}</a></li>
+                                                   {% endfor %}
+                                                </ul>
+                                            </li>
+                                            <li class="submenu dropdown">
+                                                <a href="{% url 'international-tour-package' 'South_America'%}"  id="des6" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">South America<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                                <ul class="dropdown-menu" id="deslist6">
+                                                    {% for destination in destinations.South_America %}
+                                                    <li><a href="{% url 'international-tour-packages' destination.destination_slug %}">{{destination.destination_name}}</a></li>
+                                                   {% endfor %}
+                                                </ul>
+                                            </li>
+                                        </ul> 
+                                    </li>
+                                    <li class="submenu dropdown focus-nav">
+                                        <a href="{% url 'domestic-tour'%}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Domestic <i class="fa fa-angle-right" aria-hidden="true"></i></a> 
+                                        <ul class="dropdown-menu">
+                                            <li class="submenu dropdown">
+                                                <a href="{% url 'domestic-package' 'East'%}" id="domdes1"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">East India<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                                <ul class="dropdown-menu" id="domdeslist1">
+                                                    {% for destination in destinations.East %}
+                                                    <li><a href="{% url 'main_DestinationAttraction' destination.destination_slug %}">{{destination.destination_name}}</a></li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </li>
+                                            <li class="submenu dropdown">
+                                                <a href="{% url 'domestic-package' 'North'%}" id="domdes2"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">North India<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                                <ul class="dropdown-menu" id="domdeslist2">
+                                                    {% for destination in destinations.North %}
+                                                    <li><a href="{% url 'main_DestinationAttraction' destination.destination_slug %}">{{destination.destination_name}}</a></li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </li>
+                                            <li class="submenu dropdown">
+                                                <a href="{% url 'domestic-package' 'South'%}" id="domdes3"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">South India<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                                <ul class="dropdown-menu" id="domdeslist3">
+                                                    {% for destination in destinations.South %}
+                                                    <li><a href="{% url 'main_DestinationAttraction' destination.destination_slug %}">{{destination.destination_name}}</a></li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </li>
+                                            <li class="submenu dropdown">
+                                                <a href="{% url 'domestic-package' 'West'%}" id="domdes4"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">West India<i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                                                <ul class="dropdown-menu" id="domdeslist4">
+                                                    {% for destination in destinations.West %}
+                                                    <li><a href="{% url 'main_DestinationAttraction' destination.destination_slug %}">{{destination.destination_name}}</a></li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </li>
+                                            <!-- <li><a href="login.html">Login|Register</a></li>
+                                            <li><a href="comingsoon.html">Coming Soon</a></li>
+                                            <li><a href="testimonials.html">Testimonials</a></li>
+                                            <li><a href="faq.html">Faq</a></li> 
+                                            <li><a href="contact.html">Contact Us</a></li>
+                                            <li><a href="dashboard/dashboard.html">Dashboard</a></li> -->
+                                        </ul> 
+                                    </li>
+                                    {% for views in all_categories %}
+                                        {% if views.categoriesname != "Not selected" %}
+                                        <li class="submenu dropdown">
+                                            <a href="{% url 'catagories_city'  views.categeory_slug  %}"   class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{views.categoriesname}}</a>
+                                        </li>
+                                        {% endif %}
+                                    {% endfor %}
+                               
+                                </ul> 
+                            </li>
+                            
+                            
+                            <li class="submenu dropdown focus-nav  px-2"><a class="nav-top" href="{% url 'gridblogus' %}">Blogs</a></li>
+                            <li class="submenu dropdown focus-nav  px-2"><a class="nav-top" href="{% url 'contact_us' %}">contact Us</a></li>
+                            
+                            <!-- <li class="search-main"><a href="#search1" class="mt_search"><i class="fa fa-search"></i></a></li> -->
+                        </ul>
+                    </div><!-- /.navbar-collapse -->   
+                    <div class="register-login d-flex align-items-center ps-5">
+                        <button style="background: None;" href="#" data-bs-toggle="modal" data-bs-target="#exampleModalCenter" id="log-btn-switch" class="me-3 logreg_btn">
+                            <i class="icon-user"></i> LOGIN/REGISTER
+                        </button>
+                        <!-- <a href="#" class="nir-btn white">Book Now</a> -->
+                    </div> 
+
+                    <div class="d-flex mt-2" style="text-decoration: none;">
+                        <a href="{% url 'portalhome'  %}" class="d-flex">
+                            <i class="icon-user pt-1 pe-2" style="display: none;font-size: 18px;" id="logProfile"></i>
+                            <p id="mblNumber" style="font-size: 18px;font-weight: 600;" class="mb-0"></p></a>
+                    </div>
+                    
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            var emailData = document.getElementById("hiddenEmail").value;
+                            var phoneData = document.getElementById("hiddenPhoneNumber").value;
+                            var usernameData = document.getElementById("hiddenUsername").value;
+                            var hiddenlastUsername = document.getElementById("hiddenlastUsername").value;
+                            var logProfilePic = document.getElementById("logProfile");
+                            var logbtnShow = document.getElementById("log-btn-switch");
+                            var usernameShow = document.getElementById("mblNumber");
+
+                            // Check if emailData, phoneData, and usernameData are null or undefined
+                            if (!emailData && !phoneData && !usernameData) {
+                                logbtnShow.style.display = "block";
+                            } else {
+                                logProfilePic.style.display = "block";
+                                logbtnShow.style.display = "none";
+                                usernameShow.innerHTML = usernameData+'<span style="padding-left:5px"></span>'+hiddenlastUsername;
+                            }
+                        });
+                    </script>
+
+                    <input type="hidden" id="hiddenEmail" name="hiddenEmail" value="{{ destinations.hidden_email }}">
+                    <input type="hidden" id="hiddenPhoneNumber" name="hiddenPhoneNumber" value="{{ destinations.hidden_phone_number }}">
+                    <input type="hidden" id="hiddenUsername" name="hiddenUsername" value="{{ destinations.hidden_first_name }}">
+                    <input type="hidden" id="hiddenlastUsername" name="hiddenlastUsername" value="{{ destinations.hidden_last_name }}">
+
+                    <div id="slicknav-mobile"></div>
+                </div>
+            </div><!-- /.container-fluid --> 
+        </nav>
+        
+        
+    </div>
+    <!-- Navigation Bar Ends -->
+</header>
+<style>
+
+    .logreg_btn {
+        color:#029e9d;
+        border:1px solid #029e9d;
+        border-radius:6px;
+        padding: 6px 12px;
+        font-weight: 500;
+    }
+
+    .fab-icon {
+        font-size:20px !important;
+    }
+
+    .nav-head li .nav-top {
+    font-weight: 600 !important;
+    font-size: 17px !important;
+    }
+
+    .dropdown:hover >.dropdown-menu{
+    display: block !important;
+    }
+
+    /* .d_item:hover {
+        color: white !important;
+        background: #029e9d !important;
+    } */
+
+    /*.header_menu .navbar.navbar-default .nav.navbar-nav li a {*/
+    /*    font-size: 17px !important;*/
+    /*}*/
+
+    #des1:hover #deslist1 {
+        display: block;
+    }  #deslist1  {
+       display: none;
+    }
+
+    #des2:hover #deslist2 {
+        display: block;
+    }  #deslist2  {
+       display: none;
+    }
+
+    #des3:hover #deslist3 {
+        display: block;
+    }  #deslist3  {
+       display: none;
+    }
+    
+    #des4:hover #deslist4 {
+        display: block;
+    }  #deslist4 {
+       display: none;
+    }
+
+    #des5:hover #deslist5 {
+        display: block;
+    }  #deslist5  {
+       display: none;
+    }
+
+    #des6:hover #deslist6 {
+        display: block;
+    }  #deslist6  {
+       display: none;
+    }
+
+    #domdes1:hover #domdeslist1 {
+        display: block;
+    }  #domdeslist1  {
+       display: none;
+    }
+
+    #domdes2:hover #domdeslist2 {
+        display: block;
+    }  #domdeslist2  {
+       display: none;
+    }
+
+    #domdes3:hover #domdeslist3 {
+        display: block;
+    }  #domdeslist3  {
+       display: none;
+    }
+
+    #domdes4:hover #domdeslist4 {
+        display: block;
+    }  #domdeslist4  {
+       display: none;
+    }
+
+    .dropdown-menu li a {
+        color: #777 !important;
+    }
+
+    .dropdown-menu li a:hover {
+        color: white !important;
+    }
+    
+    @media (max-width: 1098px)  {
+        .dropdown-menu li a {
+        color: #fff !important;
+        }
+
+    .slicknav_nav {
+        height: auto !important;
+        }
+    }
+    
+    
+    /*FOR TESTTTT*/
+    /*  .bg-theme{*/
+    /*    background:linear-gradient(240deg, #777, #029e9d)!important;*/
+    /*}*/
+    
+    /*.why-us .why-us-item::before {*/
+    /*    background:linear-gradient(240deg, #777, #029e9d)!important;*/
+    /*}*/
+    
+</style>
+<script>
+    // JavaScript to determine active link
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the current URL path
+        var currentPath = window.location.pathname;
+
+        // Get all navigation links
+        var navLinks = document.querySelectorAll('.navbar-nav .focus-nav a');
+
+        // Loop through each link and check if it matches the current path
+        navLinks.forEach(function(navLink) {
+            if (navLink.getAttribute('href') === currentPath) {
+                navLink.parentElement.classList.add('active');
+            }
+        });
+    });
+</script>

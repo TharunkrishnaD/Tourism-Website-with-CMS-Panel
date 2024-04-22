@@ -1,0 +1,240 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Travelin Responsive HTML Admin Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="Travelin">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/home/Magnet%20logo.png' %}">
+
+  <title>Vacation Feast</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- End fonts -->
+
+	<!-- core:css -->
+	<link rel="stylesheet" href="{% static 'vendors/core/core.css' %}">
+	<!-- endinject -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}">
+	<!-- End plugin css for this page -->
+
+	<!-- inject:css -->
+	<link rel="stylesheet" href="{% static 'css/css/iconfont.css' %}">
+	<!-- endinject -->
+
+  <!-- Layout styles -->  
+	<link rel="stylesheet" href="{% static 'css/css/style.css' %}">
+  <!-- End layout styles -->
+
+  <link rel="shortcut icon" href="../images/favicon.png" />
+</head>
+<body>
+	<div class="container">
+        <div class="mt-2 mx-auto justify-content-center" > 
+            <div class="text-center mt-3 mb-3 d-flex" >
+                <h2 class=" ps-5" style="width: 90%;">Attraction Details</h2>
+                <a href="{% url 'destination_attraction' %}" class="btn btn-primary ps-3"><i class="link-icon" data-feather="arrow-left"></i> Back</a>
+            </div>
+
+<!-- ---------------------------------------------my work contend---------------------------------- -->
+            <form class="forms-sample col-lg-10 mx-auto justify-content-center"  style="border: solid black; padding: 10px 10px;">
+        
+                <div class="mb-3  justify-content-between d-flex" >
+                    
+                    <div class="mb-3 input-div" >
+                        <label for="description" class="form-label">Name</label>
+                        <select class="form-select form-width" name="Name" id="int-domes">
+                            <option value="">--Select One--</option>
+                            {% for city in City_list %}
+                            <option value="{{city.id}}">{{city.international_city_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                
+                    <div class="mb-3 input-div">
+                        <label for="subtitle" class="form-label">Tour Spot Name</label>
+                        <input type="text" class="form-control form-width" required id="TourSpotName" name="Name" autocomplete="off">
+                    </div>
+                </div>
+                <div class="mb-3 input-div">
+                  <label for="subtitle" class="form-label">Tour Spot Slug</label>
+                  <input type="text" class="form-control form-width" required id="TourSpotslug" name="Name" autocomplete="off">
+              </div>
+                <div class="mb-3  justify-content-between d-flex" >
+                    <div class="mb-3  input-div">
+                        <label for="upload" class="form-label">Highlights Image</label>
+                        <input class="form-control  form-width" required type="file" name="Highlights_Images" id="Highlights_Images" >
+                    </div>
+                    <div class="mb-3  input-div">
+                        <label for="upload" class="form-label">Includes Image</label>
+                        <input class="form-control  form-width" required type="file" name="Includes_Images" id="Includes_Images" >
+                    </div>
+                </div>
+                <div class="mb-3  justify-content-between d-flex" >
+                <div class="mb-3  input-div">
+                    <label for="jumpLinkTitles" class="form-label">Highlights</label>
+                    <textarea id="myTextarea" class="tinymce-editor">
+                    </textarea><!-- End TinyMCE Editor -->  
+                </div>
+                <div class="mb-3  input-div">
+                  <label for="jumpLinkTitles" class="form-label">Includes</label>
+                  <!-- <textarea class="form-control" name="tinymce" id="jumpLinkTitles" rows="10"></textarea> -->
+                  <textarea id="jumpLinkTitles" class="tinymce-editor">
+                  </textarea>
+                </div>
+              </div>
+
+               <div class="text-center">
+                    <button type="button" id="submitButton2" class="btn btn-primary"><i class="link-icon" data-feather="plus"></i>Submit</button>
+                    <button class="btn btn-primary mt-2"  style="display: none;" id="loadingbutton" type="button" disabled>
+                              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                              Loading...
+                            </button>
+                            <div class="success-msg" id="successmsg"  style="display: none;">
+                              <i class="fa fa-check"></i>
+                              Attraction is uploaded.
+                        </div>
+                </div>
+                <script>
+                    tinymce.init({
+                        selector: 'textarea#tinymceExample',
+                        plugins: 'advlist autolink lists link image charmap print preview anchor',
+                        toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
+                    });
+                 </script>
+            </form>
+		</div>
+	</div>
+  <script>
+    $(document).ready(function() {
+        $('#submitButton2').click(function(event) {
+            event.preventDefault();
+            console.log("gffd")
+
+            var Highlights_Images = document.getElementById('Highlights_Images').files[0];
+            var Includes_Images = document.getElementById('Includes_Images').files[0];
+            // var gridImageFile = document.getElementById('Grid_Image').files[0];
+            var richtextarea = tinymce.get("myTextarea").getContent();
+            var jumpLinkTitles = tinymce.get("jumpLinkTitles").getContent();
+            // Get other input values
+            var inter_domes = $('#int-domes').val();
+            var TourSpotName = $('#TourSpotName').val();TourSpotslug
+            var TourSpotslug = $('#TourSpotslug').val();
+        
+
+            // Create FormData object to send to backend
+            var formData = new FormData();
+            formData.append('Highlights', richtextarea);
+            formData.append('Includes', jumpLinkTitles);
+            formData.append('Includes_Images', Includes_Images);
+            formData.append('Highlights_Images', Highlights_Images);
+            formData.append('City_name', inter_domes);
+            formData.append('TourSpotName', TourSpotName);
+            formData.append('TourSpotslug', TourSpotslug);
+          
+            
+
+            var csrftoken = document.cookie.match(/csrftoken=([\w-]+)/)[1];
+            document.getElementById("submitButton2").style.display = "none";
+            document.getElementById("loadingbutton").style.display = "block"; // or "block" based on your styling needs
+                
+
+            // Make AJAX request
+            $.ajax({
+                type: 'POST',
+                headers: {
+                    'X-CSRFToken': csrftoken // Include CSRF token in headers
+                },
+                url: '/desti_add_deatils/', // Replace with your backend URL
+                data: formData,
+               
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    document.getElementById("loadingbutton").style.display = "none";
+                    document.getElementById("successmsg").style.display = "block";
+                    window.location.href = '/destination_attraction/';
+                },
+                error: function(xhr, status, error) {
+                    // Handle error
+                    console.error(xhr.responseText);
+                }
+            });
+      
+        });
+    });
+</script>
+
+    <style>
+	.form-width{
+        width: 98%;
+      }
+      .input-div{
+        width: 100%;
+      }
+      .form-control2{
+        width: 95%;
+      }
+      .form-label{
+        font-size: medium;
+        font-weight: 600;
+      }
+      
+    textarea{
+      resize: none;
+    }
+  </style>
+
+    </style>
+
+ 
+  
+
+  <script src="{% static 'vendors/tinymce/tinymce.js' %}"></script>
+  <script src="{% static 'js/admin/datepicker.js' %}"></script>
+
+
+
+
+  
+	<!-- core:js -->
+  <script src="{% static 'vendors/core/core.js' %}"></script>
+  <!-- endinject -->
+
+  <!-- Plugin js for this page -->
+  <script src="{% static 'vendors/chartjs/Chart.min.js'  %}"></script>
+  <script src="{% static 'vendors/jquery.flot/jquery.flot.js' %}"></script>
+  <script src="{% static 'vendors/jquery.flot/jquery.flot.resize.js' %}"></script>
+  <script src="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static 'vendors/apexcharts/apexcharts.min.js' %}"></script>
+    <!-- End plugin js for this page -->
+
+    <!-- inject:js -->
+    <script src="{% static 'vendors/feather-icons/feather.min.js' %}"></script>
+    <script src="{% static 'js/admin/template.js' %}"></script>
+    <!-- endinject -->
+
+    <!-- Custom js for this page -->
+  <script src="{% static 'js/admin/dashboard-light.js' %}"></script>
+
+
+
+  <script src="{% static 'vendors/tinymce/tinymce.min.js' %}"></script>
+<!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
+
+<!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+  
+  <!-- End custom js for this page -->
+
+</body>
+</html>    

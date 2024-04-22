@@ -1,0 +1,537 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Travelin Responsive HTML Admin Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="Travelin">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/home/Magnet%20logo.png' %}">
+  <title>Vacation Feast</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- End fonts -->
+
+	<!-- core:css -->
+	<link rel="stylesheet" href="{% static 'vendors/core/core.css' %}">
+	<!-- endinject -->
+
+	<!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}">
+	<!-- End plugin css for this page -->
+
+	<!-- inject:css -->
+	<link rel="stylesheet" href="{% static 'css/css/iconfont.css' %}">
+	<!-- endinject -->
+
+  <!-- Layout styles -->  
+	<link rel="stylesheet" href="{% static 'css/css/style.css' %}">
+  <!-- End layout styles -->
+
+  <link rel="shortcut icon" href="../images/favicon.png" />
+    
+</head>
+<body>
+	<div class="main-wrapper">
+
+		<!-- sidebar starts -->
+    {% include 'home/aside.html' %}
+    <!-- sidebar Ends -->
+	
+		<div class="page-wrapper">
+					
+			<!-- navbar Starts -->
+      {% include 'home/adminheader.html' %}
+			<!-- navbar Ends -->
+<!-- ---------------------------------------------my work contend---------------------------------- -->
+
+
+
+      <!-- Page Content Starts -->
+			<div class="page-content">
+
+				<nav class="page-breadcrumb d-flex align-items-center justify-content-between">
+					<ol class="breadcrumb mb-0">
+						<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Categories Cities</li>
+					</ol>
+          <!-- <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addslider"><i class="link-icon" data-feather="plus"></i> Add Slider</button> -->
+				</nav>
+
+        <!-- <div class="search-box p-4 bg-white rounded mb-3 box-shadow">
+          <form class="forms-sample">
+            <div class="row align-items-center">
+              <div class="col-lg-3">
+                <h5>Slider Lists</h5>
+              </div>
+              <div class="col-lg-6 col-md-4">
+                <input type="text" placeholder="Search by slider title" class="form-control">
+              </div>
+              <div class="col-lg-3 col-md-4">
+                <select class="form-select form-select-lg">
+                  <option selected>Category</option>
+                  <option value="1">One</option>
+                  <option value="2">Two</option>
+                  <option value="3">Three</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div> -->
+        <div class="row">
+          <div class="col-md-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="table-responsive">
+                      <table id="dataTableExample" class="table">
+                        <thead class="text-center">
+                          <tr >
+                            <th>ID</th>
+                            <th>table id</th>
+                            <th>Categories Name</th>
+                            <!-- <th>Destination id</th> -->
+                            <th>Action</th>
+                            <!-- <th>Client postion</th>
+                            <th class="text-center">Client Review</th>
+                            <th class="text-center">Action</th> -->
+                          </tr>
+                          <div class="justify-content-between d-flex"><p class="mb-0 mt-3">Add Categories </p>
+                            <button class="btn btn-primary px-4 py-2" data-bs-toggle="modal" data-bs-target="#addslider-addteam"><i class="link-icon" data-feather="plus"></i> Add Categories </button>
+                          </div>
+            
+                        </thead>
+      
+                       
+                        <tbody class="text-center">
+                          {% for result in results %}
+                          <tr>
+                              <td>{{ forloop.counter }}</td>
+                              <td>{{ result.id}}</td>
+                              <td>{{ result.city}}</td>
+                           
+                              <td class="text-center">
+                                  <ul class="d-flex justify-content-center list-unstyled mb-0">
+                                      <li class="me-2">
+                                          <a href="#" data-bs-toggle="modal" data-bs-target="#editTeamModal{{ result.id }}">
+                                              <i class="link-icon" data-feather="edit"></i>
+                                          </a>
+                                      </li>
+                                     <li>
+                                          <a href="#" onclick="confirmDeleteTags('{{ result.id }}')">
+                                              <i class="link-icon" data-feather="delete"></i>
+                                          </a>
+                                     </li>
+                                 </ul>
+                          
+                          <script>
+                              function confirmDeleteTags(blogId) {
+                                  if (confirm("Are you sure you want to delete this Categories?")) {
+                                      window.location.href = "{% url 'delete_categories_cities' result.id %}"
+                                  } else {
+                                      // Do nothing or handle cancellation
+                                  }
+                              }
+                          </script>
+                              </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+       
+			
+        
+        <!-- <div class="row">
+          <div class="dataTables_paginate">
+                <ul class="pagination">
+                  <li class="paginate_button page-item">
+                    <a href="#" class="page-link">Previous</a>
+                  </li>
+                  <li class="paginate_button page-item active"><a href="#" class="page-link">1</a></li>
+                  <li class="paginate_button page-item"><a href="#" class="page-link">2</a></li>
+                  <li class="paginate_button page-item"><a href="#" class="page-link">3</a></li>
+                  <li class="paginate_button page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
+            </div>
+        </div> -->
+
+			</div>
+      <!-- Page Content Ends -->
+
+      
+<!-- -------------------------------------------------------page contend ----------------------------------- -->
+			<!-- footer Starts -->
+      <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small">
+        <p class="text-muted mb-1 mb-md-0">Copyright © 2022 <a href="../index.html" target="_blank">Vacation Feast</a>.</p>
+        <!-- <p class="text-muted">Powered By <i class="mb-1 text-primary ms-1 icon-sm" data-feather="heart"></i> Bizberg Themes</p> -->
+      </footer>
+      <!-- footer Ends -->
+	
+		</div>
+	</div>
+
+ 
+  <!-- Add Team Modal -->
+<div class="modal fade" id="addslider-addteam" tabindex="-1" aria-labelledby="addTeamModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header d-flex">
+              <h5 class="modal-title" id="addTeamModalLabel">Add Categories</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form class="forms-sample row" action="{% url 'add_categories_cities' %}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="mb-3  col-lg-6">
+                      <label for="TeamName" class="form-label">Categories Type</label>
+                      <select class="form-select show-4" id="CategoriesType"  name="CategoriesType">
+                        <option value="">Select the Categories</option>
+                      {% for type in categories %}
+                      <option value="{{type.categoriesname}}">{{type.categoriesname}}</option>
+                      {% endfor %}
+                    </select>
+                  </div>
+                  
+                  <div class="mb-3  col-lg-6">
+                    <label for="TeamName" class="form-label">Categories Type slug</label>
+
+                    <select class="form-select show-4" id="CategoriesTypeslug"  name="CategoriesTypeslug">
+                      <option value="">Select the Categories slug</option>
+                    {% for type in categories %}
+                    <option value="{{type.categeory_slug}}">{{type.categeory_slug}}</option>
+                    {% endfor %}
+                  </select>
+                 </div>
+                 <div class="mb-3">
+                  <label for="upload" class="form-label">Categories Images</label>
+                  <input class="form-control" required type="file" name="CategoriesImages" id="upload" >
+                </div>
+                  <div class="mb-3">
+                    <label for="TeamName" class="form-label">Destination Name</label>
+                    <input type="hidden" class="select-4" id="new-{{team.description.HomeDestinationName}}" value="{{team.description.HomeDestinationName}}">
+                    <select class="form-select show-4" id="DestinationName" name="DestinationName" multiple>
+                      <option value="">Select the cities</option>
+                      <optgroup label="International">
+                          {% for internation in Internation %}
+                          <option value="{{internation.id}}">{{internation.destination_name}}</option>
+                          {% endfor %}
+                      </optgroup>
+                      <optgroup label="Domestic">
+                          {% for domestic in Domestic %}
+                          <option value="{{domestic.id}}">{{domestic.destination_name}}</option>
+                          {% endfor %}
+                      </optgroup>
+                  </select>
+                  <input type="hidden" id="selectedCities" name="selectedCities">
+                  <div class="selected-options" id="selectedCitiesText"></div>
+                  <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const selectElement = document.getElementById('DestinationName');
+                        const hiddenInput = document.getElementById('selectedCities');
+                        const selectedCitiesText = document.getElementById('selectedCitiesText');
+                        let selectedValues = []; // Array to store selected values
+                
+                        selectElement.addEventListener('change', function () {
+                            const selectedOptions = Array.from(this.selectedOptions);
+                            
+                            selectedOptions.forEach(option => {
+                                if (!selectedValues.includes(option.value)) { // Check if value is already selected
+                                    selectedValues.push(option.value); // Add selected value to array
+                
+                                    const selectedOptionDiv = document.createElement('div');
+                                    selectedOptionDiv.classList.add('selected-option');
+                                    selectedOptionDiv.textContent = option.text;
+                
+                                    const closeIcon = document.createElement('span');
+                                    closeIcon.classList.add('selected-option-close');
+                                    closeIcon.textContent = '✖';
+                                    closeIcon.onclick = function () {
+                                        const index = selectedValues.indexOf(option.value);
+                                        if (index !== -1) {
+                                            selectedValues.splice(index, 1); // Remove the value from array
+                                            updateHiddenInput(selectedValues);
+                                            selectedCitiesText.removeChild(selectedOptionDiv); // Remove the selected option from display
+                                        }
+                                    };
+                
+                                    selectedOptionDiv.appendChild(closeIcon);
+                                    selectedCitiesText.appendChild(selectedOptionDiv);
+                                }
+                            });
+                
+                            updateHiddenInput(selectedValues);
+                        });
+                
+                        function updateHiddenInput(selectedValues) {
+                            hiddenInput.value = JSON.stringify(selectedValues); // Store array as JSON string
+                        }
+                    });
+                </script>
+            </div>  
+                
+            <div class="mb-3">
+              <label for="TeamName" class="form-label">Meta Title</label>
+              <input type="text" class="form-control" id="MetaTitle" name="MetaTitle"  autocomplete="off">
+           </div>
+           <div class="mb-3">
+                <label for="TeamName" class="form-label">Meta description</label>
+                <input type="text" class="form-control" id="Metadescription" name="Metadescription"  autocomplete="off">
+            </div>
+            <div class="mb-3">
+              <label for="TeamName" class="form-label">Meta keyword</label>
+              <input type="text" class="form-control" id="Metakeyword" name="Metakeyword" autocomplete="off">
+           </div>
+                  
+                  
+                  
+
+                <input type="hidden" class="new-id" id="new-id" name="CategoriesType_name">
+                <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Add Categories Destination</button>
+                </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+<style>
+  .selected-options {
+      border: 1px solid #ccc;
+      padding: 5px;
+      margin-top: 10px;
+      /*max-width: 300px;*/
+      border-radius: 10px;
+  }
+  .selected-option {
+      display: inline-block;
+      background-color: #f0f0f0;
+      padding: 3px 5px;
+      border-radius: 3px;
+      margin-right: 5px;
+      /*margin-bottom: 5px;*/
+  }
+  .selected-option-close {
+      cursor: pointer;
+      margin-left: 5px;
+  }
+</style>
+<!-- <script>
+  document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById('DestinationName').addEventListener('change', function() {
+          var selectedOption = this.options[this.selectedIndex];
+          document.getElementById('new-id').value = selectedOption.text;
+      });
+  });
+</script> -->
+
+
+<!-- Edit Team Modal -->
+{% for team in results %}
+<div class="modal fade" id="editTeamModal{{ team.id }}" tabindex="-1" aria-labelledby="editTeamModalLabel{{ team.id }}" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header d-flex">
+              <h5 class="modal-title" id="editTeamModalLabel{{ team.id }}">Edit Categories</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form class="forms-sample row" action="{% url 'edit_categories_cities' team_id=team.id %}" method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="mb-3 col-lg-6">
+                    <label for="TeamName" class="form-label">Categories Type</label>
+                    <!-- <input type="hidden" class="select-4" id="new2-{{team.category}}" value="{{team.categories}}"> -->
+                    <select class="form-select show-4" id="up-CategoriesType"  name="up-CategoriesType">
+                      <option value="{{team.city}}">{{team.city}}</option>
+                    {% for type in categories %}
+                    <option value="{{type.categoriesname}}">{{type.categoriesname}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <div class="mb-3 col-lg-6">
+                    <label for="TeamName" class="form-label">Categories URL</label>
+                    <select class="form-select show-4" id="CategoriesTypeslug"  name="up-CategoriesTypeslug">
+                      <option value="{{team.categeory_slug}}">{{team.categeory_slug}}</option>
+                    {% for type in categories %}
+                    <option value="{{type.categeory_slug}}">{{type.categeory_slug}}</option>
+                    {% endfor %}
+                  </select>
+               </div>
+              <div class="mb-3">
+                <label for="upload" class="form-label">Categories Images</label>
+                <input class="form-control" type="file" name="up-CategoriesImages" id="upload" >
+              </div>
+            <div class="mb-3">
+              <select class="form-select show-4" id="DestinationName{{ team.id }}" name="up-DestinationName"  multiple>
+                <option value="">Select the cities</option>
+                <optgroup label="International">
+                    {% for internation in Internation %}
+                    <option value="{{internation.id}}">{{internation.destination_name}}</option>
+                    {% endfor %}
+                </optgroup>
+                <optgroup label="Domestic">
+                    {% for domestic in Domestic %}
+                    <option value="{{domestic.id}}">{{domestic.destination_name}}</option>
+                    {% endfor %}
+                </optgroup>
+                </select>
+                 <input type="hidden" id="selectedCities{{ team.id }}" name="uptwo-selectedCities" value='{{team.description}}'>
+                <div class="selected-options" id="selectedCitiesText{{ team.id }}"></div>
+            </div>
+           
+            <script>
+              document.addEventListener('DOMContentLoaded', function () {
+                  const selectElement = document.getElementById('DestinationName{{ team.id }}');
+                  const hiddenInput = document.getElementById('selectedCities{{ team.id }}');
+                  // const hiddenInput = JSON.stringify(new_)
+                  const selectedCitiesText = document.getElementById('selectedCitiesText{{ team.id }}');
+                  let selectedValues = JSON.parse(hiddenInput.value); // Initialize selected values from hidden input
+          
+                  // Function to initialize display of all selected values
+                  function initializeSelectedValuesDisplay() {
+                      selectedValues.forEach(value => {
+                          const option = selectElement.querySelector(`option[value="${value}"]`);
+                          if (option) {
+                              addSelectedOptionToDiv(option.text, option.value);
+                          }
+                      });
+                  }
+          
+                  initializeSelectedValuesDisplay(); // Call the function to initialize display
+          
+                  selectElement.addEventListener('change', function () {
+                      const selectedOptions = Array.from(this.selectedOptions);
+          
+                      selectedOptions.forEach(option => {
+                          if (!selectedValues.includes(option.value)) { // Check if value is already selected
+                              selectedValues.push(option.value); // Add selected value to array
+                              addSelectedOptionToDiv(option.text, option.value);
+                          }
+                      });
+          
+                      updateHiddenInput(selectedValues);
+                  });
+          
+                  function addSelectedOptionToDiv(optionText, optionValue) {
+                      const selectedOptionDiv = document.createElement('div');
+                      selectedOptionDiv.classList.add('selected-option');
+                      selectedOptionDiv.textContent = optionText;
+          
+                      const closeIcon = document.createElement('span');
+                      closeIcon.classList.add('selected-option-close');
+                      closeIcon.textContent = '✖';
+                      closeIcon.onclick = function () {
+                          const index = selectedValues.indexOf(optionValue);
+                          if (index !== -1) {
+                              selectedValues.splice(index, 1); // Remove the value from array
+                              updateHiddenInput(selectedValues);
+                              selectedCitiesText.removeChild(selectedOptionDiv); // Remove the selected option from display
+                          }
+                      };
+          
+                      selectedOptionDiv.appendChild(closeIcon);
+                      selectedCitiesText.appendChild(selectedOptionDiv);
+                  }
+          
+                  function updateHiddenInput(selectedValues) {
+                      hiddenInput.value = JSON.stringify(selectedValues); // Store array as JSON string
+                  }
+              });
+          </script>
+
+              <div class="mb-3">
+                <label for="TeamName" class="form-label">Meta Title</label>
+                <input type="text" class="form-control" id="MetaTitle" name="up-MetaTitle" value="{{team.metatitle}}"  autocomplete="off">
+             </div>
+             <div class="mb-3">
+              <label for="TeamName" class="form-label">Meta description</label>
+              <input type="text" class="form-control" id="Metadescription" name="up-Metadescription" value="{{team.metadescription}}" autocomplete="off">
+           </div>
+           <div class="mb-3">
+            <label for="TeamName" class="form-label">Meta keywork</label>
+            <input type="text" class="form-control" id="Metakeywork" name="up-Metakeywork" value="{{team.metakeyword}}" autocomplete="off">
+         </div>
+              
+                  <div class="text-center">
+                      <button type="submit" class="btn btn-primary">Update Categories</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+</div>
+{% endfor %}
+
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+      document.getElementById('up-DestinationName').addEventListener('change', function() {
+          var selectedOption = this.options[this.selectedIndex];
+          document.getElementById('new-id-edit').value = selectedOption.text;
+      });
+  });
+</script>
+<!-- <script>
+  document.addEventListener("DOMContentLoaded", function() {
+      var selectTourValues = document.querySelectorAll(".select-city");
+      var showTourValues = document.querySelectorAll(".show-city");
+
+      selectTourValues.forEach(function(select, index) {
+          var selectTourValue = select.value;
+          var showTourValue = showTourValues[index];
+
+          // Loop through the options to find the one that matches the input value
+          for (var k = 0; k < showTourValue.options.length; k++) {
+              if (showTourValue.options[k].value === selectTourValue) {
+                showTourValue.options[k].selected = true;
+                  break;
+              }
+          }
+
+          // Add event listener for change event on the select element
+          showTourValue.addEventListener("change", function() {
+              // Update the value of the hidden input to match the selected option
+              select.value = this.value;
+          });
+      });
+  });
+</script> -->
+	<!-- core:js -->
+  <script src="{% static 'vendors/core/core.js' %}"></script>
+  <!-- endinject -->
+
+  <!-- Plugin js for this page -->
+  <script src="{% static 'vendors/tinymce/tinymce.min.js' %}"></script>
+  <script src="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+  <!-- End plugin js for this page -->
+
+  <!-- inject:js -->
+  <script src="{% static 'vendors/feather-icons/feather.min.js' %}"></script>
+  <script src="{% static 'js/admin/template.js' %}"></script>
+  <!-- endinject -->
+
+  <!-- Custom js for this page -->
+  <script src="{% static 'js/admin/tinymce.js' %}"></script>
+  <script src="{% static 'js/admin/datepicker.js' %}"></script>
+  <!-- End custom js for this page -->
+    <style>
+          @media screen and (min-width: 576px){
+            .modal-dialog {
+                max-width: 900px;
+            }
+          }
+    </style>
+
+
+</body>
+</html>    

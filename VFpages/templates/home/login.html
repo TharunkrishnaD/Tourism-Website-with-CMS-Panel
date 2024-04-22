@@ -1,0 +1,2160 @@
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter1" id="signup-btn">
+    SIGN IN
+</button> -->
+<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModalCenter1" id="signup-btn">
+    Launch demo modal
+  </button>
+
+<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#success_tic" id="Sucessmessages">
+  Launch demo modal
+</button>
+
+<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModalCenter1" id="errorButtons">
+    Launch demo modal
+</button>
+<button type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModalCenter2" id="forgotpassword">
+    SIGN IN
+</button>
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2" id="forgotpassword" style="display: none;">
+    SIGN IN
+</button> -->
+<!-- Login start -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body px-2 py-0">
+                <div class="container">
+                    <div id="main_container">
+                        <form class="px-2 py-1" "signup_container">
+                            {% csrf_token %}
+                            <button type="button" class="btn btn-primary d-none" id="errorButton" data-bs-toggle="modal" data-bs-target="#exampleModal" style="display: none;">
+                                Error Message
+                            </button>
+                            
+                            <div class="modal fade container" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog ">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Error Message</h5>
+                                            <button type="button" class="btn-close mt-0" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <span id="errorMessageContainer"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Container for the error message -->
+                            <div id="errorContainer" style="display: none;">
+                                {{ error }}
+                            </div>
+                            
+                            <script>
+                                // Function to check for error condition and display error message
+                                function checkForError() {
+                                    var errorExists = document.getElementById('errorContainer').innerText.trim() !== ''; // Check if error exists based on the content of errorContainer
+                            
+                                    if (errorExists) {
+                                        var errorButton = document.getElementById('errorButton');
+                                        errorButton.classList.remove('d-none');
+                                        var errorMessage = document.getElementById('errorMessageContainer');
+                                        errorMessage.innerHTML = document.getElementById('errorContainer').innerHTML;
+                                        errorButton.click(); // Trigger click event to show the modal
+                                    }
+                                }
+                            
+                                // Call the function to check for error on page load
+                                checkForError();
+                            </script>
+                            
+                            <div class="mt-2" id="sign_head_div">
+                                <div class=" d-flex justify-content-between">
+                                    <h4 class="signup_text head_modal">WELCOME BACK</h4>
+                                    <button type="button" class="btn-close mt-0" data-bs-dismiss="modal"  id="SignClose"  aria-label="Close"></button>
+                                </div>
+                                <div>
+                                    <p class="sign_utext">Please enter your contact details to connect..</p>
+                                </div>
+                            </div>
+                            <div class="input_div mt-3">
+                                <label for="email" class="mb-0">Email Or Phone Number</label><span class="error" id="emailError2"></span>
+                                <input type="text" class="mt-1 input_login email2" placeholder="Email or Phone Number" name="email_or_phone" id="email_or_phone">
+                                <span class="error" id="Errormessagelogin"></span>
+                            </div>
+                            <div class="mt-3 input_div">
+                                <label for="email" class="mb-0">Password</label><span class="error" id="passwordError2"></span>
+                                <input type="password" class="input_login  password2 mt-1" name="password" id="signpassword" placeholder="Enter Password">
+                            </div>
+                            <div class="mt-5" id="checkbox_div">
+                                <div class="d-flex justify-content-between">
+                                    <div class="d-flex">
+                                        <input type="checkbox" class="checkbox2" style="width: 19px;height: 19px">
+                                        <p class="mb-0 check_text">Remember Me</p>
+                                    </div>
+                                    <div>
+                                        <a onclick="forgetpassword()" class="check_text fp_text">Forget Password?</a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="error" id="checkboxError2"></span>
+                                </div>
+                            </div>
+                            <div class="mt-2 btn_div">
+                                <button class="sign_btn" onclick="validateFormPopup()" type="button">Log In</button>
+                            </div>
+                            <div class="mt-3 d-flex" id="concern_text">
+                                <p class="mb-0">Don’t have an account ?</p> &nbsp
+                                <button type="button" onclick="linklogin()" class="lg_btn" style="border: none;background: none;text-decoration: underline">Sign Up Here</button>
+                            </div>
+                            <script>
+                                function linklogin(){
+                                    console.log("start")
+                                    $("#SignClose").click();
+                                    $("#signup-btn").click();
+                                }
+                                function forgetpassword(){
+                                    $("#SignClose").click();
+                                    $("#forgotpassword").click();
+                                }
+                            </script>
+                        </form>
+                    </div>
+                    <script>
+                        // Get references to the popup and the Ok button
+                        var errorPopup = document.getElementById("errorPopup");
+                        var okButton = document.getElementById("okButton");
+                        
+                        // Add event listener to the Ok button
+                        okButton.addEventListener("click", function() {
+                            // Hide the popup
+                            errorPopup.style.display = "none";
+                        });
+                    </script>
+                    <script>
+                        function validateFormPopup() {
+                            var valid = true;
+                    
+                            document.getElementById('emailError2').innerText = '';
+                            document.getElementById('passwordError2').innerText = '';
+                            document.getElementById('checkboxError2').innerText = '';
+                    
+                            var emailInput = document.querySelector('.email2');
+                            var passwordInput = document.querySelector('.password2');
+                            var checkboxInput = document.querySelector('.checkbox2');
+                    
+                            var email = emailInput.value;
+                            var password = passwordInput.value;
+                            var rememberMe = checkboxInput.checked;
+                    
+                            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            var phonePattern = /^\d{10}$/;
+                            if (email.trim() === '') {
+                                document.getElementById('emailError2').innerText = 'Email is required';
+                                emailInput.style.border = '1px solid red';
+                                valid = false;
+                            }  else if (!emailPattern.test(email) && !phonePattern.test(email)) {
+                                document.getElementById('emailError2').innerText = 'Invalid email address or phone number';
+                                emailInput.style.border = '1px solid red';
+                                valid = false;
+                            } else {
+                                emailInput.style.border = ''; // Reset border style if valid
+                            }
+                    
+                            // Password validation
+                            if (password.trim() === "") {
+                                document.getElementById('passwordError2').innerText = "Password is required";
+                                passwordInput.style.border = '1px solid red';
+                                valid = false;
+                            } else if (password.length < 6) {
+                                document.getElementById('passwordError2').innerText = "Password must be at least 6 characters long";
+                                passwordInput.style.border = '1px solid red';
+                                valid = false;
+                            } else {
+                                passwordInput.style.border = '';
+                            }
+                    
+                            if (!rememberMe) {
+                                document.getElementById('checkboxError2').innerText = "Please check 'Remember Me'";
+                                valid = false;
+                            }
+
+                            
+                            if (valid) {
+                                // If form is valid, call submitLogForms() function
+                                submitLogForms();
+                            }
+                    
+                            return valid;
+                        }
+
+                        function submitLogForms() {
+                            // Retrieve form values
+                            var email_or_phone = $("#email_or_phone").val();
+                            var password = $("#signpassword").val();
+
+                            var csrftoken = getCookie('csrftoken');
+
+                            // AJAX request
+                            $.ajax({
+                                type: "POST",
+                                url: "/login_views/",
+                                headers: {
+                                        'X-CSRFToken': csrftoken
+                                },
+                                data: {
+                                    email_or_phone: email_or_phone,
+                                    password: password,
+                                },
+                                success: function(response) {
+                                    // Handle success response
+                                    console.log(response);
+                                    if (response.success === true) {
+                                        // If the response is success, submit the form
+                                        $("#SignClose").click();
+                                       console.log(response.email)
+                                       console.log(response.phone_number)
+                                       console.log(response.username)
+                                    //    document.getElementById('log-btn').style.display = 'none';
+                                    //     document.getElementById('logProfile').style.display = 'block';
+                                        // document.getElementById("mblNumber").innerHTML = response.username;
+                                    //    document.getElementById('hiddenEmail').value = response.email;
+                                    //     document.getElementById('hiddenPhoneNumber').value = response.phone_number;
+                                    //     document.getElementById('hiddenUsername').value = response.username;
+                                        window.location.reload();
+                                    } else {
+                                        // console.log("success")
+                                        // $("#SignClose").click();
+                                        // var errorMessage = document.getElementById('errorMessageContainer');
+                                        // errorMessage.innerHTML = response.error_message;
+                                        // $("#errorButtons").click();
+                                        var errorMessage = response.error_message; // Assuming you have this line to get the error message
+                                        // Display error message
+                                        var errorSpan = document.getElementById("Errormessagelogin");
+                                        errorSpan.innerHTML = errorMessage;
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    // Handle error
+                                    console.error(xhr.responseText);
+                                }
+                            });
+                        }
+                    </script>
+                    <script>
+                        $(document).ready(function() {
+                            var emailData = $("#hiddenEmail").val();
+                            var phoneData = $("#hiddenPhoneNumber").val();
+                            var usernameData = $("#hiddenUsername").val();
+                            var logProfilePic = $("#logProfile");
+                            var logbtnShow = $("#log-btn");
+                    
+                            // Check if emailData, phoneData, and usernameData are null or undefined
+                            if (!emailData && !phoneData && !usernameData) {
+                                logbtnShow.show();
+                            } else {
+                                logProfilePic.show();
+                                logbtnShow.hide();
+                            }
+                        });
+                    </script>
+                            
+                    <style>
+                        .head_modal{
+                            color:#029e9d;
+                            font-weight:700;
+                            font-size:30px;
+                        }
+                    
+                        .btn-close {
+                            font-size: 12px;
+                            /* background: #029e9d; */
+                            color: #777 !important;
+                            border: 1px solid rgba(0, 78, 174, 1);
+                            border-radius: 50%;
+                            padding: 12px;
+                            font-weight: 700;
+                        }
+                        .modal{
+                            overflow-y:scroll;
+                            background:#000000ad; !important
+                        }
+                    
+                        .modal-open .modal .modal-dialog {
+                            max-width: 520px;
+                            top: 5%;
+                        }
+                        #image_container {
+                            
+                            background-size: contain;
+                            background-position: center center;
+                            background-repeat: no-repeat;
+                            /* background-attachment: fixed;
+                            -webkit-background-size: cover; */
+                            border-radius: 20px;
+                            padding: 10px 15px;
+                            margin: 15px 5px; 
+                        }
+                
+                        .image_h4 {
+                            font-size: 36px;
+                            font-weight: 700;
+                            color:rgba(255, 255, 255, 1) ;
+                        }
+                
+                        .features_div {
+                            margin-top: 80px;
+                        }
+                
+                        .features {
+                            font-size: 16px;
+                            color:rgba(255, 255, 255, 1);
+                            font-weight: 500;
+                            /* background: rgba(255, 255, 255, 0.28); */
+                            padding: 27px 20px;
+                            background: rgba(255, 254, 254, 0.13);
+                            backdrop-filter: blur(5px);
+                            border-radius: 18px;
+                        }
+
+                        .modal-header {
+                            border-bottom: none !important;
+                        }
+
+                        .modal-content {
+                            border-radius: 12px !important;
+                        }
+                
+                        #main_container {
+                            background: rgba(255, 255, 255, 1);
+                            /* box-shadow: 5px 5px 12px 0.5px; */
+                            border-radius: 20px;
+                        }
+                
+                        #sign_head_div {
+                            margin: 2px;
+                        }
+                
+                
+                        .sign_utext {
+                            font-size: 15px;
+                            font-weight: 500;
+                            color: rgba(0, 0, 0, 0.7);
+                        }
+                
+                        .input_div{
+                            flex-direction: column;
+                            display: flex;
+                            margin: 2px;
+                        }
+                
+                        .fp_text {
+                            color:rgba(0, 78, 174, 1) !important;
+                        }
+                        
+                        .fp_text: hover {
+                            color:rgba(0, 78, 174, 1) !important;
+                            opacity:0.6 !important;
+                        }
+                
+                        .input_login {
+                            border-radius: 8px !important;
+                            padding: 13px 18px !important;
+                            color: rgba(43, 43, 43, 0.5) !important;
+                            width: 100% !important;
+                            border: 1px solid rgba(0, 78, 174, 1) !important;
+                        }
+                
+                        .sign_btn {
+                            padding: 12px 20px;
+                            background: linear-gradient(240deg, rgba(0, 78, 174, 1), rgba(75, 153, 249, 1));
+                            border-radius: 50px;
+                            color:rgba(255, 255, 255, 1);
+                            text-align: center;
+                            font-weight: 600;
+                            font-size: 15px;
+                            width: 100%;
+                            height: 50px;
+                            border: none;
+                        }
+                
+                        .sign_btn:hover {
+                            background: linear-gradient(240deg, rgba(75, 153, 249, 1), rgba(0, 78, 174, 1));
+                        }
+                
+                        #concern_text {
+                            align-items: center;
+                            justify-content: center;
+                            text-align: center;
+                            margin: 2px;
+                        }
+                
+                        #concern_text p {
+                            color: rgba(0, 0, 0, 0.71);
+                            font-size: 15px;
+                            font-weight: 600;
+                
+                        }
+                
+                        .btn_div {
+                            margin: 2px;
+                        }
+                
+                
+                    </style>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Login End -->
+
+<!-- SIGNIN POPUP -->
+<div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1Title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container">
+                    <div class="d-flex" id="main_container1">
+                        <form class="" id="signup_form">
+                            {% csrf_token %}
+                            <div class="d-flex justify-content-between" id="sign_head_div">
+                                <h4 class="signup_text head_modal">SIGN UP</h4>
+                                <button type="button" class="btn-close mt-0" data-bs-dismiss="modal"  id="LogClose"  aria-label="Close"></button>
+                            </div>
+                            <div>
+                                <p class="sign_utext">Create Your Account,Get Your Personalized Tour Account.</p>
+                                <p class="sign_utext">OTP will be send to the enter whatsapp number</p>
+                            </div>
+                            <div class="input_div mt-0">
+                                <div class="mt-1 justify-content-between d-flex">
+                                    <div style="width: 49%;">
+                                        <input type="text" class="input_signin username" id="user_name" placeholder="First Name" name="user_name">
+                                        <span class="error" id="nameError"></span>
+                                    </div>
+                                    <div style="width: 49%;">
+                                        <input type="text" class="input_signin last_user_name" id="last_user_name" placeholder="Last Name" name="last_user_name">
+                                        <span class="error" id="lastnameError"></span>
+                                    </div>
+                                </div>
+                                <input type="text" onfocus="(this.type='date')" class="mt-2 input_signin dateofbirth" placeholder="Date Of Birth" name="dateofbirth" id="dateofbirth" max="<?php echo date('Y-m-d'); ?>">
+                                <span class="error" id="dateError"></span>
+                                <script>
+                                    document.getElementById('dateofbirth').max = new Date().toISOString().split('T')[0];
+                                </script>                
+                            
+                                <input type="text" class="mt-2 input_signin phone_number" placeholder="WhatsApp Number" name="phone_number" id="phone_number">
+                                <span class="error" id="phoneError"></span>
+                                <input type="text" class="mt-2 input_signin second_phone_number" placeholder="Phone Number" name="second_phone_number" id="second_phone_number">
+                                <span class="error" id="secondphoneError"></span>
+                                <input type="email" class="mt-2 input_signin email" placeholder="Email" name="email" id="Email">
+                                <span class="error" id="emailError"></span>
+                            </div>
+
+                            <!--<div class="input_div mt-0>-->
+                            <!--    <div class="mt-3 justify-content-between d-flex">-->
+                            <!--        <div style="width: 49%;">-->
+                            <!--            <input type="text" class="input_signin username" id="user_name" placeholder="First Name" name="user_name" >-->
+                            <!--            <span class="error" id="nameError"></span>-->
+                            <!--        </div>-->
+                            <!--        <div style="width: 49%;">-->
+                            <!--            <input type="text" class="input_signin last_user_name" id="last_user_name" placeholder="Last Name" name="last_user_name" >-->
+                            <!--            <span class="error" id="lastnameError"></span>-->
+                            <!--        </div>-->
+                            <!--    </div>-->
+                            <!--    <input type="date" class="mt-2 input_signin dateofbirth" placeholder="Date Of Birth" name="dateofbirth" id="dateofbirth" max="<?php echo date('Y-m-d'); ?>">-->
+                            <!--    <span class="error" id="dateError"></span>-->
+                            <!--    <script>-->
+                            <!--        document.getElementById('dateofbirth').max = new Date().toISOString().split('T')[0];-->
+                            <!--    </script>                -->
+                                                
+                            <!--    <input type="text" class="mt-2 input_signin phone_number" placeholder="whatsapp No" name="phone_number" id="phone_number">-->
+                            <!--    <span class="error" id="phoneError"></span>-->
+                            <!--    <input type="text" class="mt-2 input_signin second_phone_number" placeholder="Phone No" name="second_phone_number" id="second_phone_number">-->
+                            <!--    <span class="error" id="secondphoneError"></span>-->
+                            <!--    <input type="email" class="mt-2 input_signin email" placeholder="Email" name="email" id="Email">-->
+                            <!--    <span class="error" id="emailError"></span>-->
+                            <!--</div>-->
+                            <div class="mt-2 justify-content-between d-flex">
+                                <div style="width: 49%">
+                                    <input type="password" class="input_signin password" name="password" id="password" placeholder="Enter Password">
+                                    <span class="error" id="passwordError"></span>
+                                </div>
+                                <div style="width: 49%">
+                                    <input type="password" class="input_signin confirm_password" name="confirm_password" id="confirm_password" placeholder="Confirm Password" >
+                                    <span class="error" id="confirmPasswordError"></span>
+                                </div>
+                            </div>
+                            <div class="mt-2" id="checkbox_div">
+                                <div class="d-flex">
+                                    <input type="checkbox" class="checkbox1" style="width: 19px;height: 19px">
+                                    <p class="mb-0 check_text">I Agree with <span>Terms of Servies</span>  and the <span> Privacy policy</span> </p>
+                                </div>
+                                <span class="error" id="checkboxError"></span>
+                            </div>
+                            <div><p style="color: black;"  id="otpmessages"></p></div>
+                            <div class="row justify-content-center" id="otp_container">
+                                <div class="mt-2">
+                                    <div class="card mb-0 mt-0 border-0">
+                                    <div class="card-body p-2 text-center">
+                                        <!-- <h4>Verify</h4>
+                                        <p>Your code was sent to you via email</p> -->
+                                        <div class="otp-field mb-2">
+                                            <input id="digitA" class="otp_inp p-1" type="number" />
+                                            <input id="digitB" class="otp_inp p-1" type="number" disabled />
+                                            <input id="digitC" class="otp_inp p-1" type="number" disabled />
+                                            <input id="digitD" class="otp_inp p-1" type="number" disabled />
+                                        </div>
+                                        <span class="error" id="Otp_error"></span>
+                                        <!--<p class="resend text-muted mb-2">Didn't receive code? <a href="">Request again</a></p>-->
+                                        <div class="mt-0 mb-0">Time left : <span id="timer"></span></div>
+                                        <div id="verifyBtn" class=" verify_btn btn btn-primary mb-0 mt-2">Submit</div>
+                                        {% if error_message %}
+                                        <script>
+                                            alert("{{ error_message }}")
+                                        </script>    
+                                        {% endif %}
+                                        <script>
+                                            function submitForm() {
+                                                // Retrieve form values
+                                                var userName = $("#user_name").val();
+                                                var lastuserName = $("#last_user_name").val();
+                                                var date = $("#dateofbirth").val();
+                                                var phoneNumber = $("#phone_number").val();
+                                                var second_phone_number = $("#second_phone_number").val();
+                                                var email = $("#Email").val();
+                                                var password = $(".password").val();
+                                                var confirmPassword = $(".confirm_password").val();
+
+                                                var csrftoken = getCookie('csrftoken');
+                
+                                                // AJAX request
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "/signups/",
+                                                    headers: {
+                                                            'X-CSRFToken': csrftoken
+                                                    },
+                                                    data: {
+                                                        user_name: userName,
+                                                        lastuserName: lastuserName,
+                                                        date: date,
+                                                        phone_number: phoneNumber,
+                                                        second_phone_number:second_phone_number,
+                                                        email: email,
+                                                        password: password,
+                                                        confirm_password:confirmPassword
+                                                    },
+                                                    success: function(response) {
+                                                        // Handle success response
+                                                        console.log(response);
+                                                        if (response.success === true) {
+                                                            // If the response is success, submit the form
+                                                            $("#LogClose").click();
+                                                            $("#Sucessmessages").click();
+                                                        } else {
+                                                            if (response.error_number === 1) {
+                                                                var nameerror = document.getElementById('nameError');
+                                                                var phoneerror =  document.getElementById('phoneError');
+                                                                var secondphoneerror =  document.getElementById('secondphoneError');
+                                                                var emailerror =  document.getElementById('emailError');
+                                                                var passworderror =  document.getElementById('passwordError');
+                                                                var confirmpassworderror =  document.getElementById('confirmPasswordError');
+                                                                nameerror.innerText = response.error_message;
+                                                                phoneerror.innerText = response.error_message;
+                                                                secondphoneerror.innerText = response.error_message;
+                                                                emailerror.innerText = response.error_message;
+                                                                passworderror.innerText = response.error_message;
+                                                                confirmpassworderror.innerText = response.error_message;
+                                                            } else if (response.error_number === 2){
+                                                                var email = document.getElementById('emailError');
+                                                                var otperror = document.getElementById('phoneError');
+                                                                var secondnumber = document.getElementById('secondphoneError');
+                                                                otperror.innerText = response.error_message;
+                                                                email.innerText = response.error_message;
+                                                                secondnumber.innerHTML = response.error_message;
+                                                            } else if (response.error_number === 3){
+                                                                var otperror = document.getElementById('passwordError');
+                                                                otperror.innerText = response.error_message;
+                                                            }
+                                                            // console.log("success")
+                                                            // $("#LogClose").click();
+                                                            // var errorMessage = document.getElementById('errorMessageContainer');
+                                                            // errorMessage.innerHTML = response.error_message;
+                                                            // $("#errorButtons").click();
+                                                        }
+                                                    },
+                                                    error: function(xhr, status, error) {
+                                                        // Handle error
+                                                        console.error(xhr.responseText);
+                                                    }
+                                                });
+                                            }
+                                        </script>                                          
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function () {
+                                                document.getElementById('verifyBtn').addEventListener('click', function () {
+                                                    var digit1 = document.getElementById('digitA').value;
+                                                    var digit2 = document.getElementById('digitB').value;
+                                                    var digit3 = document.getElementById('digitC').value;
+                                                    var digit4 = document.getElementById('digitD').value;
+            
+                                                    // Concatenate the digits into a single string
+                                                    var otp = digit1 + digit2 + digit3 + digit4;
+            
+                                                    // Get CSRF token
+                                                    var csrftoken = getCookie('csrftoken');
+                                        
+                                                    // Send the OTP to the backend using AJAX
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: '/verify-otp/',  // URL to the backend view
+                                                        headers: {
+                                                            'X-CSRFToken': csrftoken
+                                                        },
+                                                        data: {
+                                                            'otp': otp,
+                                                            // You can include other data if needed
+                                                        },
+                                                        success: function(response) {
+                                                            // Handle success response
+                                                            console.log(response);
+                                                            if (response.success === true) {
+                                                                // If the response is success, submit the form
+                                                                submitForm();
+                                                            } else {
+                                                                console.log(response.message)
+                                                                var otperror = document.getElementById('Otp_error');
+                                                                
+                                                                otperror.innerText = response.message;
+                                                            }
+                                                        },
+                                                        error: function(xhr, errmsg, err) {
+                                                            // Handle error
+                                                            console.log(xhr.status + ": " + xhr.responseText);
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2 btn_div">
+                                <button class="sign_btn" id="signBtn"  type="button" onclick="validateFormSign()">SUBMIT</button>
+                            </div>
+                            <div class="mt-3 d-flex" id="concern_text">
+                                <p class="mb-0">Already Have An Account? </p> &nbsp
+                                <button type="button" onclick="loginroute()" class="lg_btn" style="border: none;background: none;text-decoration: underline">Log In</button>
+                            </div>
+                        </form>
+                    </div>
+                    <script>
+                        function loginroute(){
+                            $("#LogClose").click();
+                            $("#log-btn-switch").click();
+                        }
+                    </script>
+                    <style>
+                        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap');
+                
+                     
+                        body:before {
+                            content: '';
+                            /*position: absolute;*/
+                            width: 100vw;
+                            height: 100vh;
+                            
+                            background-position: center center;
+                            background-repeat: no-repeat;
+                            background-attachment: fixed;
+                            -webkit-background-size: cover;
+                            background-size: cover;
+                            -webkit-filter: blur(10px);
+                            -moz-filter: blur(10px);
+                            filter: blur(10px);
+                        } */
+                        
+                        .otp-field {
+                            flex-direction: row;
+                            column-gap: 20px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                
+                        .otp-field input {
+                            height: 45px;
+                            width: 42px;
+                            border-radius: 6px;
+                            outline: none;
+                            font-size: 1.125rem;
+                            text-align: center;
+                            border: 1px solid #ddd;
+                        }
+                        
+                        .otp-field input:focus {
+                            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+                        }
+                
+                        .otp-field input::-webkit-inner-spin-button,
+                        .otp-field input::-webkit-outer-spin-button {
+                            display: none;
+                        }
+                
+                        .resend {
+                            font-size: 12px;
+                        }
+                
+                        #otp_container{
+                            display: none;
+                        }
+                        
+                       
+                
+                        #image_container {
+                            /* */
+                            background-position: center center;
+                            background-repeat: no-repeat;
+                            background-attachment: fixed;
+                            -webkit-background-size: cover;
+                            background-size: cover;
+                            border-radius: 20px;
+                            padding: 10px 15px;
+                            margin: 15px 5px; 
+                        }
+                
+                        .image_h4 {
+                            font-size: 36px;
+                            font-weight: 700;
+                            color:rgba(255, 255, 255, 1) ;
+                        }
+                
+                        .features_div {
+                            margin-top: 80px;
+                        }
+                
+                        .features {
+                            font-size: 16px;
+                            color:rgba(255, 255, 255, 1);
+                            font-weight: 500;
+                            /* background: rgba(255, 255, 255, 0.28); */
+                            padding: 27px 20px;
+                            background: rgba(255, 254, 254, 0.13);
+                            backdrop-filter: blur(5px);
+                            border-radius: 18px;
+                        }
+                
+                        
+                
+                        #main_container {
+                            background: rgba(255, 255, 255, 1);
+                            /* box-shadow: 5px 5px 12px 0.5px; */
+                            border-radius: 20px;
+                        }
+                
+                
+                        #sign_head_div {
+                            margin: 2px;
+                        }
+                
+                        .sign_utext {
+                            font-size: 15px;
+                            font-weight: 500;
+                            color: rgba(0, 0, 0, 0.7);
+                        }
+                
+                        .input_div{
+                            flex-direction: column;
+                            display: flex;
+                            margin: 2px;
+                        }
+                
+                        .input_signin {
+                            background: rgba(237, 237, 237, 0.75);
+                            border-radius: 53px;
+                            padding: 13px 18px;
+                            font-size: 15px;
+                            height: auto !important;
+                            font-weight: 600;
+                            color:rgba(23, 52, 73, 0.61);
+                            border: none;
+                            width: 100%;
+                            margin: 2px;
+                            border: 1px solid rgba(0, 78, 174, 1) !important;
+                        }
+                
+                        .input::placeholder {
+                            font-weight: 400;
+                            color:rgba(23, 52, 73, 0.61);
+                            font-size: 15px;
+                        }
+                
+                        #checkbox_div {
+                           margin: 2px 10px;
+                           /* display: none; */
+                        }
+                
+                        .check_text {
+                            color: rgba(23, 52, 73, 1);
+                            font-size: 14px;
+                            font-weight: 400;
+                            padding-left: 10px;
+                        }
+                
+                        .check_text span {
+                            color: rgba(0, 78, 174, 1);
+                            font-weight: 500;
+                            cursor: pointer;
+                        }
+                        .sign_btn {
+                            padding: 12px 20px;
+                            background: linear-gradient(240deg, rgba(0, 78, 174, 1), rgba(75, 153, 249, 1));
+                            border-radius: 50px;
+                            color:rgba(255, 255, 255, 1);
+                            text-align: center;
+                            font-weight: 600;
+                            font-size: 15px;
+                            width: 100%;
+                            height: 50px;
+                            border: none;
+                        }
+                
+                       #verifyBtn {
+                            padding: 12px 20px;
+                            color:rgba(255, 255, 255, 1);
+                            background: linear-gradient(240deg, rgba(0, 78, 174, 1), rgba(75, 153, 249, 1));
+                            width: 100%;
+                            height: 50px;
+                            border: none;
+                            font-weight: 600;
+                            font-size: 15px;
+                            border-radius: 50px;
+                       }
+                
+                       #timer {
+                        border: 1px solid black;
+                        border-radius: 10px;
+                        font-weight: 600;
+                        box-shadow: 5px 5px 5px 0.5 gray;
+                        padding: 4px;
+                       }
+                        
+                
+                        .sign_btn:hover {
+                            background: linear-gradient(240deg, rgba(75, 153, 249, 1), rgba(0, 78, 174, 1));
+                        }
+                
+                        #concern_text {
+                            align-items: center;
+                            justify-content: center;
+                            text-align: center;
+                            margin: 2px;
+                        }
+                
+                        #concern_text p {
+                            color: rgba(0, 0, 0, 0.71);
+                            font-size: 15px;
+                            font-weight: 600;
+                
+                        }
+                
+                        .btn_div {
+                            margin: 2px;
+                        }
+                
+                        .lg_btn {
+                            color: #029e9d;
+                            font-size: 15px;
+                            font-weight: 600;
+                            cursor: pointer;
+                            text-decoration: underline;
+                        }
+                
+                        .lg_btn:hover {
+                            opacity: 60%;
+                        }
+                
+                        @media only screen and (max-width: 768px) {
+                            #main_container {
+                                flex-direction: column;
+                            }
+                        }
+                
+                    </style>
+                    <script>
+                        let timerOn = true;
+                        var otpDiv = document.getElementById("otp_container");
+                        var signBtn = document.getElementById("signBtn");
+                        function timer(remaining) {
+                        var m = Math.floor(remaining / 60);
+                        var s = remaining % 60;
+                        
+                        m = m < 10 ? '0' + m : m;
+                        s = s < 10 ? '0' + s : s;
+                        document.getElementById('timer').innerHTML = m + ':' + s;
+                        remaining -= 1;
+                        
+                        if(remaining >= 0 && timerOn) {
+                            setTimeout(function() {
+                                timer(remaining);
+                            }, 1000);
+                            return;
+                        }
+                
+                        if(!timerOn) {
+                            // Do validate stuff here
+                            return;
+                        }
+                        
+                        // Do timeout stuff here
+                        alert('Timeout for otp');
+                        otpDiv.style.display = "none";
+                        signBtn.style.display = "block"
+                        signBtn.innerHTML = "Resend OTP"
+                        }
+                    </script>
+                    <script>
+                        function validateFormSign() {
+                            var valid = true;
+                    
+                            document.getElementById('nameError').innerText = '';
+                            document.getElementById('lastnameError').innerText = '';
+                            document.getElementById('dateError').innerText = '';
+                            document.getElementById('phoneError').innerText = '';
+                            document.getElementById('secondphoneError').innerText = '';
+                            document.getElementById('emailError').innerText = '';
+                            document.getElementById('passwordError').innerText = '';
+                            document.getElementById('confirmPasswordError').innerText = '';
+                            document.getElementById('checkboxError').innerText = '';
+                    
+                            var nameInput = document.querySelector('.username');
+                            var lastnameInput = document.querySelector('.last_user_name');
+                            var dateInput = document.querySelector('.dateofbirth');
+                            var phoneInput = document.querySelector('.phone_number');
+                            var secondphoneInput = document.querySelector('.second_phone_number');
+                            var emailInput = document.querySelector('.email');
+                            var passwordInput = document.querySelector('.password');
+                            var confirmPasswordInput = document.querySelector('.confirm_password');
+                            var checkbox = document.querySelector('#checkbox_div .checkbox1');
+                    
+                            var name = nameInput.value;
+                            var lastname = lastnameInput.value;
+                            var phone = phoneInput.value;
+                            var secondphone = secondphoneInput.value;
+                            var email = emailInput.value;
+                            var password = passwordInput.value;
+                            var confirmPassword = confirmPasswordInput.value;
+                            var date = dateInput.value;
+                            
+                            // First Name
+                            if (name === '') {
+                                document.getElementById('nameError').innerText = 'Name is required';
+                                nameInput.style.border = '1px solid red';
+                                valid = false;
+                            } else {
+                                nameInput.style.border = '';
+                            }
+
+                            // Last Name
+
+                            if (lastname === '') {
+                                document.getElementById('lastnameError').innerText = 'Name is required';
+                                lastnameInput.style.border = '1px solid red';
+                                valid = false;
+                            } else {
+                                lastnameInput.style.border = '';
+                            }
+                    
+                            // Validation for date field
+                            if (date === '') {
+                                document.getElementById('dateError').innerText = 'Date of Birth is required';
+                                dateInput.style.border = '1px solid red';
+                                valid = false;
+                            } else {
+                                dateInput.style.border = '';
+                            }
+                    
+                            // Validation for phone number
+                            var phonePattern = /^\d{10}$/;
+                            if (phone === '') {
+                                document.getElementById('phoneError').innerText = 'Whatsapp number is required';
+                                phoneInput.style.border = '1px solid red';
+                                valid = false;
+                            } else if (!phonePattern.test(phone)) {
+                                document.getElementById('phoneError').innerText = 'Invalid phone number';
+                                phoneInput.style.border = '1px solid red';
+                                valid = false;
+                            } else {
+                                phoneInput.style.border = '';
+                            }
+                    
+                            // Validation for second phone number
+                            if (secondphone === '') {
+                                document.getElementById('secondphoneError').innerText = 'Phone number is required';
+                                secondphoneInput.style.border = '1px solid red';
+                                valid = false;
+                            } else if (!phonePattern.test(secondphone)) {
+                                document.getElementById('secondphoneError').innerText = 'Invalid phone number';
+                                secondphoneInput.style.border = '1px solid red';
+                                valid = false;
+                            } else {
+                                secondphoneInput.style.border = '';
+                            }
+                    
+                            // Validation for email
+                            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                            if (email.trim() === '') {
+                                document.getElementById('emailError').innerText = 'Email is required';
+                                emailInput.style.border = '1px solid red';
+                                valid = false;
+                            } else if (!emailPattern.test(email)) {
+                                document.getElementById('emailError').innerText = 'Invalid email address';
+                                emailInput.style.border = '1px solid red';
+                                valid = false;
+                            } else {
+                                emailInput.style.border = ''; // Reset border style if valid
+                            }
+                    
+                            // Validation for password
+                            if (password === '') {
+                                document.getElementById('passwordError').innerText = 'Password is required';
+                                passwordInput.style.border = '1px solid red';
+                                valid = false;
+                            } else if (password.length < 8) {
+                                document.getElementById('passwordError').innerText = 'Password must be at least 8 characters long';
+                                passwordInput.style.border = '1px solid red';
+                                valid = false;
+                            } else {
+                                passwordInput.style.border = '';
+                            }
+                    
+                            // Validation for confirm password
+                            if (confirmPassword === '') {
+                                document.getElementById('confirmPasswordError').innerText = 'Confirm your password';
+                                confirmPasswordInput.style.border = '1px solid red';
+                                valid = false;
+                            } else if (confirmPassword !== password) {
+                                document.getElementById('confirmPasswordError').innerText = 'Passwords do not match';
+                                confirmPasswordInput.style.border = '1px solid red';
+                                valid = false;
+                            } else {
+                                confirmPasswordInput.style.border = '';
+                            }
+                    
+                            // Validation for checkbox
+                            if (!checkbox.checked) {
+                                document.getElementById('checkboxError').innerText = 'Please agree to the terms and privacy policy';
+                                valid = false;
+                            } else {
+                                document.getElementById('checkboxError').innerText = '';
+                            }
+                    
+                            if (valid) {
+                                document.getElementById("otpmessages").innerText = "OTP WILL BE SEND TO THE PHONE NUMBER AND MAIL";
+                                sendOTP();
+                            }
+                    
+                            return valid;
+                        }
+                    </script>
+                    
+                   <!-- <script>
+                    function validateFormSign() {
+                        var valid = true;
+                        
+                        document.getElementById('nameError').innerText = '';
+                        document.getElementById('lastnameError').innerText = '';
+                        document.getElementById('dateError').innerText = '';
+                        document.getElementById('phoneError').innerText = '';
+                        document.getElementById('secondphoneError').innerText = '';
+                        document.getElementById('emailError').innerText = '';
+                        document.getElementById('passwordError').innerText = '';
+                        document.getElementById('confirmPasswordError').innerText = '';
+                        document.getElementById('checkboxError').innerText = '';
+            
+                        var nameInput = document.querySelector('.username');
+                        var lastnameInput = document.querySelector('.last_user_name');
+                        var dateInput = document.querySelector('.dateofbirth');
+                        var phoneInput = document.querySelector('.phone_number');
+                        var secondphoneInput = document.querySelector('.second_phone_number');
+                        var emailInput = document.querySelector('.email');
+                        var passwordInput = document.querySelector('.password');
+                        var confirmPasswordInput = document.querySelector('.confirm_password');
+                        var checkbox = document.querySelector('#checkbox_div .checkbox1');
+                        
+                
+                        var name = nameInput.value;
+                        var phone = phoneInput.value;
+                        var email = emailInput.value;
+                        var password = passwordInput.value;
+                        var confirmPassword = confirmPasswordInput.value;
+                
+                        if (name === '') {
+                            document.getElementById('nameError').innerText = 'Name is required';
+                            nameInput.style.border = '1px solid red';
+                            valid = false;
+                        } else {
+                            nameInput.style.border = '';
+                        }
+                
+                        var phonePattern = /^\d{10}$/;
+                        if (phone === '') {
+                            document.getElementById('phoneError').innerText = 'Whatsapp number is required';
+                            phoneInput.style.border = '1px solid red';
+                            valid = false;
+                        } else if (!phonePattern.test(phone)) {
+                            document.getElementById('phoneError').innerText = 'Invalid phone number';
+                            phoneInput.style.border = '1px solid red';
+                            valid = false;
+                        } else {
+                            phoneInput.style.border = '';
+                        }
+
+                        var phonePattern = /^\d{10}$/;
+                        if (phone === '') {
+                            document.getElementById('secondphoneError').innerText = 'Phone number is required';
+                            secondphoneInput.style.border = '1px solid red';
+                            valid = false;
+                        } else if (!phonePattern.test(phone)) {
+                            document.getElementById('secondphoneError').innerText = 'Invalid phone number';
+                            secondphoneInput.style.border = '1px solid red';
+                            valid = false;
+                        } else {
+                            secondphoneInput.style.border = '';
+                        }
+            
+                        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        if (email.trim() === '') {
+                            document.getElementById('emailError').innerText = 'Email is required';
+                            emailInput.style.border = '1px solid red';
+                            valid = false;
+                        } else if (!emailPattern.test(email)) {
+                            document.getElementById('emailError').innerText = 'Invalid email address';
+                            emailInput.style.border = '1px solid red';
+                            valid = false;
+                        } else {
+                            emailInput.style.border = ''; // Reset border style if valid
+                        }
+                        
+            
+                        if (password === '') {
+                            document.getElementById('passwordError').innerText = 'Password is required';
+                            passwordInput.style.border = '1px solid red';
+                            valid = false;
+                        } else if (password.length < 8) {
+                            document.getElementById('passwordError').innerText = 'Password must be at least 8 characters long';
+                            passwordInput.style.border = '1px solid red';
+                            valid = false;
+                        } else {
+                            passwordInput.style.border = '';
+                        }
+            
+                        if (confirmPassword === '') {
+                            document.getElementById('confirmPasswordError').innerText = 'confirm your password';
+                            confirmPasswordInput.style.border = '1px solid red';
+                            valid = false;
+                        } else if (confirmPassword !== password) {
+                            document.getElementById('confirmPasswordError').innerText = 'Passwords do not match';
+                            confirmPasswordInput.style.border = '1px solid red';
+                            valid = false;
+                        } else {
+                            confirmPasswordInput.style.border = '';
+                        }
+            
+                        if (!checkbox.checked) {
+                            document.getElementById('checkboxError').innerText = 'Please agree to the terms and privacy policy';
+                            valid = false;
+                        } else {
+                            document.getElementById('checkboxError').innerText = '';
+                        }
+            
+                        if (valid) {
+                            document.getElementById("otpmessages").innerText = "OTP WILL BE SEND TO THE PHONE NUMBER AND MAIL";
+                            sendOTP();
+                        }
+            
+                        return valid
+                    }
+
+                </script> -->
+                 <script>
+                    function sendOTP() {
+                        // Send AJAX request to server to send OTP to the provided phone number
+                        var phone_number = document.getElementById("phone_number").value;
+                        var email = document.getElementById("Email").value;
+                        var user_name = document.getElementById("user_name").value;
+                        var otpDiv = document.getElementById("otp_container");
+                        var signBtn = document.getElementById("signBtn");
+                        
+                        // Get CSRF token from the cookie
+                        var csrftoken = getCookie('csrftoken');
+                
+                        // Example AJAX request with CSRF token included
+                        $.ajax({
+                            url: '/send_otp/',
+                            type: 'POST',
+                            data: {
+                                'phone_number': phone_number,
+                                'email':email,
+                                'user_name':user_name,
+                                'csrfmiddlewaretoken': csrftoken  // Include the CSRF token in the data
+                            },
+                            success: function(response) {
+                                if (response.success === true) {
+                                    // If the response is success, submit the for
+                                    otpDiv.style.display = "block";
+                                    signBtn.style.display = "none"
+                                    var expirationTime = new Date();
+                                    expirationTime.setSeconds(expirationTime.getSeconds() + 180); // Assuming expiration time is 180 seconds
+                                    localStorage.setItem('expirationTime', expirationTime.getTime());
+
+                                    timer();
+                                } else {
+                                    var errorButton = document.getElementById('errorButtons');
+                                    errorButton.click();
+                                    otpDiv.style.display = "none";
+                                    signBtn.style.display = "block"
+                                }
+                            }
+                        });
+                    }
+            
+            
+                    // Function to get CSRF token from the cookie
+                    function getCookie(name) {
+                        var cookieValue = null;
+                        if (document.cookie && document.cookie !== '') {
+                            var cookies = document.cookie.split(';');
+                            for (var i = 0; i < cookies.length; i++) {
+                                var cookie = cookies[i].trim();
+                                // Check if the cookie name matches the requested name
+                                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                    // Extract and decode the CSRF token
+                                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                    break;
+                                }
+                            }
+                        }
+                        return cookieValue;
+                    }
+                    
+                    var otpDiv = document.getElementById("otp_container");
+                    var signBtn = document.getElementById("signBtn");
+
+                    function timer() {
+                        var expirationTime = localStorage.getItem('expirationTime');
+
+                        if (!expirationTime) return;
+
+                        function updateTimer() {
+                            var currentTime = new Date().getTime();
+                            var remainingTime = Math.max(0, Math.floor((expirationTime - currentTime) / 1000));
+
+                            var m = Math.floor(remainingTime / 60);
+                            var s = remainingTime % 60;
+
+                            m = m < 10 ? '0' + m : m;
+                            s = s < 10 ? '0' + s : s;
+                            document.getElementById('timer').innerHTML = m + ':' + s;
+
+                            if (remainingTime > 0) {
+                                setTimeout(updateTimer, 1000);
+                            } else {
+                                // Handle timeout
+                                otpDiv.style.display = "none";
+                                signBtn.style.display = "block";
+                                signBtn.innerHTML = "Resend OTP";
+                            }
+                        }
+
+                        updateTimer();
+                    }
+
+                    // Call timers() on page load to resume timer if expirationTime is stored
+                    // timer();
+                </script>  
+                <script>
+                    const inputs = document.querySelectorAll(".otp-field > input");
+                    const button = document.querySelector(".verify_btn");
+            
+                    window.addEventListener("load", () => inputs[0].focus());
+                    button.setAttribute("disabled", "disabled");
+            
+                    inputs[0].addEventListener("paste", function (event) {
+                    event.preventDefault();
+            
+                    const pastedValue = (event.clipboardData || window.clipboardData).getData(
+                        "text"
+                    );
+                    const otpLength = inputs.length;
+            
+                    for (let i = 0; i < otpLength; i++) {
+                        if (i < pastedValue.length) {
+                        inputs[i].value = pastedValue[i];
+                        inputs[i].removeAttribute("disabled");
+                        inputs[i].focus;
+                        } else {
+                        inputs[i].value = ""; // Clear any remaining inputs
+                        inputs[i].focus;
+                        }
+                    }
+                    });
+            
+                    inputs.forEach((input, index1) => {
+                    input.addEventListener("keyup", (e) => {
+                        const currentInput = input;
+                        const nextInput = input.nextElementSibling;
+                        const prevInput = input.previousElementSibling;
+            
+                        if (currentInput.value.length > 1) {
+                        currentInput.value = "";
+                        return;
+                        }
+            
+                        if (
+                        nextInput &&
+                        nextInput.hasAttribute("disabled") &&
+                        currentInput.value !== ""
+                        ) {
+                        nextInput.removeAttribute("disabled");
+                        nextInput.focus();
+                        }
+            
+                        if (e.key === "Backspace") {
+                        inputs.forEach((input, index2) => {
+                            if (index1 <= index2 && prevInput) {
+                            input.setAttribute("disabled", true);
+                            input.value = "";
+                            prevInput.focus();
+                            }
+                        });
+                        }
+            
+                        button.classList.remove("active");
+                        button.setAttribute("disabled", "disabled");
+            
+                        const inputsNo = inputs.length;
+                        if (!inputs[inputsNo - 1].disabled && inputs[inputsNo - 1].value !== "") {
+                        button.classList.add("active");
+                        button.removeAttribute("disabled");
+            
+                        return;
+                        }
+                    });
+                    });
+                </script>  
+                </div>
+        </div>
+    </div>
+    </div>
+</div>   
+<!-- SIGNIN POPUP END -->
+
+
+<!-- FORGOT PASSWORD START-->
+<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1Title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="container">
+                    <div class="d-flex" id="main_container2">
+                        <form class="col-md-12 mt-0" id="signup_form">
+                            <div class="d-flex justify-content-between" id="sign_head_div">
+                                <h4 class="signup_text head_modal">FORGET PASSWORD</h4>
+                                <button type="button" class="btn-close mt-0" data-bs-dismiss="modal" aria-label="Close" id="forgetclose"></button>
+                            </div>
+                            <div>
+                                <p class="sign_utext">OTP send to the whatsapp or mail.</p>
+                            </div>
+                            <div class="input_div mt-2" id="UserName">
+                                <label for="email_or_phone_password">Email Or Phone Number</label><span class="error" id="emailError2"></span>
+                                <input type="text" class="mt-1 input_signin email_or_phone_password" placeholder="phone number or email" name="email_or_phone_password" id="email_or_phone_password">
+                                <span class="error" id="email_or_phone_number"></span>
+                            </div>
+                            <div class="input_div mt-0" id="Password"></div>
+                            <div id="gif" style="display: none;width: 100%;align-items: center;justify-content: center;text-align: center;"><img src="/static/image/signup/icons8-success.gif" alt="Success GIF" style="
+                                background: none !important;
+                                width: 250px;
+                            "></div>
+                            <!-- <div class="mt-2" id="checkbox_div">
+                                <div class="d-flex">
+                                    <input type="checkbox" style="width: 19px;height: 19px">
+                                    <p class="mb-0 check_text">I Agree With <span>Terms Of Servies</span>  And The <span> Privacy Policy</span> </p>
+                                </div>
+                                <span class="error" id="checkboxError"></span>
+                            </div> -->
+                            <div><p style="color: black;" id="otpmessage"></p></div>
+                            <div class="row justify-content-center" id="otp_container_forget">
+                                <div class="mt-2">
+                                    <div class="card mb-0 mt-0 border-0">
+                                    <div class="card-body p-2 text-center">
+                                        <!-- <h4>Verify</h4>
+                                        <p>Your code was sent to you via email</p> -->
+                                        <div class="otp-field mb-2">
+                                            <input id="digit1" class="otp_inp2 p-1" type="number" />
+                                            <input id="digit2" class="otp_inp2 p-1" type="number" disabled />
+                                            <input id="digit3" class="otp_inp2 p-1" type="number" disabled />
+                                            <input id="digit4" class="otp_inp2 p-1" type="number" disabled />
+                                        </div>
+                                        <span class="error" id="Otp_error_forgot"></span>
+                                        <!-- <p class="resend text-muted mb-2">Didn't receive code? <a href="">Request again</a></p> -->
+                                        <div class="mt-0 mb-0">Time left : <span id="timers"></span></div>
+                                        <div id="verifyButton" class=" verify_btn btn btn-primary mb-0 mt-2">Submit</div>
+                                        <script>
+                                            function submitPassword() {
+                                                // Retrieve form values
+                                                var userName = $("#checkname").val();
+                                                var password = $("#New_password").val();
+                                                var confirmPassword = $("#New_confirm_password").val();
+
+                                                var csrftoken = getCookie('csrftoken');
+                
+                                                // AJAX request
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "/change_password/",
+                                                    headers: {
+                                                            'X-CSRFToken': csrftoken
+                                                    },
+                                                    data: {
+                                                        user_name: userName,
+                                                        password: password,
+                                                        confirm_password:confirmPassword
+                                                    },
+                                                    success: function(response) {
+                                                        // Handle success response
+                                                        console.log(response);
+                                                        if (response.success === true) {
+                                                            // document.getElementById('Password').innerHTML = " ";
+                                                            document.getElementById('Password').innerHTML = "<p style='color:black'>Password Changed</p>";
+                                                            document.getElementById('gif').style.display = 'block';
+                                                            // If the response is success, submit the form
+                                                        } else {
+                                                            console.log("success")
+                                                            $("#passwordErrors").text(response.error_message);
+                                                        }
+                                                    },
+                                                    error: function(xhr, status, error) {
+                                                        // Handle error
+                                                        console.error(xhr.responseText);
+                                                    }
+                                                });
+                                            }
+                                        </script>                                          
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', function () {
+                                                document.getElementById('verifyButton').addEventListener('click', function () {
+                                                    var digit1 = document.getElementById('digit1').value;
+                                                    var digit2 = document.getElementById('digit2').value;
+                                                    var digit3 = document.getElementById('digit3').value;
+                                                    var digit4 = document.getElementById('digit4').value;
+            
+                                                    // Concatenate the digits into a single string
+                                                    var otp = digit1 + digit2 + digit3 + digit4;
+            
+                                                    // Get CSRF token
+                                                    var csrftoken = getCookie('csrftoken');
+                                        
+                                                    // Send the OTP to the backend using AJAX
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: '/verify-otp/',  // URL to the backend view
+                                                        headers: {
+                                                            'X-CSRFToken': csrftoken
+                                                        },
+                                                        data: {
+                                                            'otp': otp,
+                                                            // You can include other data if needed
+                                                        },
+                                                        success: function(response) {
+                                                            // Handle success response
+                                                            console.log(response);
+                                                            if (response.success === true) {
+                                                                // If the response is success, submit the form
+                                                                document.getElementById('UserName').style.display = 'none';
+                                                                var name = document.getElementById('email_or_phone_password').value;
+                                                                console.log(name)
+                                                                document.getElementById('otp_container_forget').innerHTML = '';
+                                                                
+                                                                // Insert HTML inside 'msg' id
+                                                                document.getElementById('Password').innerHTML = `
+                                                                    <div class="input_div mt-2">
+                                                                        <input type="hidden" id="checkname" value="${name}">
+                                                                        <div style="margin:4px;width: 100%;">
+                                                                            <input type="password" class="input_signin password" name="password" id="New_password" placeholder="Enter Password">
+                                                                        </div>
+                                                                        <div style="margin:4px;width: 100%;">
+                                                                            <input type="password" class="input_signin confirm_password" name="confirm_password" id="New_confirm_password" placeholder="Confirm Password">
+                                                                            <span class="error" id="passwordErrors" class="passwordErrors"></span>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div id="verifyBtn" onclick="submitPassword()" class=" verify_btn btn btn-primary mb-0 mt-2">Submit</div>
+                                                                `;
+                                                            } else {
+                                                                console.log(response.message)
+                                                                var otperror = document.getElementById('Otp_error_forgot');
+                                                                
+                                                                otperror.innerText = response.message;
+                                                                // var errorButton = document.getElementById('errorButtons');
+                                                                // errorButton.classList.remove('d-none');
+                                                                // var errorMessage = document.getElementById('errorMessageContainers');
+                                                                // errorMessage.innerHTML = response.message;
+                                                                // errorButton.click(); // Trigger click event to show the modal
+                                                            }
+                                                        },
+                                                        error: function(xhr, errmsg, err) {
+                                                            // Handle error
+                                                            console.log(xhr.status + ": " + xhr.responseText);
+                                                        }
+                                                    });
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2 btn_div">
+                                <button class="sign_btn" id="signButton"  type="button" onclick="validateFormpassword()">SUBMIT</button>
+                            </div>
+                            <!-- <div class="mt-3 d-flex" id="concern_text">
+                                <p class="mb-0">Already Have An Account? </p> &nbsp
+                                <button type="button" onclick="loginroute()" class="lg_btn" style="border: none;background: none;text-decoration: underline"></button>
+                            </div> -->
+                        </form>
+                    </div>
+                    <!-- <script>
+                        function loginroute(){
+                            $("#LogClose").click();
+                            $("#log-btn").click();
+                        }
+                    </script> -->
+                    <style>
+                        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap');
+                
+                        .otp-field {
+                            flex-direction: row;
+                            column-gap: 20px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                        }
+                
+                        .otp-field input {
+                            height: 45px;
+                            width: 42px;
+                            border-radius: 6px;
+                            outline: none;
+                            font-size: 1.125rem;
+                            text-align: center;
+                            border: 1px solid #ddd;
+                        }
+                        
+                        .otp-field input:focus {
+                            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+                        }
+                
+                        .otp-field input::-webkit-inner-spin-button,
+                        .otp-field input::-webkit-outer-spin-button {
+                            display: none;
+                        }
+                
+                        .resend {
+                            font-size: 12px;
+                        }
+                
+                        #otp_container_forget{
+                            display: none;
+                        }
+                        
+                        .error {
+                            color: red;
+                            font-size: 13px !important;
+                            border:none !important
+                        }
+                
+                        #image_container {
+                            
+                            background-position: center center;
+                            background-repeat: no-repeat;
+                            background-attachment: fixed;
+                            -webkit-background-size: cover;
+                            background-size: cover;
+                            border-radius: 20px;
+                            padding: 10px 15px;
+                            margin: 15px 5px; 
+                        }
+                
+                        .image_h4 {
+                            font-size: 36px;
+                            font-weight: 700;
+                            color:rgba(255, 255, 255, 1) ;
+                        }
+                
+                        .features_div {
+                            margin-top: 80px;
+                        }
+                
+                        .features {
+                            font-size: 16px;
+                            color:rgba(255, 255, 255, 1);
+                            font-weight: 500;
+                            /* background: rgba(255, 255, 255, 0.28); */
+                            padding: 27px 20px;
+                            background: rgba(255, 254, 254, 0.13);
+                            backdrop-filter: blur(5px);
+                            border-radius: 18px;
+                        }
+                
+                        .container-fluid {
+                            
+                            /* -webkit-filter: blur(10px); */
+                            /* -moz-filter: blur(10px); */
+                            /* filter: blur(10px); */
+                            /* padding: 40px 20px; */
+                        }
+                
+                        #main_container {
+                            background: rgba(255, 255, 255, 1);
+                            /* box-shadow: 5px 5px 12px 0.5px; */
+                            border-radius: 20px;
+                        }
+                
+                
+                        #sign_head_div {
+                            margin: 2px;
+                        }
+                
+                
+                        .sign_utext {
+                            font-size: 15px;
+                            font-weight: 500;
+                            color: rgba(0, 0, 0, 0.7);
+                        }
+                
+                        .input_div{
+                            flex-direction: column;
+                            display: flex;
+                            margin: 2px;
+                        }
+                
+                        .input_signin {
+                            background: rgba(237, 237, 237, 0.75);
+                            border-radius: 53px;
+                            padding: 13px 18px;
+                            font-size: 15px;
+                            height: auto !important;
+                            font-weight: 600;
+                            color:rgba(23, 52, 73, 0.61);
+                            border: none;
+                            width: 100%;
+                            margin: 2px;
+                        }
+                
+                        .input::placeholder {
+                            font-weight: 400;
+                            color:rgba(23, 52, 73, 0.61);
+                            font-size: 15px;
+                        }
+                
+                        #checkbox_div {
+                           margin: 2px 10px;
+                           /* display: none; */
+                        }
+                
+                        .sign_btn {
+                            padding: 12px 20px;
+                            background: linear-gradient(240deg, rgba(0, 78, 174, 1), rgba(75, 153, 249, 1));
+                            border-radius: 50px;
+                            color:rgba(255, 255, 255, 1);
+                            text-align: center;
+                            font-weight: 600;
+                            font-size: 15px;
+                            width: 100%;
+                            height: 50px;
+                            border: none;
+                        }
+                
+                       #verifyBtn {
+                            padding: 12px 20px;
+                            color:rgba(255, 255, 255, 1);
+                            background: linear-gradient(240deg, rgba(0, 78, 174, 1), rgba(75, 153, 249, 1));
+                            width: 100%;
+                            height: 50px;
+                            border: none;
+                            font-weight: 600;
+                            font-size: 15px;
+                            border-radius: 50px;
+                       }
+                
+                       #timers {
+                        border: 1px solid black;
+                        border-radius: 10px;
+                        font-weight: 600;
+                        box-shadow: 5px 5px 5px 0.5 gray;
+                        padding: 4px;
+                       }
+                        
+                
+                        .sign_btn:hover {
+                            background: linear-gradient(240deg, rgba(75, 153, 249, 1), rgba(0, 78, 174, 1));
+                        }
+                
+                        #concern_text {
+                            align-items: center;
+                            justify-content: center;
+                            text-align: center;
+                            margin: 2px;
+                        }
+                
+                        #concern_text p {
+                            color: rgba(0, 0, 0, 0.71);
+                            font-size: 15px;
+                            font-weight: 600;
+                
+                        }
+                
+                        .btn_div {
+                            margin: 2px;
+                        }
+                
+                        @media only screen and (max-width: 768px) {
+                            #main_container {
+                                flex-direction: column;
+                            }
+                        }
+                
+                    </style>
+                    <!-- <script>
+                        let timerOns = true;
+                        var otpDiv = document.getElementById("otp_container");
+                        var signBtn = document.getElementById("signButton");
+                        function timers(remaining) {
+                            var m = Math.floor(remaining / 60);
+                            var s = remaining % 60;
+                    
+                            m = m < 10 ? '0' + m : m;
+                            s = s < 10 ? '0' + s : s;
+                            document.getElementById('timers').innerHTML = m + ':' + s;
+                            remaining -= 1;
+                    
+                            if (remaining >= 0 && timerOns) {
+                                setTimeout(function () {
+                                    timers(remaining);
+                                }, 1000);
+                                return;
+                            }
+                    
+                            if (!timerOns) {
+                                // Do validate stuff here
+                                return;
+                            }
+                    
+                            if (document.getElementById('UserName').style.display === 'none') {
+                                otpDiv.style.display = "none";
+                                signBtn.style.display = "none";
+                            } else if (document.getElementById('UserName').style.display === 'block') {
+                                // Do timeout stuff here
+                                otpDiv.style.display = "none";
+                                signBtn.style.display = "block";
+                                signBtn.innerHTML = "Resend OTP";
+                            } else {
+                                alert("Something went wrong");
+                            }
+                        }
+                    </script> -->
+                    
+                   <script>
+                    function validateFormpassword() {
+                        var valid = true;
+                        document.getElementById('email_or_phone_password').innerText = '';
+                        // document.getElementById('phoneError').innerText = '';
+                        // document.getElementById('emailError').innerText = '';
+                        // document.getElementById('passwordError').innerText = '';
+                        // document.getElementById('confirmPasswordError').innerText = '';
+                        // document.getElementById('checkboxError').innerText = '';
+            
+                        var nameInput = document.querySelector('.email_or_phone_password');
+                        // var phoneInput = document.querySelector('.phone_number');
+                        // var emailInput = document.querySelector('.email');
+                        // var passwordInput = document.querySelector('.password');
+                        // var confirmPasswordInput = document.querySelector('.confirm_password');
+                        // var checkbox = document.querySelector('#checkbox_div input[type="checkbox"]');
+                        
+                
+                        var email = nameInput.value;
+                        // var phone = phoneInput.value;
+                        // var email = emailInput.value;
+                        // var password = passwordInput.value;
+                        // var confirmPassword = confirmPasswordInput.value;
+                
+                        var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        var phonePattern = /^\d{10}$/;
+                        if (email.trim() === '') {
+                            document.getElementById('email_or_phone_number').innerText = 'Email is required';
+                            nameInput.style.border = '1px solid red';
+                            valid = false;
+                        }  else if (!emailPattern.test(email) && !phonePattern.test(email)) {
+                            document.getElementById('email_or_phone_number').innerText = 'Invalid email address or phone number';
+                            nameInput.style.border = '1px solid red';
+                            valid = false;
+                        } else {
+                            nameInput.style.border = ''; // Reset border style if valid
+                        }
+            
+                        if (valid) {
+                            document.getElementById("otpmessage").innerText = "OTP WILL BE SEND TO THE PHONE NUMBER AND MAIL";
+                            sendOTPass();
+                        }
+            
+                        return valid
+                    }
+
+                </script>
+                <script>
+                    function sendOTPass() {
+                        // Send AJAX request to server to send OTP to the provided phone number
+                        var phone_number = document.getElementById("email_or_phone_password").value;
+
+                        // Get CSRF token from the cookie
+                        var csrftoken = getCookie('csrftoken');
+
+                        // Example AJAX request with CSRF token included
+                        $.ajax({
+                            url: '/send_otp_forgot/',
+                            type: 'POST',
+                            data: {
+                                'phone_number': phone_number,
+                                'csrfmiddlewaretoken': csrftoken // Include the CSRF token in the data
+                            },
+                            success: function(response) {
+                                if (response.success === true) {
+                                    // If the response is success, submit the form
+                                    document.getElementById("otpmessage").innerText = " ";
+                                    otpDiv.style.display = "block";
+                                    document.getElementById("signButton").style.display = "none";
+                                    document.getElementById('otp_container_forget').style.display = 'block';
+
+                                    // Store expiration time in localStorage
+                                    var expirationTime = new Date();
+                                    expirationTime.setSeconds(expirationTime.getSeconds() + 180); // Assuming expiration time is 180 seconds
+                                    localStorage.setItem('expirationTime', expirationTime.getTime());
+
+                                    timers();
+                                } else {
+                                    var errorMessage = document.getElementById('otpmessage');
+                                    errorMessage.innerText = response.message;
+                                    // var errorButton = document.getElementById('errorButtons');
+                                    // errorButton.click();
+                                    otpDiv.style.display = "none";
+                                    signBtn.style.display = "block";
+                                }
+                            }
+                        });
+                    }
+
+                    // Function to get CSRF token from the cookie
+                    function getCookie(name) {
+                        var cookieValue = null;
+                        if (document.cookie && document.cookie !== '') {
+                            var cookies = document.cookie.split(';');
+                            for (var i = 0; i < cookies.length; i++) {
+                                var cookie = cookies[i].trim();
+                                // Check if the cookie name matches the requested name
+                                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                                    // Extract and decode the CSRF token
+                                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                    break;
+                                }
+                            }
+                        }
+                        return cookieValue;
+                    }
+
+                    var otpDivcon = document.getElementById("otp_container_forget");
+                    var signBtncon = document.getElementById("signButton");
+
+                    function timers() {
+                        var expirationTime = localStorage.getItem('expirationTime');
+
+                        if (!expirationTime) return;
+
+                        function updateTimer() {
+                            var currentTime = new Date().getTime();
+                            var remainingTime = Math.max(0, Math.floor((expirationTime - currentTime) / 1000));
+
+                            var m = Math.floor(remainingTime / 60);
+                            var s = remainingTime % 60;
+
+                            m = m < 10 ? '0' + m : m;
+                            s = s < 10 ? '0' + s : s;
+                            document.getElementById('timers').innerHTML = m + ':' + s;
+
+                            if (remainingTime > 0) {
+                                setTimeout(updateTimer, 1000);
+                            } else {
+                                // Handle timeout
+                                otpDivcon.style.display = "none";
+                                signBtncon.style.display = "block";
+                                signBtncon.innerHTML = "Resend OTP";
+                            }
+                        }
+
+                        updateTimer();
+                    }
+                </script>
+                <script>
+                    const inputss = document.querySelectorAll(".otp-field > input");
+                    const buttons = document.querySelector(".verify_btn");
+            
+                    window.addEventListener("load", () => inputss[0].focus());
+                    button.setAttribute("disabled", "disabled");
+            
+                    inputss[0].addEventListener("paste", function (event) {
+                    event.preventDefault();
+            
+                    const pastedValue = (event.clipboardData || window.clipboardData).getData(
+                        "text"
+                    );
+                    const otpLength = inputss.length;
+            
+                    for (let i = 0; i < otpLength; i++) {
+                        if (i < pastedValue.length) {
+                        inputss[i].value = pastedValue[i];
+                        inputss[i].removeAttribute("disabled");
+                        inputss[i].focus;
+                        } else {
+                        inputss[i].value = ""; // Clear any remaining inputs
+                        inputss[i].focus;
+                        }
+                    }
+                    });
+            
+                    inputss.forEach((input, index1) => {
+                    input.addEventListener("keyup", (e) => {
+                        const currentInput = input;
+                        const nextInput = input.nextElementSibling;
+                        const prevInput = input.previousElementSibling;
+            
+                        if (currentInput.value.length > 1) {
+                        currentInput.value = "";
+                        return;
+                        }
+            
+                        if (
+                        nextInput &&
+                        nextInput.hasAttribute("disabled") &&
+                        currentInput.value !== ""
+                        ) {
+                        nextInput.removeAttribute("disabled");
+                        nextInput.focus();
+                        }
+            
+                        if (e.key === "Backspace") {
+                        inputs.forEach((input, index2) => {
+                            if (index1 <= index2 && prevInput) {
+                            input.setAttribute("disabled", true);
+                            input.value = "";
+                            prevInput.focus();
+                            }
+                        });
+                        }
+            
+                        button.classList.remove("active");
+                        button.setAttribute("disabled", "disabled");
+            
+                        const inputsNo = inputss.length;
+                        if (!inputss[inputsNo - 1].disabled && inputss[inputsNo - 1].value !== "") {
+                        button.classList.add("active");
+                        button.removeAttribute("disabled");
+            
+                        return;
+                        }
+                    });
+                    });
+                </script>  
+                </div>
+        </div>
+    </div>
+    </div>
+</div> 
+<!-- FORGOT PASSWORD END-->
+
+
+</div>
+</div>
+<!-- Success Page -->
+<div class="modal fade" id="success_tic" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenter1Title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="text-end px-3 pt-2">
+            <a class="btn-close mt-0" href="#" data-bs-dismiss="modal" aria-label="Close">&times;</a>
+        </div>
+        <div class="page-body">
+            <div class="head">  
+                <h4 class="head_modal">Account Successfully Created</h4>
+            </div>
+            <h1 style="text-align:center;">
+                <div class="checkmark-circle">
+                    <div class="background"></div>
+                    <div class="checkmark draw"></div>
+                </div>
+             </h1>
+        </div>
+      </div>
+    </div>
+</div>
+<style>
+
+#success_tic .page-body{
+  max-width:300px;
+  background-color:#FFFFFF;
+  margin:10% auto;
+}
+ #success_tic .page-body .head{
+  text-align:center;
+}
+/* #success_tic .tic{
+  font-size:186px;
+} */
+#success_tic .close{
+      /* opacity: 1; */
+    position: absolute;
+    right: 0px;
+    font-size: 30px;
+    padding: 3px 15px;
+  margin-bottom: 10px;
+}
+#success_tic .checkmark-circle {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+.checkmark-circle .background {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: #1ab394;
+  position: absolute;
+}
+#success_tic .checkmark-circle .checkmark {
+  border-radius: 5px;
+}
+#success_tic .checkmark-circle .checkmark.draw:after {
+  -webkit-animation-delay: 300ms;
+  -moz-animation-delay: 300ms;
+  animation-delay: 300ms;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-name: checkmark;
+  -moz-animation-name: checkmark;
+  animation-name: checkmark;
+  -webkit-transform: scaleX(-1) rotate(135deg);
+  -moz-transform: scaleX(-1) rotate(135deg);
+  -ms-transform: scaleX(-1) rotate(135deg);
+  -o-transform: scaleX(-1) rotate(135deg);
+  transform: scaleX(-1) rotate(135deg);
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+#success_tic .checkmark-circle .checkmark:after {
+  opacity: 1;
+  height: 75px;
+  width: 37.5px;
+  -webkit-transform-origin: left top;
+  -moz-transform-origin: left top;
+  -ms-transform-origin: left top;
+  -o-transform-origin: left top;
+  transform-origin: left top;
+  border-right: 15px solid #fff;
+  border-top: 15px solid #fff;
+  border-radius: 2.5px !important;
+  content: '';
+  left: 35px;
+  top: 80px;
+  position: absolute;
+}
+
+@-webkit-keyframes checkmark {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+  20% {
+    height: 0;
+    width: 37.5px;
+    opacity: 1;
+  }
+  40% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+  100% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+}
+@-moz-keyframes checkmark {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+  20% {
+    height: 0;
+    width: 37.5px;
+    opacity: 1;
+  }
+  40% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+  100% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+}
+@keyframes checkmark {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+  20% {
+    height: 0;
+    width: 37.5px;
+    opacity: 1;
+  }
+  40% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+  100% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+}
+</style>
+<!-- End Success Page -->
+
+<!-- script start -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- script end -->

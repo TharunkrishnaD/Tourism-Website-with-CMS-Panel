@@ -1,0 +1,475 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Travelin Responsive HTML Admin Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="Travelin">
+  <link rel="shortcut icon" type="image/x-icon" href="{% static 'image/home/Magnet logo.png' %}">
+  <title>Vacation Feast</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <!-- End fonts -->
+
+	<!-- core:css -->
+	<link rel="stylesheet" href="{% static 'vendors/core/core.css' %}">
+	<!-- endinject -->
+
+	<!-- Plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}">
+	<!-- End plugin css for this page -->
+
+	<!-- inject:css -->
+	<link rel="stylesheet" href="{% static 'fonts/feather-font/css/iconfont.css' %}">
+	<!-- endinject -->
+
+  <!-- Layout styles -->  
+  <link rel="stylesheet" href="{% static 'css/css/style.css' %}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- End layout styles -->
+
+  <link rel="shortcut icon" href="../images/favicon.png" />
+</head>
+<body>
+	<div class="main-wrapper">
+
+		<!-- sidebar starts -->
+    {% include 'home/aside.html' %}
+    <!-- sidebar Ends -->
+	
+		<div class="page-wrapper">
+					
+			<!-- navbar Starts -->
+			{% include 'home/adminheader.html' %}
+			<!-- navbar Ends -->
+
+      <!-- Page Content Starts -->
+
+			<div class="page-content">
+
+				<nav class="page-breadcrumb d-flex align-items-center justify-content-between">
+					<ol class="breadcrumb mb-0">
+						<li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+						<li class="breadcrumb-item active" aria-current="page">Package</li>
+					</ol>
+          <a href="{% url 'packagesadmin' %}" class="btn btn-primary"><i class="link-icon" data-feather="arrow-left"></i> Back To List</a>
+				</nav>
+
+				<div class="row">
+					<div class="col-md-12 grid-margin stretch-card">
+              <div class="card">
+                  <div class="card-body">
+                      <form class="row forms-sample">
+                            <div class="col-lg-6 mb-3">
+                              <label for="uploadGrid" class="form-label">Grid Images(size:800x534)</label>
+                              <input class="form-control" type="file" id="uploadGrid">
+                            </div>
+                            <div class="col-lg-6 mb-3">
+                                <label for="uploadCover" class="form-label">Cover Images(size:1800x1200)</label>
+                                <input class="form-control" type="file" id="uploadCover">
+                              </div>
+                            <div class="col-lg-3 mb-3">
+                                <label for="Noofdays" class="form-label">No of Days</label>
+                                <input type="text" class="form-control" id="Noofdays" autocomplete="off" placeholder="">
+                            </div>
+                            <div class="col-lg-3 mb-3">
+                                <label for="rating" class="form-label">Star Rating</label>
+                                <input type="number" class="form-control" id="rating" placeholder="" min="0" max="5">
+                            </div>
+                            <div class="col-lg-3 mb-3">
+                                <label for="price" class="form-label">Price Details</label>
+                                <input type="text" class="form-control" id="price" placeholder="">
+                              </div>
+                              <div class="col-lg-3 mb-3">
+                                <label for="person" class="form-label">Person Details</label>
+                                <input type="text" class="form-control" id="person" placeholder="">
+                              </div>
+                          <div class="col-lg-4 mb-3">
+                            <label for="place1" class="form-label">Country</label>
+                            <input type="text" class="form-control" id="place1" autocomplete="off" placeholder="">
+                          </div>
+                          <div class="col-lg-4 mb-3">
+                            <label for="place2" class="form-label">Cities</label>
+                            <input type="text" class="form-control" id="place2" placeholder="">
+                          </div>
+                          <div class="col-lg-4 mb-3">
+                            <label for="url" class="form-label">URL</label>
+                            <input type="text" class="form-control" id="url" placeholder="">
+                          </div>
+                          <div class="col-lg-6 mb-3">
+                            <label for="destination" class="form-label">Destination</label>
+                            <select class="form-select" id="destinationType" name="destinationType">
+                                <option value=" ">Please select the destination</option>
+                                <option value="international">International</option>
+                                <option value="domestic">Domestic</option>
+                            </select>
+                        </div>
+
+                        <input type="hidden" id="selectedDestinationType" name="selectedDestinationType">
+
+                        <script>
+                            // Function to update hidden input field with selected destination type
+                            function updateSelectedDestinationType() {
+                                var selectElement = document.getElementById("destinationType");
+                                var selectedValue = selectElement.value;
+                                document.getElementById("selectedDestinationType").value = selectedValue;
+                            }
+
+                            // Add event listener for change event on destination type select
+                            document.getElementById("destinationType").addEventListener("change", function() {
+                                updateSelectedDestinationType();
+                            });
+                        </script>
+                        
+                        <div id="internationalSelect" style="display: none;" class="col-lg-6 mb-3">
+                            <label for="international" class="form-label">International Destination</label>
+                            <select class="form-select Show-city" id="internationalDestination" name="up-DestinationName">
+                                <option value=""></option>
+                                {% for internation in Internation %}
+                                <option value="{{internation.id}}">{{internation.destination_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                        <div id="domesticSelect" style="display: none;" class="col-lg-6 mb-3">
+                            <label for="domestic" class="form-label">Domestic Destination</label>
+                            <select class="form-select Show-city" id="domesticDestination" name="up-DestinationName">
+                                <option value=""></option>
+                                {% for domestic in Domestic %}
+                                <option value="{{domestic.id}}">{{domestic.destination_name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Hidden input field to store the selected destination value -->
+                        <input type="hidden" id="selectedDestinationId" name="selectedDestinationId">
+                        <!-- Hidden input field to store the selected destination name -->
+                        <input type="hidden" id="selectedDestinationName" name="selectedDestinationName">
+                        
+                        
+                        <script>
+                            // Function to update hidden input field with selected value
+                            function updateSelectedValue(selectId) {
+                              var selectElement = document.getElementById(selectId);
+                              var selectedOption = selectElement.options[selectElement.selectedIndex];
+                              var selectedId = selectedOption.value;
+                              var selectedName = selectedOption.text;
+                              document.getElementById("selectedDestinationId").value = selectedId;
+                              document.getElementById("selectedDestinationName").value = selectedName;
+                            }
+                    
+                            // Add event listeners for change events on select boxes
+                            document.getElementById("internationalDestination").addEventListener("change", function() {
+                                updateSelectedValue("internationalDestination");
+                            });
+                    
+                            document.getElementById("domesticDestination").addEventListener("change", function() {
+                                updateSelectedValue("domesticDestination");
+                            });
+                    
+                            // Add event listener for change event on destination type select
+                            document.getElementById("destinationType").addEventListener("change", function() {
+                                var selectedValue = this.value;
+                                if (selectedValue === "international") {
+                                    document.getElementById("internationalSelect").style.display = "block";
+                                    document.getElementById("domesticSelect").style.display = "none";
+                                    updateSelectedValue("internationalDestination");
+                                } else if (selectedValue === "domestic") {
+                                    document.getElementById("internationalSelect").style.display = "none";
+                                    document.getElementById("domesticSelect").style.display = "block";
+                                    updateSelectedValue("domesticDestination");
+                                } else {
+                                    document.getElementById("internationalSelect").style.display = "none";
+                                    document.getElementById("domesticSelect").style.display = "none";
+                                    document.getElementById("selectedDestination").value = ""; // Clear value if no option is selected
+                                    document.getElementById("selectedDestinationName").value = ""; // Clear value if no option is selected
+                                }
+                            });
+                        </script>
+                          
+                            
+                           
+                            <div class="col-lg-12 mb-3">
+                              <label for="description" class="form-label">Description</label>
+                              <textarea class="form-control" name="tinymce" id="description" rows="2"></textarea>
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                                <label for="metaTitle" class="form-label">Meta title</label>
+                                <textarea class="form-control" name="tinymce" id="metaTitle" rows="1"></textarea>
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                                <label for="metaDescription" class="form-label">Meta Description</label>
+                                <textarea class="form-control" name="tinymce" id="metaDescription" rows="2"></textarea>
+                            </div>
+                            <div class="col-lg-12 mb-3">
+                                <label for="metaKeywords" class="form-label">Meta Keywords</label>
+                                <textarea class="form-control" name="tinymce" id="metaKeywords" rows="2"></textarea>
+                            </div>
+
+                            <label for="TeamNamemodify" class="form-label"><strong>Highlights</strong></label>
+                            <div class="input-container col-lg-4">
+                              <label for="TeamNamemodify" class="form-label">Lead</label>
+                              <input type="text" class="form-input form-control" id="searchInput" placeholder="Search...">
+                              <select class="form-select form-control" id="selectOptions" name="selectleadid" size="1">
+                                  {% for lead in Lead_details %}
+                                  <option value="{{lead.id}}">{{lead.leadNumber}}</option>
+                                  {% endfor %}
+                              </select>
+                          </div>
+      
+                          <script>
+                          document.addEventListener('DOMContentLoaded', function() {
+                              const searchInput = document.getElementById('searchInput');
+                              const selectOptions = document.getElementById('selectOptions');
+                              const originalOptions = Array.from(selectOptions.options);
+      
+                              function filterOptions(searchTerm) {
+                                  const filteredOptions = originalOptions.filter(option => option.textContent.toLowerCase().includes(searchTerm));
+                                  selectOptions.size = filteredOptions.length > 1 ? filteredOptions.length : 1;
+                                  selectOptions.innerHTML = '';
+                                  filteredOptions.forEach(option => selectOptions.appendChild(option.cloneNode(true)));
+                              }
+      
+                              searchInput.addEventListener('input', function() {
+                                  filterOptions(this.value.toLowerCase());
+                                  selectOptions.size = 1; // Reset the size to 1 when typing in the search box
+                              });
+      
+                              selectOptions.addEventListener('change', function() {
+                                  const selectedOption = selectOptions.options[selectOptions.selectedIndex];
+                                  const selectedValue = selectedOption.value;
+                                  alert("Selected Value: " + selectedValue);
+                              });
+                          });
+                          </script>
+                          <div class="mb-3 col-lg-4">
+                            <label for="TeamNamemodify" class="form-label">Url in pakage page</label>
+                            <input type="text" class="form-control" id="Urlinpakage" required name="Urlinpakage"  autocomplete="off">
+                        </div>
+                        <div class="mb-3 col-lg-4">
+                          <label for="TeamNamemodify" class="form-label">pakage Heading</label>
+                          <input type="text" class="form-control" id="pakageHeading" required name="pakageHeading"  autocomplete="off">
+                      </div>
+                      
+                          <div class="mb-3 col-lg-4">
+                              <label for="TeamNamemodify" class="form-label">DAYS</label>
+                              <input type="text" class="form-control" id="Days" required name="Days"  autocomplete="off">
+                          </div>
+                          <div class="mb-3 col-lg-4">
+                              <label for="TeamNamemodify" class="form-label">TRANSFERS</label>
+                              <input type="text" class="form-control form-width" required name="TRANSFERS" id="TRANSFERS">
+                                
+                          </div>
+                        
+                       
+                          <div class="mb-3 col-lg-4">
+                              <label for="TeamNamemodify" class="form-label">HOTEL(STAY)</label>
+                              <input type="text" class="form-control" id="HOTEL" required name="HOTEL"  autocomplete="off">
+                          </div>
+                       
+                       
+                          <div class="mb-3 col-lg-4">
+                              <label for="TeamNamemodify" class="form-label">MEALS</label>
+                              <input type="text" class="form-control form-width" required name="BREAKFAST" id="BREAKFAST">
+                                
+                          </div>
+                          <div class="mb-3 col-lg-4">
+                              <label for="TeamNamemodify" class="form-label">SIGHTSEEING</label>
+                              <input type="text" class="form-control form-width" required name="SIGHTSEEING" id="SIGHTSEEING">
+                                
+                          </div>
+                          <div class="mb-3 col-lg-4">
+                              <label for="TeamNamemodify" class="form-label">CATEGORY</label>
+                              <input type="text" class="form-control form-width" required name="CATEGORY" id="CATEGORY">
+                               
+                          </div>
+                          <!-- <div class="mb-3 col-lg-4">
+                            <label for="TeamNamemodify" class="form-label">Leaad</label>
+                            <input type="text" class="form-control" id="HOTEL" required name="HOTEL"  autocomplete="off">
+                        </div>  -->
+                             
+                            <!-- <label for="description" class="form-label">Package details</label>
+                            <textarea id="myTextarea" class="tinymce-editor"> -->
+                            <!-- </textarea>End TinyMCE Editor  -->
+                              <script>
+                                tinymce.init({
+                                    selector: 'textarea#tinymceExample',
+                                    plugins: 'advlist autolink lists link image charmap print preview anchor',
+                                    toolbar: 'undo redo | formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image'
+                                });
+                             </script>
+                          <div class="text-center">
+                            <button type="submit" id="submitButton" class="btn btn-primary"><i class="link-icon" data-feather="plus"></i> Create Package</button>
+                          </div>
+                        </form>
+                        <script>
+                            $(document).ready(function() {
+                                $('#submitButton').click(function(event) {
+                                    event.preventDefault();
+                        
+                                    // Get file objects
+                                    var coverImageFile = document.getElementById('uploadCover').files[0];
+                                    var gridImageFile = document.getElementById('uploadGrid').files[0];
+                                    // var richtextarea = tinymce.get("myTextarea").getContent();
+                                    // Get other input values
+                                    var Noofdays = $('#Noofdays').val();
+                                    var rating = document.getElementById('rating').value;
+                                    var price = $('#price').val();
+                                    var person = $('#person').val();
+                                    var place1 = $('#place1').val();
+                                    var place2 = $('#place2').val();
+                                    var content = $('#description').val();
+                                    var url = $('#url').val();
+                                    var description = $('#description').val();
+                                    var destination_package_id = document.getElementById("selectedDestinationId").value
+                                    var destination_package_name = document.getElementById("selectedDestinationName").value
+                                    var destinationtype = document.getElementById("selectedDestinationType").value
+                                    
+                                    var metaTitle = $('#metaTitle').val();
+                                    var metaDescription = $('#metaDescription').val();
+                                    var metaKeywords = $('#metaKeywords').val();
+
+                                    var  itinerayid = $('#selectOptions').val();
+                                    var Url_lead = $('#Urlinpakage').val();
+                                    var Days = $('#Days').val();
+                                    var TRANSFERS = $('#TRANSFERS').val();
+                                    var HOTEL = $('#HOTEL').val();
+                                    var BREAKFAST = $('#BREAKFAST').val();
+                                    var SIGHTSEEING = $('#SIGHTSEEING').val();
+                                    var CATEGORY = $('#CATEGORY').val();
+                                    var pakageHeading = $('#pakageHeading').val();
+                          
+                        
+                                    // Create FormData object to send to backend
+                                    var formData = new FormData();
+                                    formData.append('Cover_Image', coverImageFile);
+                                    formData.append('Grid_Image', gridImageFile);
+                                    formData.append('Noofdays', Noofdays);
+                                    formData.append('rating', rating);
+                                    formData.append('price', price);
+                                    formData.append('person', person);
+                                    formData.append('place1', place1);
+                                    formData.append('place2', place2);
+                                    formData.append('description', description);
+                                    formData.append('content', content);
+                                    formData.append('url', url);
+                                    formData.append('destination_package_id', destination_package_id);
+                                    formData.append('metaTitle', metaTitle);
+                                    formData.append('metaDescription', metaDescription);
+                                    formData.append('metaKeywords', metaKeywords);
+                                    // formData.append('richtextarea', richtextarea);
+                                    formData.append('destination_package_name', destination_package_name);
+                                    formData.append('destinationtype', destinationtype);
+
+                                    formData.append('itinerayid', itinerayid);
+                                    formData.append('Url_lead', Url_lead);
+                                    formData.append('Days', Days);
+                                    formData.append('TRANSFERS', TRANSFERS);
+                                    formData.append('HOTEL', HOTEL);
+                                    formData.append('BREAKFAST', BREAKFAST);
+                                    formData.append('SIGHTSEEING', SIGHTSEEING);
+                                    formData.append('CATEGORY', CATEGORY);
+                                    formData.append('pakageHeading', pakageHeading);
+                                    
+        
+                                    var csrftoken = document.cookie.match(/csrftoken=([\w-]+)/)[1];
+                        
+                                    // Make AJAX request
+                                    $.ajax({
+                                        type: 'POST',
+                                        headers: {
+                                            'X-CSRFToken': csrftoken // Include CSRF token in headers
+                                        },
+                                        url: '/createpackages/', // Replace with your backend URL
+                                        data: formData,
+                                        processData: false,
+                                        contentType: false,
+                                        success: function(response) {
+                                            // Handle success response
+                                            window.location.href = '/packagesadmin/';
+                                        },
+                                        error: function(xhr, status, error) {
+                                            // Handle error
+                                            console.error(xhr.responseText);
+                                        }
+                                    });
+                                    // function getCSRFToken() {
+                                    //     return $('input[name="csrfmiddlewaretoken"]').val();
+                                    // }
+                                });
+                            });
+                        </script>
+                  </div>
+              </div>
+					</div>
+				</div>
+
+        <!-- <div class="row">
+          <div class="dataTables_paginate">
+                <ul class="pagination">
+                  <li class="paginate_button page-item">
+                    <a href="#" class="page-link">Previous</a>
+                  </li>
+                  <li class="paginate_button page-item active"><a href="#" class="page-link">1</a></li>
+                  <li class="paginate_button page-item"><a href="#" class="page-link">2</a></li>
+                  <li class="paginate_button page-item"><a href="#" class="page-link">3</a></li>
+                  <li class="paginate_button page-item"><a href="#" class="page-link">Next</a></li>
+                </ul>
+            </div>
+        </div> -->
+
+			</div>
+			<!-- Page Content Ends -->
+
+			<!-- footer Starts -->
+      <!-- <footer class="footer d-flex flex-column flex-md-row align-items-center justify-content-between px-4 py-3 border-top small">
+        <p class="text-muted mb-1 mb-md-0">Copyright © 2022 <a href="../index.html" target="_blank">Travelin</a>.</p>
+        <p class="text-muted">Powered By <i class="mb-1 text-primary ms-1 icon-sm" data-feather="heart"></i> Bizberg Themes</p>
+      </footer> -->
+      <!-- footer Ends -->
+	
+		</div>
+	</div>
+
+<!-- core:js -->
+<!-- core:js -->
+<script src="{% static 'vendors/core/core.js' %}"></script>
+<!-- endinject -->
+
+<!-- Plugin js for this page -->
+<script src="{% static 'vendors/chartjs/Chart.min.js'  %}"></script>
+<script src="{% static 'vendors/jquery.flot/jquery.flot.js' %}"></script>
+<script src="{% static 'vendors/jquery.flot/jquery.flot.resize.js' %}"></script>
+<script src="{% static 'vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+<script src="{% static 'vendors/apexcharts/apexcharts.min.js' %}"></script>
+  <!-- End plugin js for this page -->
+
+  <!-- inject:js -->
+  <script src="{% static 'vendors/feather-icons/feather.min.js' %}"></script>
+  <script src="{% static 'js/admin/template.js' %}"></script>
+  <!-- endinject -->
+
+  <!-- Custom js for this page -->
+<script src="{% static 'js/admin/dashboard-light.js' %}"></script>
+<script src="{% static 'js/admin/datepicker.js' %}"></script>
+  <!-- End custom js for this page -->
+  <!-- <script src="{% static 'assets/vendors/tinymce/tinymce.min.js' %}"></script>
+
+  <script src="{% static 'assets/js/tinymce.js' %}"></script> -->
+
+<script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+<!-- <script src="assets/vendor/php-email-form/validate.js"></script> -->
+
+<!-- Template Main JS File -->
+<script src="{% static 'assets/js/main.js' %}"></script>
+  <!-- End custom js for this page -->
+
+
+</body>
+</html>    
